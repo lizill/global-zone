@@ -1,0 +1,183 @@
+$phone: "only screen and (max-width: 758px)";
+
+.layout {
+  background-color: #fbfafb;
+  height: 100vh;
+  width: 100vw;
+
+  header {
+    background-color: white;
+    .menu {
+      max-width: 1280px;
+      height: 70px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      button {
+        // logo
+        border: 0px;
+        background-color: white;
+      }
+
+      ul {
+        list-style: none;
+        display: flex;
+
+        li {
+          &.on {
+            color: #30addc;
+            list-style: disc;
+          }
+        }
+
+        li + li {
+          margin-left: 40px;
+        }
+      }
+    }
+
+    @media #{$phone} {
+      .menu {
+        padding: 0 10px;
+        height: 60px;
+
+        img {
+          width: 160px;
+        }
+
+        ul {
+          li {
+            font-size: 0.9em;
+
+            &.on {
+              color: #30addc;
+              list-style: none;
+            }
+          }
+
+          li + li {
+            margin-left: 20px;
+          }
+        }
+      }
+    }
+  }
+
+  main {
+    margin: 100px 0px 50px 0px;
+  }
+
+  .mainWrap {
+    margin: 0 auto;
+    max-width: 1280px;
+    text-align: center;
+    color: #8d8f94;
+    align-items: center;
+
+    h1 {
+      font-weight: lighter;
+      font-size: 2.6em;
+      margin: 20px;
+
+      span {
+        color: #30addc;
+      }
+    }
+
+    p {
+      font-weight: normal;
+      font-size: 0.9em;
+    }
+  }
+
+  footer {
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    color: #aaa;
+    bottom: 0px;
+    border-top: 1px solid #eaeaea;
+    max-width: 1280px;
+  }
+}
+
+.koreanWrap {
+  .login_gsuite {
+    margin-top: 3rem;
+  }
+
+  .loginBtn {
+    margin-top: 1rem;
+    width: 320px;
+    height: 3em;
+    border-radius: 1.5em;
+    border: none;
+    color: #737373;
+    background-color: #efefef;
+    padding: 0 3em;
+    font-size: 0.9em;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    div {
+      display: flex;
+      justify-content: space-between;
+
+      p {
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.foreignWrap {
+  form {
+    width: 320px;
+    margin: 0 auto;
+    padding-top: 4rem;
+
+    input {
+      display: block;
+      width: 320px;
+      height: 3.6em;
+      border-radius: 1.8em;
+      border: 1px solid #e0e0e0;
+      padding: 0 30px;
+      transition: 0.2s;
+
+      &:hover {
+        border: 1px solid #30addc;
+        background-color: #30aedc10;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    input + input {
+      margin-top: 10px;
+    }
+
+    button {
+      display: block;
+      width: 320px;
+      height: 3em;
+      border-radius: 1.8em;
+      border: none;
+      margin-top: 30px;
+      background-color: #30addc;
+      color: white;
+      font-size: 1em;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}

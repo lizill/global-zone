@@ -1,0 +1,77 @@
+.appLayout {
+  max-width: 500px;
+  margin: 0 auto;
+  -webkit-box-shadow: 0px 1px 13px 0px rgba(164, 168, 195, 0.3);
+          box-shadow: 0px 1px 13px 0px rgba(164, 168, 195, 0.3);
+}
+.appLayout header {
+  background-color: white;
+}
+.appLayout header .menuLogo {
+  padding: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.appLayout header .menuLogo button {
+  border: none;
+  background-color: white;
+  color: rgba(0, 0, 0, 0.54);
+}
+.appLayout header .menuLogo button:hover {
+  cursor: pointer;
+}
+.appLayout header .menuLogo .logoutBtn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.appLayout header .menuLogo .logoutBtn img {
+  width: 20px;
+  margin-right: 10px;
+}
+.appLayout header img {
+  width: 210px;
+}
+.appLayout header .menu {
+  padding: 0 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  font-size: 0.8em;
+  font-weight: bold;
+  color: #c8c8c8;
+}
+.appLayout header .menu a {
+  display: inline-block;
+  padding: 10px 0px;
+}
+.appLayout header .menu a.on {
+  border-bottom: #182f9e solid 2px;
+  color: #182f9e;
+}
+.appLayout main {
+  background-color: #eef1f6;
+}
+.appLayout footer {
+  background-color: white;
+  border-top: 1px solid #e6e6e6;
+  padding: 10px 0px;
+}
+.appLayout footer p {
+  text-align: center;
+  color: #afafaf;
+  font-size: 0.8em;
+}
+/*# sourceMappingURL=AppLayout.module.css.map */
