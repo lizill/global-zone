@@ -3,11 +3,18 @@ import Head from 'next/head';
 import LoginLayout from "../components/auth/LoginLayout";
 import Router from 'next/router';
 import styles from '../styles/Login.module.scss'
-import { GoChevronRight } from 'react-icons/go'
+import { GoChevronRight } from 'react-icons/go';
+import axios from 'axios';
 
 const Korean = () => {
   const onLogin = () => {
-    Router.push('/');
+    axios.get('http://localhost:8000/api/google/login')
+      .then((res) => {
+        Router.push(res.data)
+      })
+      .catch((err) => {
+        alert('로그인을 실패했습니다!', err)
+      });
   }
 
   return (

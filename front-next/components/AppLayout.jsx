@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Link from 'next/link';
 import Router from 'next/router';
+import axios from 'axios';
+
 import styles from '../styles/AppLayout.module.scss';
+import { LOG_OUT_REQUEST } from "../reducers/user";
 
 const AppLayout = ({ children, on }) => {
+  const dispatch = useDispatch();
+  const { me } = useSelector(state => state.user);
+
   const onLogout = () => {
-    Router.push('/korean');
+    dispatch({
+      type: LOG_OUT_REQUEST,
+    });
   }
+
+  useEffect(() => {
+    if(!me) {
+      Router.push('/korean');
+    }
+  }, [me])
 
   return (
     <div className={styles.appLayout}>

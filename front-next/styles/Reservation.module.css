@@ -58,12 +58,14 @@
 }
 .managementWrap .contentWrap .itemList .itemWrap {
   background-color: #eef1f6;
-  padding: 10px 0px;
+  padding: 13px 0px;
+  height: 66px;
 }
 .managementWrap .contentWrap .itemList .itemWrap p {
   margin: 0px;
-  padding: 1px 10px;
+  padding: 0px 10px;
   font-size: 0.9em;
+  line-height: 20px;
 }
 .managementWrap .contentWrap .itemList .itemWrap + .itemWrap {
   border-top: 1px solid #d7dce4;

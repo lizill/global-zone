@@ -1,20 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Head from 'next/head';
-import Router from 'next/router';
+import axios from 'axios';
+import { END } from 'redux-saga';
+
 import AppLayout from '../components/AppLayout';
 import ReservationStatus from '../components/reservation/ReservationStatus';
 import ReservationManagement from '../components/reservation/ReservationManagement';
 import styles from '../styles/Reservation.module.scss';
+import wrapper from '../store/configuresStore';
+import { LOAD_MY_INFO_REQUEST } from '../reducers/user';
 
 export default function Home() {
-  const [me, setMe] = useState();
-
-  // useEffect(() => {
-  //   if (!(me && me.id)) {
-  //     Router.push('/korean');
-  //   }
-  // }, [me && me.id]);
-
   return (
     <div>
       <Head>
@@ -32,3 +28,16 @@ export default function Home() {
     </div>
   );
 }
+
+export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req }) => {
+  const cookie = req ? req.headers.cookie : '';
+  axios.defaults.headers.Cookie = '';
+  if (req && cookie) {
+    axios.defaults.headers.Cookie = cookie;
+  }
+  store.dispatch({
+    type: LOAD_MY_INFO_REQUEST,
+  });
+  store.dispatch(END);
+  await store.sagaTask.toPromise();
+});

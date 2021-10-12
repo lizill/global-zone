@@ -1,7 +1,19 @@
-import '../styles/globals.scss'
+import React from 'react';
+import '../styles/globals.scss';
+import Head from 'next/head';
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+import wrapper from '../store/configuresStore';
+
+function App({ Component, pageProps }) {
+  return (
+    <>
+      <Head>
+        <meta charSet="UTF-8" />
+        <title>영진 글로벌존</title>
+      </Head>
+      <Component {...pageProps} />
+    </>
+  )
 }
 
-export default MyApp
+export default wrapper.withRedux(App);

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from '../../styles/Reservation.module.scss'
-import { AiOutlineUpCircle } from 'react-icons/ai'
+import { AiOutlineDownCircle } from 'react-icons/ai'
 
 import Items from "./Items";
 
@@ -45,7 +45,7 @@ const ContentBtn = ({ content, on, onList }) => {
     <button onClick={() => onList(content.name)}>
       <img src={content.src} alt="" />
       <p>{content.p}</p>
-      <AiOutlineUpCircle
+      <AiOutlineDownCircle
         className={styles.icon}
         style={
           on === content.name 
@@ -69,7 +69,7 @@ const ReservationManagement = () => {
   }
 
   const transformHeight = (label, length) => {
-    return on === label ? { height: 60 * length} : { height: 0 }
+    return on === label ? { height: 66 * length} : { height: 0 }
   }
 
   return (
