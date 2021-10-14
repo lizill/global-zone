@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Router from 'next/router';
 import axios from 'axios';
 
-import styles from '../styles/AppLayout.module.scss';
+import styles from '../styles/layout/AppLayout.module.scss';
 import { LOG_OUT_REQUEST } from "../reducers/user";
 
 const AppLayout = ({ children, on }) => {

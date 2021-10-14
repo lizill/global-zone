@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import styles from '../../styles/Login.module.scss';
+import styles from '../../styles/login/Login.module.scss';
 
 const LoginLayout = ({ children, on }) => {
   return (

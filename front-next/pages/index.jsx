@@ -6,7 +6,7 @@ import { END } from 'redux-saga';
 import AppLayout from '../components/AppLayout';
 import ReservationStatus from '../components/reservation/ReservationStatus';
 import ReservationManagement from '../components/reservation/ReservationManagement';
-import styles from '../styles/Reservation.module.scss';
+import styles from '../styles/reservation/Reservation.module.scss';
 import wrapper from '../store/configuresStore';
 import { LOAD_MY_INFO_REQUEST } from '../reducers/user';
 

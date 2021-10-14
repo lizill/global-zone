@@ -1,0 +1,60 @@
+.rankWrap {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: hidden;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background-color: #182f9e;
+  border-radius: 10px;
+  color: white;
+  padding: 20px 25px;
+  margin: 30px;
+}
+.rankWrap p {
+  margin: 0px;
+  z-index: 100;
+}
+.rankWrap .status {
+  font-size: 0.9em;
+}
+.rankWrap .status span {
+  color: #f7bd4d;
+  text-decoration: underline;
+  font-weight: bold;
+}
+.rankWrap .count span {
+  font-size: 2.5em;
+  font-weight: lighter;
+  margin-right: 5px;
+}
+.rankWrap .greenCircle {
+  position: absolute;
+  border-radius: 50%;
+  width: 85px;
+  height: 85px;
+  left: 220px;
+  top: -45px;
+  background-color: #66cfd6;
+}
+.rankWrap .pinkCircle {
+  position: absolute;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  left: 235px;
+  bottom: -2px;
+  background-color: pink;
+}
+.rankWrap .yellowCircle {
+  position: absolute;
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  left: 155px;
+  bottom: -40px;
+  background-color: #f7bd4d;
+}
+/*# sourceMappingURL=result.module.css.map */

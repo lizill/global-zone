@@ -4,7 +4,6 @@ import axios from 'axios';
 import userSaga from './user';
 import { backUrl } from '../config/config';
 
-// saga에서 보내는 axios는 기본적으로 적용된다.
 axios.defaults.baseURL = backUrl;
 axios.defaults.withCredentials = true;
 

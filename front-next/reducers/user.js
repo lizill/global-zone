@@ -1,9 +1,9 @@
 import produce from 'immer';
 
 export const initialState = {
-  logInLoading: false, // 로그인 시도중
-  logInDone: false,
-  logInError: null,
+  googleLogInLoading: false, // 구글 로그인 시도중
+  googleLogInDone: false,
+  googleLogInError: null,
   logOutLoading: false, // 로그아웃 시도중
   logOutDone: false,
   logOutError: null,
@@ -13,9 +13,9 @@ export const initialState = {
   me: null,
 };
 
-export const LOG_IN_REQUEST = 'LOG_IN_REQUEST';
-export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS';
-export const LOG_IN_FAILURE = 'LOG_IN_FAILURE';
+export const GOOGLE_LOG_IN_REQUEST = 'GOOGLE_LOG_IN_REQUEST';
+export const GOOGLE_LOG_IN_SUCCESS = 'GOOGLE_LOG_IN_SUCCESS';
+export const GOOGLE_LOG_IN_FAILURE = 'GOOGLE_LOG_IN_FAILURE';
 
 export const LOG_OUT_REQUEST = 'LOG_OUT_REQUEST';
 export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS';
@@ -27,19 +27,18 @@ export const LOAD_MY_INFO_FAILURE = 'LOAD_MY_INFO_FAILURE';
 
 const reducer = (state = initialState, action) => produce(state, (draft) => {
   switch (action.type) {
-    case LOG_IN_REQUEST:
-      draft.logInLoading = true;
-      draft.logInError = null;
-      draft.logInDone = false;
+    case GOOGLE_LOG_IN_REQUEST:
+      draft.googleLogInLoading = true;
+      draft.googleLogInError = null;
+      draft.googleLogInDone = false;
       break;
-    case LOG_IN_SUCCESS:
-      draft.logInLoading = false;
-      draft.logInDone = true;
-      draft.me = action.data;
+    case GOOGLE_LOG_IN_SUCCESS:
+      draft.googleLogInLoading = false;
+      draft.googleLogInDone = true;
       break;
-    case LOG_IN_FAILURE:
-      draft.logInLoading = false;
-      draft.logInError = action.error;
+    case GOOGLE_LOG_IN_FAILURE:
+      draft.googleLogInLoading = false;
+      draft.googleLogInError = action.error;
       break;
 
     case LOG_OUT_REQUEST:

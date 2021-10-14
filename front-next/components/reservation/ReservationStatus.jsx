@@ -1,5 +1,5 @@
 import React from "react";
-import styles from '../../styles/Reservation.module.scss';
+import styles from '../../styles/reservation/Reservation.module.scss';
 
 const ReservationStatus = () => {
   return (

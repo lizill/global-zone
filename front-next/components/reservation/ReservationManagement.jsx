@@ -1,21 +1,24 @@
 import React, { useState } from "react";
-import styles from '../../styles/Reservation.module.scss'
+import styles from '../../styles/reservation/Reservation.module.scss'
 import { AiOutlineDownCircle } from 'react-icons/ai'
 
 import Items from "./Items";
 
 const standby = [
   {
+    id: 1,
     lang: '일본어',
     name: '나카무라 시이아',
     date: '10월 13일 03:30 ~ 03:50'
   },
   {
+    id: 2,
     lang: '일본어',
     name: '후쿠이 료우',
     date: '10월 13일 04:00 ~ 04:20'
   },
   {
+    id: 3,
     lang: '일본어',
     name: '마키 코나츠',
     date: '10월 13일 04:30 ~ 04:50'
@@ -78,15 +81,15 @@ const ReservationManagement = () => {
       <div className={styles.contentWrap}>
         <ContentBtn content={contentBtnList[0]} on={on} onList={onList}/>
         <div className={styles.itemList} style={transformHeight("standby", standby.length)}>
-          {standby.map(v => <Items content={v}/>)}
+          {standby.map(v => <Items key={v.id} content={v}/>)}
         </div>
         <ContentBtn content={contentBtnList[1]} on={on} onList={onList}/>
         <div className={styles.itemList} style={transformHeight("completion", standby.length)}>
-          {standby.map(v => <Items content={v}/>)}
+          {standby.map(v => <Items key={v.id} content={v}/>)}
         </div>
         <ContentBtn content={contentBtnList[2]} on={on} onList={onList}/>
         <div className={styles.itemList} style={transformHeight("result", standby.length)}>
-          {standby.map(v => <Items content={v}/>)}
+          {standby.map(v => <Items key={v.id} content={v}/>)}
         </div>
       </div>
     </div>

@@ -1,10 +1,11 @@
 import React from "react";
 import Head from 'next/head';
-import LoginLayout from "../components/auth/LoginLayout";
 import Router from 'next/router';
-import styles from '../styles/Login.module.scss'
 import { GoChevronRight } from 'react-icons/go';
 import axios from 'axios';
+
+import LoginLayout from "../components/auth/LoginLayout";
+import styles from '../styles/login/Login.module.scss';
 
 const Korean = () => {
   const onLogin = () => {

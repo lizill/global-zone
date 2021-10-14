@@ -1,7 +1,8 @@
 import React from "react";
 import Head from 'next/head';
+
 import LoginLayout from "../components/auth/LoginLayout";
-import styles from '../styles/Login.module.scss';
+import styles from '../styles/login/Login.module.scss';
 
 const Foreign = () => {
   return (
