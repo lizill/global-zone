@@ -1,19 +1,66 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import Link from 'next/link';
 import Head from 'next/head';
-import AppLayout from "../components/AppLayout";
+import Router from 'next/router';
+import { useSelector, useDispatch } from "react-redux";
+
+import styles from '../styles/admin/admin.module.scss'
+import CreateUser from "../components/admin/CreateUser";
+import { LOG_OUT_REQUEST } from "../reducers/user";
+import ScheduleControllContainer from "../components/admin/ScheduleControllContainer";
 
 const Admin = () => {
+  const dispatch = useDispatch();
+  const [show, setShow] = useState('user');
+  const { me } = useSelector(state => state.user);
+
+  const onLogout = () => {
+    dispatch({
+      type: LOG_OUT_REQUEST,
+    });
+  }
+
+  // useEffect(() => {
+  //   if(!me || me.position !== 'admin') {
+  //     Router.push('/');
+  //   }
+  // }, [me])
+
   return (
-    <div>
+    <div className={styles.adminWrap}>
       <Head>
         <title>글로벌존 | 관리 페이지</title>
         <meta name="description" content="Global zone reservation service" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       
-      <AppLayout on="admin">
-        관리자 페이지
-      </AppLayout>
+      <header>
+        <div className={styles.menu}>
+          <button>
+            <img src="/images/logo_intro_globalzone.gif" alt="logo.gif" />
+          </button>
+          <button className={styles.logoutBtn} onClick={onLogout}>
+            <img src="/images/google_icon.png" alt="icon.png" width="20" />
+            <p>Logout</p>
+          </button>
+        </div>
+        <menu>
+          <button onClick={() => setShow('user')}>유저 관리</button>
+          <button onClick={() => setShow('schedule')}>스케줄 관리</button>
+        </menu>
+      </header>
+
+      <main>
+        {show === 'user' && <CreateUser/>}
+        {show === 'schedule' && <ScheduleControllContainer/>}
+      </main>
+
+      <footer>
+        <p>
+          담당전화 053-940-5625 41527 대구광역시 북구 복현로 35 (복현2동 218)<br/>
+          COPYRIGHT© YEUNGJIN UNIVERSITY. All RIGHTS RESERVED.
+        </p>
+      </footer>
     </div>
   )
 }

@@ -1,0 +1,69 @@
+.adminWrap {
+  background-color: #eef1f6;
+  height: 100vh;
+  width: 100vw;
+
+  header {
+    background-color: white;
+    max-width: 1280px;
+    margin: 0 auto;
+
+    .menu {
+      height: 70px;
+      padding: 0 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    menu {
+      button {
+        cursor: pointer;
+      }
+    }
+
+    button {
+      // logo
+      border: 0px;
+      background-color: white;
+    }
+
+    .logoutBtn {
+      display: flex;
+      align-items: center;
+
+      img {
+        width: 20px;
+        margin-right: 10px;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  footer {
+    max-width: 1280px;
+    margin: 0 auto;
+    background-color: white;
+    border-top: 1px solid #e6e6e6;
+    padding: 10px 0px;
+
+    p {
+      text-align: center;
+      color: #afafaf;
+      font-size: 0.8em;
+    }
+  }
+}
+
+.calendarWrap {
+  width: 440px;
+}

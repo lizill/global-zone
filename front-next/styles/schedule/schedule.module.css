@@ -1,0 +1,81 @@
+.purpleDay:not(.-selectedStart):not(.-selectedBetween):not(.-selectedEnd):not(.-selected) {
+  border: 2px solid rgba(156, 136, 255, 0.7) !important;
+}
+
+.orangeDay:not(.-selectedStart):not(.-selectedBetween):not(.-selectedEnd):not(.-selected) {
+  border: 2px solid rgba(219, 145, 60, 0.7) !important;
+}
+
+.calendarWrap {
+  padding: 30px;
+  font-size: 0.9em;
+  font-weight: 600;
+  background-color: white;
+}
+.calendarWrap span {
+  font-size: 1.4em;
+}
+.calendarWrap .calendarHeader {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 10px;
+}
+.calendarWrap .calendarHeader button {
+  border: none;
+  font-size: 1.1em;
+  background-color: white;
+  display: inline;
+  padding: 0px;
+}
+.calendarWrap .calendarHeader button:hover {
+  cursor: pointer;
+}
+.calendarWrap .calendarHeader button + button {
+  margin-left: 10px;
+}
+.calendarWrap .calendarTable {
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+}
+.calendarWrap .calendarTable tbody {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  width: 100%;
+}
+.calendarWrap .calendarTable tbody .tableHeader {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 0.9em;
+}
+.calendarWrap .calendarTable tbody .tableRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+.calendarWrap .calendarTable tbody .tableData button {
+  background-color: white;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 8px;
+}
+.calendarWrap .calendarTable tbody .tableData button:hover {
+  cursor: pointer;
+}
+.calendarWrap .calendarTable tbody .tableData:after {
+  content: "";
+  display: block;
+  padding-bottom: 60%;
+}
+/*# sourceMappingURL=schedule.module.css.map */

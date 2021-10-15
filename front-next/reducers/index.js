@@ -2,6 +2,7 @@ import { HYDRATE } from 'next-redux-wrapper';
 import { combineReducers } from 'redux';
 
 import user from './user';
+import schedule from './schedule'
 
 const rootReducer = (state, action) => {
   switch (action.type) {
@@ -11,6 +12,7 @@ const rootReducer = (state, action) => {
     default: {
       const combinedReducer = combineReducers({
         user,
+        schedule,
       });
       return combinedReducer(state, action);
     }

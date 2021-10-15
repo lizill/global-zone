@@ -5,6 +5,8 @@ import { END } from 'redux-saga';
 
 import AppLayout from "../components/AppLayout";
 import wrapper from '../store/configuresStore';
+import CalendarContainer from "../components/schedule/CalendarConatainer";
+import ScheduleList from "../components/schedule/ScheduleList"
 import { LOAD_MY_INFO_REQUEST } from '../reducers/user';
 
 const Schedule = () => {
@@ -17,9 +19,8 @@ const Schedule = () => {
       </Head>
 
       <AppLayout on="schedule">
-        {/* <CalendarContainer/>
-        <ScheduleList/> */}
-        스케줄
+        <CalendarContainer/>
+        <ScheduleList/>
       </AppLayout>
     </div>
   )
