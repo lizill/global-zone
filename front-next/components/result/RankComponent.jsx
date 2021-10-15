@@ -11,11 +11,11 @@ const RankComponent = () => {
       <div className={styles.greenCircle}/>
       <div className={styles.pinkCircle}/>
       <div className={styles.yellowCircle}/>
-      <p className={styles.status}>
+      <div className={styles.status}>
         <span>{me && me.name}</span> 학생의 2021학년도 2학기<br/>
         글로벌 존 이용 횟수
-      </p>
-      <p className={styles.count}><span>3</span>회</p>
+      </div>
+      <div className={styles.count}><span>3</span>회</div>
     </div>
   )
 }

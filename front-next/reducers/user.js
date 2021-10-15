@@ -10,6 +10,9 @@ export const initialState = {
   loadMyInfoLoading: false, // 내 정보 불러오기
   loadMyInfoDone: false,
   loadMyInfoError: null,
+  signUpLoading: false, // 유학생 회원가입
+  signUpDone: false,
+  signUpError: null,
   me: null,
 };
 
@@ -24,6 +27,10 @@ export const LOG_OUT_FAILURE = 'LOG_OUT_FAILURE';
 export const LOAD_MY_INFO_REQUEST = 'LOAD_MY_INFO_REQUEST';
 export const LOAD_MY_INFO_SUCCESS = 'LOAD_MY_INFO_SUCCESS';
 export const LOAD_MY_INFO_FAILURE = 'LOAD_MY_INFO_FAILURE';
+
+export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
+export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
+export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';
 
 const reducer = (state = initialState, action) => produce(state, (draft) => {
   switch (action.type) {
@@ -69,6 +76,20 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
     case LOAD_MY_INFO_FAILURE:
       draft.loadMyInfoLoading = false;
       draft.loadMyInfoError = action.error;
+      break;
+
+    case SIGN_UP_REQUEST:
+      draft.signUpLoading = true;
+      draft.signUpDone = false;
+      draft.signUpError = null;
+      break;
+    case SIGN_UP_SUCCESS:
+      draft.signUpLoading = false;
+      draft.signUpDone = true;
+      break;
+    case SIGN_UP_FAILURE:
+      draft.signUpLoading = false;
+      draft.signUpError = action.error;
       break;
       
     default:

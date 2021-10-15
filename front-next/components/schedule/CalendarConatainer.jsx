@@ -1,19 +1,25 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import moment from 'moment';
 import { GrNext, GrPrevious } from 'react-icons/gr'
 
 import styles from '../../styles/schedule/schedule.module.scss';
+import { SET_SELETED_DATE } from "../../reducers/schedule";
 
 const CalendarContainer = () => {
   const [getMoment, setMoment] = useState(moment);
-  const [selectedDate, setSelectedDate] = useState(moment().format('YYYYMMDD'));
+  const { selectedDate } = useSelector(state => state.schedule);
+  const dispatch = useDispatch();
 
   const today = getMoment; // today = moment()
   const firstWeek = today.clone().startOf('month').week();
   const lastWeek = today.clone().endOf('month').week() === 1 ? 53 : today.clone().endOf('month').week();
 
   const onSelectDate = (date) => {
-    setSelectedDate(date)
+    dispatch({
+      type: SET_SELETED_DATE,
+      data: date
+    });
   }
 
   const calendarArr = () => {
@@ -99,7 +105,6 @@ const CalendarContainer = () => {
           { calendarArr() }
         </tbody>
       </table>
-      <p>{ selectedDate }</p>
     </div>
   );
 }

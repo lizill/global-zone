@@ -9,7 +9,7 @@ import styles from '../styles/login/Login.module.scss';
 
 const Korean = () => {
   const onLogin = () => {
-    axios.get('http://localhost:8000/api/google/login')
+    axios.get('/google/login')
       .then((res) => {
         Router.push(res.data)
       })

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { SIGN_UP_REQUEST } from "../../reducers/user";
 
 const CreateUser = () => {
+  const dispatch = useDispatch();
   const [id, setId] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -47,14 +50,26 @@ const CreateUser = () => {
       return
     }
 
-    alert(id, name, password)
+    let isConfirm = confirm(`
+      학번: ${id}\n
+      이름: ${name}\n
+      언어(나라): ${lang}\n
+      위 정보로 계정을 생성 하시겠습니까?
+    `);
 
-    setId('');
-    setName('');
-    setLang('');
-    setPassword('');
-    setPasswordCheck('');
-    setError('');
+    if (isConfirm) {
+      dispatch({
+        type: SIGN_UP_REQUEST,
+        data: { email: id, name, password, position: lang }
+      });
+
+      setId('');
+      setName('');
+      setLang('');
+      setPassword('');
+      setPasswordCheck('');
+      setError('');
+    }
   }
 
   return (
@@ -67,9 +82,9 @@ const CreateUser = () => {
         <input id="name" type="text" value={name} onChange={onChangeName}/>
         <select onChange={onChangeSelect} value={lang}>
           <option value="" >언어</option>
-          <option value="일본어" >일본어</option>
-          <option value="중국어">중국어</option>
-          <option value="영어">영어</option>
+          <option value="japanese">일본어</option>
+          <option value="chinese">중국어</option>
+          <option value="american">영어</option>
         </select><br/>
         <label htmlFor="password">비밀번호</label>
         <input id="password" type="password" value={password} onChange={onChangePassword}/><br/>

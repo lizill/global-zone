@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
-import Link from 'next/link';
 import Head from 'next/head';
 import Router from 'next/router';
 import { useSelector, useDispatch } from "react-redux";
+import axios from 'axios';
+import { END } from 'redux-saga';
 
+import wrapper from '../store/configuresStore';
 import styles from '../styles/admin/admin.module.scss'
 import CreateUser from "../components/admin/CreateUser";
-import { LOG_OUT_REQUEST } from "../reducers/user";
+import { LOG_OUT_REQUEST, LOAD_MY_INFO_REQUEST } from "../reducers/user";
 import ScheduleControllContainer from "../components/admin/ScheduleControllContainer";
 
 const Admin = () => {
   const dispatch = useDispatch();
-  const [show, setShow] = useState('user');
+  const [show, setShow] = useState('schedule');
   const { me } = useSelector(state => state.user);
 
   const onLogout = () => {
@@ -20,11 +22,11 @@ const Admin = () => {
     });
   }
 
-  // useEffect(() => {
-  //   if(!me || me.position !== 'admin') {
-  //     Router.push('/');
-  //   }
-  // }, [me])
+  useEffect(() => {
+    if(!me || me.position !== 'admin') {
+      Router.push('/korean');
+    }
+  }, [me])
 
   return (
     <div className={styles.adminWrap}>
@@ -45,14 +47,14 @@ const Admin = () => {
           </button>
         </div>
         <menu>
-          <button onClick={() => setShow('user')}>유저 관리</button>
           <button onClick={() => setShow('schedule')}>스케줄 관리</button>
+          <button onClick={() => setShow('user')}>유저 관리</button>
         </menu>
       </header>
 
       <main>
-        {show === 'user' && <CreateUser/>}
         {show === 'schedule' && <ScheduleControllContainer/>}
+        {show === 'user' && <CreateUser/>}
       </main>
 
       <footer>
@@ -66,3 +68,16 @@ const Admin = () => {
 }
 
 export default Admin;
+
+export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req }) => {
+  const cookie = req ? req.headers.cookie : '';
+  axios.defaults.headers.Cookie = '';
+  if (req && cookie) {
+    axios.defaults.headers.Cookie = cookie;
+  }
+  store.dispatch({
+    type: LOAD_MY_INFO_REQUEST,
+  });
+  store.dispatch(END);
+  await store.sagaTask.toPromise();
+});

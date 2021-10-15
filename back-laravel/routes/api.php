@@ -24,5 +24,6 @@ Route::get('/google/login', [GoogleController::class, 'loginWithGoogle'])->name(
 Route::any('/google/callback', [GoogleController::class, 'callbackFromGoogle'])->name('callback');
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/auth/logout', [AuthController::class, 'logout']);
+    Route::post('/auth/register', [AuthController::class, 'createForeignUser']);
 });

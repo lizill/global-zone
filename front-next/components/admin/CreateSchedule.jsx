@@ -3,7 +3,12 @@ import React from "react";
 const CreateSchdule = () => {
   return (
     <div>
-      create new schedule
+      <form>
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+      </form>
     </div>
   )
 }

@@ -7,10 +7,13 @@ const Google = () => {
   const router = useRouter();
 
   useEffect(() => {
-    axios.get('http://localhost:8000/api/google/callback' + router.asPath.substring(7))
+    axios.get('/google/callback' + router.asPath.substring(7))
       .then((res) => {
-        console.log(res.data);
-        Router.push('/')
+        if (res.data.user.position === 'admin') {
+          Router.push('/admin');
+        } else {
+          Router.push('/');
+        }
       })
       .catch(err => console.error(err))
   }, []);
