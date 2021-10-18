@@ -6,6 +6,7 @@ import {
   LOG_OUT_REQUEST, LOG_OUT_SUCCESS, LOG_OUT_FAILURE,
   LOAD_MY_INFO_REQUEST, LOAD_MY_INFO_SUCCESS, LOAD_MY_INFO_FAILURE,
   SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_FAILURE,
+  LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_IN_FAILURE,
 } from '../reducers/user';
 
 function googleLogInApi() {
@@ -90,11 +91,33 @@ function* watchSignUp() {
   yield takeLatest(SIGN_UP_REQUEST, signUp);
 }
 
+function logInApi(data) {
+  return axios.post('/auth/login', data);
+}
+function* logIn(action) {
+  try {
+    console.log(action.data)
+    yield call(logInApi, action.data);
+    yield put({
+      type: LOG_IN_SUCCESS,
+    });
+  } catch (err) {
+    yield put({
+      type: LOG_IN_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+function* watchLogIn() {
+  yield takeLatest(LOG_IN_REQUEST, logIn);
+}
+
 export default function* userSaga() {
   yield all([
     fork(watchGoogleLogIn),
     fork(watchLogOut),
     fork(watchLoadMyInfo),
     fork(watchSignUp),
+    fork(watchLogIn),
   ]);
 }

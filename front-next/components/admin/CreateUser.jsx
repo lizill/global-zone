@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { SIGN_UP_REQUEST } from "../../reducers/user";
 
 const CreateUser = () => {
@@ -10,6 +10,7 @@ const CreateUser = () => {
   const [passwordCheck, setPasswordCheck] = useState('');
   const [lang, setLang] = useState('');
   const [error, setError] = useState('');
+  const { signUpError } = useSelector(state => state.user);
 
   const onChangeId = (e) => {
     setId(e.target.value);
@@ -77,9 +78,9 @@ const CreateUser = () => {
       create new user
       <form  onSubmit={onSubmit}>
         <label htmlFor="email">학번</label>
-        <input id="email" type="text" value={id} onChange={onChangeId}/><br/>
+        <input id="email" type="text" required value={id} onChange={onChangeId}/><br/>
         <label htmlFor="name">이름</label>
-        <input id="name" type="text" value={name} onChange={onChangeName}/>
+        <input id="name" type="text" required value={name} onChange={onChangeName}/>
         <select onChange={onChangeSelect} value={lang}>
           <option value="" >언어</option>
           <option value="japanese">일본어</option>
@@ -87,11 +88,12 @@ const CreateUser = () => {
           <option value="american">영어</option>
         </select><br/>
         <label htmlFor="password">비밀번호</label>
-        <input id="password" type="password" value={password} onChange={onChangePassword}/><br/>
+        <input id="password" type="password" min="8" required value={password} onChange={onChangePassword}/><br/>
         <label htmlFor="passwordCheck">비밀번호 확인</label>
-        <input id="passwordCheck" type="password" value={passwordCheck} onChange={onChangePasswordCheck}/><br/>
+        <input id="passwordCheck" type="password" min="8" required value={passwordCheck} onChange={onChangePasswordCheck}/><br/>
         
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {error && <p style={{ color: "red" }}>{ error }</p>}
+        {signUpError && <p style={{ color: "red" }}>{ signUpError.error }</p>}
         <button type="submit">Save</button>
       </form>
     </div>

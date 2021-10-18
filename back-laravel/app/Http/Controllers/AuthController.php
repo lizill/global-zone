@@ -35,10 +35,24 @@ class AuthController extends Controller
         ]);
     }
 
-    public function login()
+    public function login(Request $request)
     {
-        // $token = $user->createToken();
-        // return $this->respondWithToken($token);
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|string|max:255',
+            'password' => 'required|string|min:8|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        $is_user = User::where('email', $request->email)->first();
+        if ($is_user) {
+            Auth::loginUsingId($is_user->id);
+            return response()->json(['message' => 'login success!']);
+        } else {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
     }
 
     public function logout()

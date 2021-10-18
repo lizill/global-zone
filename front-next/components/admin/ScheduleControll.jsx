@@ -6,7 +6,6 @@ import styles from '../../styles/admin/admin.module.scss'
 const ScheduleControll = () => {
   return (
     <div>
-      schedule controller
       <div className={styles.calendarWrap}>
         <CalendarContainer/>
       </div>

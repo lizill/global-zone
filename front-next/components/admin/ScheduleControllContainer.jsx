@@ -1,4 +1,5 @@
 import React from "react";
+import ScheduleList from "./ScheduleList";
 
 import CreateSchdule from "./CreateSchedule";
 import ScheduleControll from "./ScheduleControll";
@@ -8,6 +9,7 @@ const ScheduleControllContainer = () => {
     <div>
       <ScheduleControll/>
       <CreateSchdule/>
+      <ScheduleList/>
     </div>
   )
 }
