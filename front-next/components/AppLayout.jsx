@@ -26,7 +26,7 @@ const AppLayout = ({ children, on }) => {
     <div className={styles.appLayout}>
       <header>
         <div className={styles.menuLogo}>
-          <button>         
+          <button>
             <img src="/images/logo_intro_globalzone.gif" alt="logo.gif" />
           </button>
           <button className={styles.logoutBtn} onClick={onLogout}>

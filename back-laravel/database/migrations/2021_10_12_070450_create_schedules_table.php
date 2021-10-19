@@ -22,10 +22,9 @@ class CreateSchedulesTable extends Migration
                 ->foreignId('user_id')
                 ->constrained()
                 ->onDelete('cascade');
-            $table->date('start_date'); // 신청 날짜
-            $table->string('start_time'); // 신청 시간
+            $table->string('date'); // 신청 날짜, 시간
             $table->string('password')->nullable(); // 생성시 방 비밀번호 부여
-            $table->boolean('finished'); // 완료 여부(진행 되었는지)
+            $table->boolean('finished')->default(false); // 완료 여부(진행 되었는지)
             $table->timestamps();
         });
     }

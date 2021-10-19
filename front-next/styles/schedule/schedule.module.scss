@@ -1,11 +1,3 @@
-.purpleDay:not(.-selectedStart):not(.-selectedBetween):not(.-selectedEnd):not(.-selected) {
-  border: 2px solid rgba(156, 136, 255, 0.7) !important;
-}
-
-.orangeDay:not(.-selectedStart):not(.-selectedBetween):not(.-selectedEnd):not(.-selected) {
-  border: 2px solid rgba(219, 145, 60, 0.7) !important;
-}
-
 .calendarWrap {
   padding: 30px;
   font-size: 0.9em;
@@ -81,6 +73,123 @@
         display: block;
         padding-bottom: 60%;
       }
+    }
+  }
+}
+
+.itemWrap {
+  background-color: #659cff;
+  border-radius: 5px;
+  padding: 12px 18px;
+  font-size: 0.8em;
+  font-weight: bold;
+  color: white;
+  margin: 15px;
+
+  p {
+    padding: 0;
+    margin: 0;
+    margin-bottom: 12px;
+  }
+
+  .reservationsDiv {
+    display: flex;
+    justify-content: space-between;
+    background-color: #5e87fe;
+    border-radius: 5px;
+    padding: 10px;
+
+    span {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.scheduleListWrap {
+  padding: 30px;
+  padding-top: 0px;
+  background-color: white;
+
+  .content {
+    border: 1px solid #e5e5e5;
+    background-color: #f5f5f6;
+    border-radius: 5px 5px 0 0;
+
+    menu {
+      display: flex;
+      margin: 0px;
+      padding: 0px;
+      border-radius: 5px 5px 0 0;
+      overflow: hidden;
+
+      button {
+        border: none;
+        border-bottom: 1px solid #e5e5e5;
+        background-color: white;
+        width: 25%;
+        height: 48px;
+        font-size: 0.8em;
+        font-weight: bold;
+        text-align: center;
+        position: relative;
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        p {
+          // '전체'가 오른쪽으로 치우쳐서 바로잡기 위함..
+          position: relative;
+          bottom: 14px;
+        }
+
+        div {
+          position: absolute;
+          width: 6px;
+          height: 6px;
+          border-radius: 3px;
+          right: 10px;
+          top: 5px;
+        }
+
+        &.on {
+          border-bottom: none;
+          background-color: #f5f5f6;
+        }
+      }
+
+      button + button {
+        border-left: 1px solid #e5e5e5;
+      }
+    }
+
+    .empty {
+      background-color: white;
+      text-align: center;
+      border: 1px solid #e5e5e5;
+      border-radius: 5px;
+      margin: 20px 50px;
+      padding: 15px;
+      font-size: 0.8em;
+      font-weight: bold;
+    }
+  }
+
+  .dotsWrap {
+    // position: absolute;
+    border: 1px solid red;
+
+    div {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 3px;
+      border: 1px solid red;
     }
   }
 }

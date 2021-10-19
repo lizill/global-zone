@@ -5,6 +5,7 @@ import { GrNext, GrPrevious } from 'react-icons/gr'
 
 import styles from '../../styles/schedule/schedule.module.scss';
 import { SET_SELETED_DATE } from "../../reducers/schedule";
+import DotsComponent from "./DotsComponent";
 
 const CalendarContainer = () => {
   const [getMoment, setMoment] = useState(moment);
@@ -40,6 +41,7 @@ const CalendarContainer = () => {
                       >
                         {days.format('D')}
                       </button>
+                        <DotsComponent/>
                     </td>
                 );
               }else if(days.format('MM') !== today.format('MM')){
