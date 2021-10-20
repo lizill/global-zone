@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, memo } from "react";
 import styles from '../../styles/reservation/Reservation.module.scss'
 import { AiOutlineDownCircle } from 'react-icons/ai'
 
@@ -63,17 +63,17 @@ const ContentBtn = ({ content, on, onList }) => {
 const ReservationManagement = () => {
   const [on, setOn] = useState('');
 
-  const onList = (label) => {
+  const onList = useCallback((label) => {
     if(label === on) {
       setOn('');
     } else {
       setOn(label)
     }
-  }
+  }, [on]);
 
-  const transformHeight = (label, length) => {
+  const transformHeight = useCallback((label, length) => {
     return on === label ? { height: 66 * length} : { height: 0 }
-  }
+  }, [on]);
 
   return (
     <div className={styles.managementWrap}>
@@ -96,4 +96,4 @@ const ReservationManagement = () => {
   )
 }
 
-export default ReservationManagement;
+export default memo(ReservationManagement);

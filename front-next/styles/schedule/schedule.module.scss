@@ -62,6 +62,12 @@
           border: none;
           border-radius: 8px;
 
+          span {
+            position: relative;
+            font-size: 1em;
+            bottom: 6px;
+          }
+
           &:hover {
             cursor: pointer;
           }
@@ -77,7 +83,7 @@
   }
 }
 
-.itemWrap {
+.scheduleItemWrap {
   background-color: #659cff;
   border-radius: 5px;
   padding: 12px 18px;
@@ -119,6 +125,10 @@
     border: 1px solid #e5e5e5;
     background-color: #f5f5f6;
     border-radius: 5px 5px 0 0;
+
+    .listWrap {
+      padding: 8px;
+    }
 
     menu {
       display: flex;
@@ -179,17 +189,23 @@
       font-weight: bold;
     }
   }
+}
 
-  .dotsWrap {
-    // position: absolute;
-    border: 1px solid red;
+.dotsWrap {
+  position: absolute;
+  justify-content: space-between;
+  display: flex;
+  left: 50%;
+  transform: translate(-50%, 0);
+  bottom: 12px;
 
-    div {
-      position: absolute;
-      width: 6px;
-      height: 6px;
-      border-radius: 3px;
-      border: 1px solid red;
-    }
+  div {
+    width: 6px;
+    height: 6px;
+    border-radius: 3px;
+  }
+
+  div + div {
+    margin-left: 2px;
   }
 }

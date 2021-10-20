@@ -1,15 +1,18 @@
-import React from "react";
+import React, { memo } from "react";
 
 import styles from '../../styles/schedule/schedule.module.scss';
 
-const DotsComponent = () => {
+const DotsComponent = ({ list }) => {
   return (
     <div className={styles.dotsWrap}>
-      <div className={styles.en}/>
-      <div className={styles.jp}/>
-      <div className={styles.ch}/>
+      {list.filter(v => v.user.position === 'american').length !== 0 &&
+        <div style={{ backgroundColor: "#182f9e" }}></div>}
+      {list.filter(v => v.user.position === 'japanese').length !== 0 &&
+      <div style={{ backgroundColor: "#659cff" }}></div>}
+      {list.filter(v => v.user.position === 'chinese').length !== 0 &&
+      <div style={{ backgroundColor: "#ff6565" }}></div>}
     </div>
   )
 }
 
-export default DotsComponent;
+export default memo(DotsComponent);

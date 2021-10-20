@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, memo } from "react";
 import { useSelector } from "react-redux";
 import moment from "moment";
 
@@ -9,11 +9,11 @@ const ScheduleList = () => {
   const { selectedDate, schedule } = useSelector(state => state.schedule)
   const [menu, setMenu] = useState('전체');
 
-  const onClickMenu = (value) => {
+  const onClickMenu = useCallback((value) => {
     setMenu(value);
-  }
+  }, [menu]);
 
-  const setList = (value) => {
+  const setList = useCallback((value) => {
     const listByDate = schedule.filter(v => moment(v.date, 'YYYYMMDDhhmm').format('YYYYMMDD') === selectedDate);
     switch (value) {
       case '전체':
@@ -25,7 +25,7 @@ const ScheduleList = () => {
       case '중국어':
         return listByDate.filter(v => v.user.position === 'chinese');
     }
-  }
+  }, [schedule, selectedDate]);
 
   return (
     <div className={styles.scheduleListWrap}>
@@ -72,4 +72,4 @@ const ScheduleList = () => {
   )
 }
 
-export default ScheduleList;
+export default memo(ScheduleList);

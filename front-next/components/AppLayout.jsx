@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback, memo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Link from 'next/link';
 import Router from 'next/router';
@@ -10,11 +10,11 @@ const AppLayout = ({ children, on }) => {
   const dispatch = useDispatch();
   const { me } = useSelector(state => state.user);
 
-  const onLogout = () => {
+  const onLogout = useCallback(() => {
     dispatch({
       type: LOG_OUT_REQUEST,
     });
-  }
+  }, []);
 
   useEffect(() => {
     if(!me) {
@@ -38,7 +38,6 @@ const AppLayout = ({ children, on }) => {
           <Link href="/"><a className={on === 'index' ? styles.on : null}>예약 조회</a></Link>
           <Link href="/schedule"><a className={on === 'schedule' ? styles.on : null}>스케줄 조회</a></Link>
           <Link href="/result"><a className={on === 'result' ? styles.on : null}>결과 관리</a></Link>
-          {/* <Link href="/admin"><a className={on === 'admin' ? styles.on : null}>관리자 페이지</a></Link> */}
         </div>
       </header>
 
@@ -56,4 +55,4 @@ const AppLayout = ({ children, on }) => {
   )
 }
 
-export default AppLayout;
+export default memo(AppLayout);

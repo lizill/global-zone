@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo } from "react";
 
 import CalendarContainer from "./CalendarConatainer";
 import ScheduleList from "./ScheduleList";
@@ -12,4 +12,4 @@ const ScheduleContainer = () => {
   )
 }
 
-export default ScheduleContainer;
+export default memo(ScheduleContainer);

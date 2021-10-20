@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import styles from '../../styles/reservation/Reservation.module.scss';
 
 const Items = ({ content }) => {
@@ -10,4 +10,4 @@ const Items = ({ content }) => {
   )
 }
 
-export default Items;
+export default memo(Items);

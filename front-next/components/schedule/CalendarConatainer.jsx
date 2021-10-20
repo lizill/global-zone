@@ -1,29 +1,20 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useCallback, memo } from "react";
+import { useSelector } from "react-redux";
 import moment from 'moment';
-import { GrNext, GrPrevious } from 'react-icons/gr'
+import { GrNext, GrPrevious } from 'react-icons/gr';
 
 import styles from '../../styles/schedule/schedule.module.scss';
-import { SET_SELETED_DATE } from "../../reducers/schedule";
-import DotsComponent from "./DotsComponent";
+import TdComponent from "./TdComponent";
 
 const CalendarContainer = () => {
   const [getMoment, setMoment] = useState(moment);
   const { selectedDate } = useSelector(state => state.schedule);
-  const dispatch = useDispatch();
 
   const today = getMoment; // today = moment()
   const firstWeek = today.clone().startOf('month').week();
   const lastWeek = today.clone().endOf('month').week() === 1 ? 53 : today.clone().endOf('month').week();
 
-  const onSelectDate = (date) => {
-    dispatch({
-      type: SET_SELETED_DATE,
-      data: date
-    });
-  }
-
-  const calendarArr = () => {
+  const calendarArr = useCallback(() => {
     let result = [];
     let week = firstWeek;
     for ( week; week <= lastWeek; week++) {
@@ -32,38 +23,18 @@ const CalendarContainer = () => {
           {
             Array(7).fill(0).map((data, index) => {
               let days = today.clone().startOf('year').week(week).startOf('week').add(index, 'day');
-
               if(selectedDate === days.format('YYYYMMDD')){
                 return( // 선택된 날짜
-                    <td className={styles.tableData} key={index}>
-                      <button style={{ backgroundColor:'#E7E7FF', color: "#4F369C", fontWeight: "bold" }}
-                        onClick={() => onSelectDate(days.format('YYYYMMDD'))}
-                      >
-                        {days.format('D')}
-                      </button>
-                        <DotsComponent/>
-                    </td>
+                  <TdComponent
+                    key={index}
+                    index={index} days={days}
+                    styleProps={{ backgroundColor:'#E7E7FF', color: "#4F369C", fontWeight: "bold" }}
+                  />
                 );
-              }else if(days.format('MM') !== today.format('MM')){
-                return( // 그 외의 달
-                    <td className={styles.tableData} key={index}>
-                      <button style={{ color: '#C0C0C0' }}
-                        onClick={() => onSelectDate(days.format('YYYYMMDD'))}
-                      >
-                        {days.format('D')}
-                      </button>
-                    </td>
-                );
+              }else if(days.format('MM') !== today.format('MM')){ // 다른 달
+                return <TdComponent key={index} index={index} styleProps={{ color: '#C0C0C0' }} days={days}/>
               }else{
-                return(
-                    <td className={styles.tableData} key={index}>
-                      <button 
-                        onClick={() => onSelectDate(days.format('YYYYMMDD'))}
-                      >
-                        {days.format('D')}
-                      </button>
-                    </td>
-                );
+                return <TdComponent key={index} index={index} days={days}/>
               }
             })
           }
@@ -71,15 +42,15 @@ const CalendarContainer = () => {
       );
     }
     return result;
-  }
+  }, [getMoment, selectedDate]);
 
-  const getPrevMonth = () => {
+  const getPrevMonth = useCallback(() => {
     setMoment(getMoment.clone().subtract(1, 'month'))
-  }
+  }, [getMoment]);
 
-  const getNextMonth = () => {
+  const getNextMonth = useCallback(() => {
     setMoment(getMoment.clone().add(1, 'month')) 
-  }
+  }, [getMoment]);
   
   return (
     <div className={styles.calendarWrap}>
@@ -111,4 +82,4 @@ const CalendarContainer = () => {
   );
 }
 
-export default CalendarContainer;
+export default memo(CalendarContainer);

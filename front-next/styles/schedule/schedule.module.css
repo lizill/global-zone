@@ -62,6 +62,11 @@
   border: none;
   border-radius: 8px;
 }
+.calendarWrap .calendarTable tbody .tableData button span {
+  position: relative;
+  font-size: 1em;
+  bottom: 6px;
+}
 .calendarWrap .calendarTable tbody .tableData button:hover {
   cursor: pointer;
 }
@@ -71,8 +76,7 @@
   padding-bottom: 60%;
 }
 
-.itemWrap {
-  background-color: #659cff;
+.scheduleItemWrap {
   border-radius: 5px;
   padding: 12px 18px;
   font-size: 0.8em;
@@ -80,12 +84,12 @@
   color: white;
   margin: 15px;
 }
-.itemWrap p {
+.scheduleItemWrap p {
   padding: 0;
   margin: 0;
   margin-bottom: 12px;
 }
-.itemWrap .reservationsDiv {
+.scheduleItemWrap .reservationsDiv {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -96,7 +100,7 @@
   border-radius: 5px;
   padding: 10px;
 }
-.itemWrap .reservationsDiv span {
+.scheduleItemWrap .reservationsDiv span {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -104,7 +108,7 @@
       -ms-flex-align: center;
           align-items: center;
 }
-.itemWrap:hover {
+.scheduleItemWrap:hover {
   cursor: pointer;
 }
 
@@ -117,6 +121,9 @@
   border: 1px solid #e5e5e5;
   background-color: #f5f5f6;
   border-radius: 5px 5px 0 0;
+}
+.scheduleListWrap .content .listWrap {
+  padding: 8px;
 }
 .scheduleListWrap .content menu {
   display: -webkit-box;
@@ -170,14 +177,26 @@
   font-size: 0.8em;
   font-weight: bold;
 }
-.scheduleListWrap .dotsWrap {
-  border: 1px solid red;
-}
-.scheduleListWrap .dotsWrap div {
+
+.dotsWrap {
   position: absolute;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+  bottom: 12px;
+}
+.dotsWrap div {
   width: 6px;
   height: 6px;
   border-radius: 3px;
-  border: 1px solid red;
+}
+.dotsWrap div + div {
+  margin-left: 2px;
 }
 /*# sourceMappingURL=schedule.module.css.map */

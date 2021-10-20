@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import styles from '../../styles/reservation/Reservation.module.scss';
 
 const ReservationStatus = () => {
@@ -23,4 +23,4 @@ const ReservationStatus = () => {
   )
 }
 
-export default ReservationStatus;
+export default memo(ReservationStatus);

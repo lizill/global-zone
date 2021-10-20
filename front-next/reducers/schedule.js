@@ -68,6 +68,16 @@ export const initialState = {
         }
       ]
     },
+    {
+      id: 5,
+      date: '202111021100', // 'YYYYMMDDhhmm'
+      user: {
+        id: 3,
+        name: '임채환',
+        position: 'chinese'
+      },
+      reservations: []
+    },
   ],
 };
 
