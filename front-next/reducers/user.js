@@ -16,7 +16,12 @@ export const initialState = {
   logInLoading: false, // 유학생 로그인
   logInDone: false,
   logInError: null,
+  loadForeignsLoading: false, // 유학생들 정보 불러오기
+  loadForeignsDone: false,
+  loadForeignsError: null,
+  
   me: null,
+  foreigns: null,
 };
 
 export const GOOGLE_LOG_IN_REQUEST = 'GOOGLE_LOG_IN_REQUEST';
@@ -38,6 +43,10 @@ export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';
 export const LOG_IN_REQUEST = 'LOG_IN_REQUEST';
 export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS';
 export const LOG_IN_FAILURE = 'LOG_IN_FAILURE';
+
+export const LOAD_FOREIGNS_REQUEST = 'LOAD_FOREIGNS_REQUEST';
+export const LOAD_FOREIGNS_SUCCESS = 'LOAD_FOREIGNS_SUCCESS';
+export const LOAD_FOREIGNS_FAILURE = 'LOAD_FOREIGNS_FAILURE';
 
 const reducer = (state = initialState, action) => produce(state, (draft) => {
   switch (action.type) {
@@ -111,6 +120,21 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
     case LOG_IN_FAILURE:
       draft.logInLoading = false;
       draft.logInError = action.error;
+      break;
+
+    case LOAD_FOREIGNS_REQUEST:
+      draft.loadForeignsLoading = true;
+      draft.loadForeignsDone = false;
+      draft.loadForeignsError = null;
+      break;
+    case LOAD_FOREIGNS_SUCCESS:
+      draft.loadForeignsLoading = false;
+      draft.loadForeignsDone = true;
+      draft.foreigns = action.data;
+      break;
+    case LOAD_FOREIGNS_FAILURE:
+      draft.loadForeignsLoading = false;
+      draft.loadForeignsError = action.error;
       break;
       
     default:

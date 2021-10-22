@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Validator;
 
 class SchedulesController extends Controller
 {
-    public function newSchedule(Request $request)
+    public function schedule(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|string|max:255',
@@ -19,14 +19,21 @@ class SchedulesController extends Controller
             return response()->json($validator->errors()->toJson(), 400);
         }
 
-        Schedule::create([
+        // Schedule::create([
+        //     'user_id' => $request->foreign_id,
+        //     'date' => $request->start_date,
+        //     'password' => random_int(100000, 999999),
+        // ]);
+        $schedule = Schedule::updateOrCreate([
             'user_id' => $request->foreign_id,
             'date' => $request->start_date,
-            'password' => random_int(100000, 999999),
+        ], [
+            'password' => random_int(100000, 999999)
         ]);
 
         return response()->json([
             'message' => 'create schedule success',
+            'schedule' => $schedule,
         ]);
     }
 }

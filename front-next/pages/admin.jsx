@@ -8,7 +8,7 @@ import { END } from 'redux-saga';
 import wrapper from '../store/configuresStore';
 import styles from '../styles/admin/admin.module.scss'
 import CreateUser from "../components/admin/CreateUser";
-import { LOG_OUT_REQUEST, LOAD_MY_INFO_REQUEST } from "../reducers/user";
+import { LOG_OUT_REQUEST, LOAD_MY_INFO_REQUEST, LOAD_FOREIGNS_REQUEST } from "../reducers/user";
 import ScheduleControllContainer from "../components/admin/ScheduleControllContainer";
 
 const Admin = () => {
@@ -77,6 +77,9 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async ({
   }
   store.dispatch({
     type: LOAD_MY_INFO_REQUEST,
+  });
+  store.dispatch({
+    type: LOAD_FOREIGNS_REQUEST,
   });
   store.dispatch(END);
   await store.sagaTask.toPromise();

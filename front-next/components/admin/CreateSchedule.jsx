@@ -1,22 +1,50 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
+import styles from '../../styles/admin/admin.module.scss';
+
 const CreateSchdule = () => {
   const { selectedDate } = useSelector(state => state.schedule);
+  const { foreigns } = useSelector(state => state.user);
   const [time, setTime] = useState('');
+  const [lang, setLang] = useState('american');
+  const [foreign, setForeign] = useState('');
 
-  const onChangeSelect = (e) => {
+  const onSelectTime = (e) => {
     setTime(e.target.value)
+  }
+
+  const onSelectLang = (e) => {
+    setLang(e.target.value)
+  }
+
+  const onSelctForeign = (e) => {
+    setForeign(e.target.value)
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+    
+    let isConfirm = confirm(`
+      신청 날짜: ${selectedDate}\n
+      신청 시간: ${time}\n
+      유학생: ${foreign}\n
+      위 정보로 일정을 생성 하시겠습니까?
+    `);
+  }
+
+  const setForeignList = () => {
+    return foreigns?.filter(v => v.position === lang);
   }
   
   return (
-    <div>
-      <form>
+    <div className={styles.createSchdule}>
+      <form onSubmit={onSubmit}>
         <label htmlFor="start_date">신청 날짜</label>
         <input id="start_date" type="text" disabled value={selectedDate} /> <br />
         <label htmlFor="start_time">신청 시간</label>
-        <select id="start_time" onChange={onChangeSelect} value={time}>
-          <option value="" >신청 시간</option>
+        <select id="start_time" onChange={onSelectTime} value={time}>
+          <option value="">신청 시간</option>
           <option value="10:00">10:00 ~ 10:20</option>
           <option value="10:30">10:30 ~ 10:50</option>
           <option value="11:00">11:00 ~ 11:20</option>
@@ -32,8 +60,18 @@ const CreateSchdule = () => {
           <option value="16:00">16:00 ~ 16:20</option>
           <option value="16:30">16:30 ~ 16:50</option>
         </select><br/>
+        <label htmlFor="lang">언어</label>
+        <select id="lang" onChange={onSelectLang} value={lang}>
+          <option value="american">영어</option>
+          <option value="japanese">일본어</option>
+          <option value="chinese">중국어</option>
+        </select> <br />
         <label htmlFor="foreign">유학생</label>
-        <input id="foreign" type="text" /> <br />
+        <select id="foreign" onChange={onSelctForeign} value={foreign}>
+          {setForeignList() && setForeignList().map(v => (
+            <option value={v.id}>{v.name}</option>
+          ))}
+        </select> <br/>
         <button type="submit">Save</button>
       </form>
     </div>

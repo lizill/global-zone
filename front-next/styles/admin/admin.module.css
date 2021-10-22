@@ -21,6 +21,9 @@
       -ms-flex-align: center;
           align-items: center;
 }
+.adminWrap header menu {
+  margin: 0;
+}
 .adminWrap header menu button {
   cursor: pointer;
 }
@@ -46,7 +49,7 @@
 .adminWrap main {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 20px;
 }
 .adminWrap footer {
   max-width: 1280px;
@@ -61,7 +64,29 @@
   font-size: 0.8em;
 }
 
-.calendarWrap {
+.scConatiner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.scConatiner .calendarWrap {
   width: 440px;
+  background-color: white;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.scConatiner .scheduleList {
+  width: 440px;
+  background-color: white;
+  border-radius: 5px;
+}
+.scConatiner .createSchdule {
+  width: 440px;
+  background-color: white;
+  border-radius: 5px;
+  margin-top: 20px;
 }
 /*# sourceMappingURL=admin.module.css.map */

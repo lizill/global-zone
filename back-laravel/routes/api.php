@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\SchedulesController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,5 +29,11 @@ Route::any('/google/callback', [GoogleController::class, 'callbackFromGoogle'])-
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/auth/logout', [AuthController::class, 'logout']);
+
+    // admin
     Route::post('/auth/register', [AuthController::class, 'createForeignUser']);
+
+    Route::post('/schedule', [SchedulesController::class, 'schedule']);
+
+    Route::get('/users/foreign', [UsersController::class, 'foreigns']);
 });

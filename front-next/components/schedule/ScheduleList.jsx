@@ -52,7 +52,7 @@ const ScheduleList = () => {
             일본어
             <div style={{ backgroundColor: "#659cff" }}/>
           </button>
-          <button 
+          <button
             className={menu === '중국어' ? styles.on : null} 
             onClick={() => onClickMenu('중국어')}
           >

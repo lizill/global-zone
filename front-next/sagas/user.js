@@ -7,6 +7,7 @@ import {
   LOAD_MY_INFO_REQUEST, LOAD_MY_INFO_SUCCESS, LOAD_MY_INFO_FAILURE,
   SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_FAILURE,
   LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_IN_FAILURE,
+  LOAD_FOREIGNS_REQUEST, LOAD_FOREIGNS_SUCCESS, LOAD_FOREIGNS_FAILURE,
 } from '../reducers/user';
 
 function googleLogInApi() {
@@ -14,7 +15,7 @@ function googleLogInApi() {
 }
 function* googleLogIn() {
   try {
-    const result = yield call(googleLogInApi);
+    yield call(googleLogInApi);
     yield put({
       type: GOOGLE_LOG_IN_SUCCESS,
     });
@@ -75,7 +76,7 @@ function signUpApi(data) {
 }
 function* signUp(action) {
   try {
-    console.log(action.data)
+    // console.log(action.data)
     yield call(signUpApi, action.data);
     yield put({
       type: SIGN_UP_SUCCESS,
@@ -96,7 +97,7 @@ function logInApi(data) {
 }
 function* logIn(action) {
   try {
-    console.log(action.data)
+    // console.log(action.data)
     yield call(logInApi, action.data);
     yield put({
       type: LOG_IN_SUCCESS,
@@ -112,6 +113,27 @@ function* watchLogIn() {
   yield takeLatest(LOG_IN_REQUEST, logIn);
 }
 
+function loadForeignsApi() {
+  return axios.get('/users/foreign');
+}
+function* loadForeigns() {
+  try {
+    const result = yield call(loadForeignsApi);
+    yield put({
+      type: LOAD_FOREIGNS_SUCCESS,
+      data: result.data
+    });
+  } catch (err) {
+    yield put({
+      type: LOAD_FOREIGNS_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+function* watchLoadForegins() {
+  yield takeLatest(LOAD_FOREIGNS_REQUEST, loadForeigns);
+}
+
 export default function* userSaga() {
   yield all([
     fork(watchGoogleLogIn),
@@ -119,5 +141,6 @@ export default function* userSaga() {
     fork(watchLoadMyInfo),
     fork(watchSignUp),
     fork(watchLogIn),
+    fork(watchLoadForegins),
   ]);
 }

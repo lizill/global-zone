@@ -17,6 +17,7 @@
     }
 
     menu {
+      margin: 0;
       button {
         cursor: pointer;
       }
@@ -46,7 +47,7 @@
   main {
     max-width: 1280px;
     margin: 0 auto;
-    padding: 0 40px;
+    padding: 20px;
   }
 
   footer {
@@ -64,6 +65,36 @@
   }
 }
 
-.calendarWrap {
-  width: 440px;
+.scConatiner {
+  display: flex;
+  justify-content: center;
+
+  .calendarWrap {
+    width: 440px;
+    background-color: white;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  .scheduleList {
+    width: 440px;
+    background-color: white;
+    border-radius: 5px;
+  }
+
+  .createSchdule {
+    width: 440px;
+    background-color: white;
+    border-radius: 5px;
+    margin-top: 20px;
+
+    form {
+      label {
+      }
+      input {
+      }
+      button {
+      }
+    }
+  }
 }

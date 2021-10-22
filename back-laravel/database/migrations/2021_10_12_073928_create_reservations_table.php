@@ -25,9 +25,13 @@ class CreateReservationsTable extends Migration
                 ->foreignId('schedule_id')
                 ->constrained()
                 ->onDelete('cascade');
-            $table->boolean('confirmed'); // 수락 여부
-            $table->string('password'); // 수락 완료시 방 번호 부여
-            $table->boolean('finished'); // 완료 여부(출결)
+            $table // 수락 여부
+                ->boolean('confirmed')
+                ->default(false);
+            $table->string('password');
+            $table // 완료 여부(출결)
+                ->boolean('finished')
+                ->default(false);
             $table->timestamps();
         });
     }
