@@ -1,20 +1,22 @@
 import React from "react";
+
 import ScheduleList from "./ScheduleList";
-
-import CreateSchdule from "./CreateSchedule";
-import ScheduleControll from "./ScheduleControll";
+import CreateSchedule from "./CreateSchedule";
 import styles from '../../styles/admin/admin.module.scss'
+import CalendarContainer from "../schedule/CalendarConatainer";
 
-const ScheduleControllContainer = () => {
+const ScheduleControllerContainer = () => {
   return (
-    <div className={styles.scConatiner}>
+    <div className={styles.scContainer}>
       <div>
-        <ScheduleControll className={styles.scheduleControll}/>
-        <CreateSchdule className={styles.createSchdule}/>
+        <CalendarContainer/>
+        <CreateSchedule className={styles.createSchedule}/>
       </div>
-      <ScheduleList className={styles.scheduleList}/>
+        <div className={styles.scheduleList}>
+            <ScheduleList/>
+        </div>
     </div>
   )
 }
 
-export default ScheduleControllContainer;
+export default ScheduleControllerContainer;

@@ -8,7 +8,7 @@ const CreateUser = () => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [passwordCheck, setPasswordCheck] = useState('');
-  const [lang, setLang] = useState('');
+  const [lang, setLang] = useState('en');
   const [error, setError] = useState('');
   const { signUpError } = useSelector(state => state.user);
 
@@ -40,9 +40,6 @@ const CreateUser = () => {
     } else if (!name) {
       setError('이름을 입력하세요!')
       return
-    } else if (!lang) {
-      setError('언어를 선택해 주세요!')
-      return
     } else if (!password) {
       setError('비밀번호를 입력하세요!')
       return
@@ -54,7 +51,7 @@ const CreateUser = () => {
     let isConfirm = confirm(`
       학번: ${id}\n
       이름: ${name}\n
-      언어(나라): ${lang}\n
+      언어: ${lang}\n
       위 정보로 계정을 생성 하시겠습니까?
     `);
 
@@ -82,10 +79,9 @@ const CreateUser = () => {
         <label htmlFor="name">이름</label>
         <input id="name" type="text" required value={name} onChange={onChangeName}/>
         <select onChange={onChangeSelect} value={lang}>
-          <option value="" >언어</option>
-          <option value="japanese">일본어</option>
-          <option value="chinese">중국어</option>
-          <option value="american">영어</option>
+          <option value="en">영어</option>
+          <option value="ja">일본어</option>
+          <option value="ch">중국어</option>
         </select><br/>
         <label htmlFor="password">비밀번호</label>
         <input id="password" type="password" min="8" required value={password} onChange={onChangePassword}/><br/>

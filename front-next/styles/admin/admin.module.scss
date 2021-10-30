@@ -65,7 +65,7 @@
   }
 }
 
-.scConatiner {
+.scContainer {
   display: flex;
   justify-content: center;
 
@@ -77,12 +77,13 @@
   }
 
   .scheduleList {
+    padding-top: 2rem;
     width: 440px;
     background-color: white;
     border-radius: 5px;
   }
 
-  .createSchdule {
+  .createSchedule {
     width: 440px;
     background-color: white;
     border-radius: 5px;

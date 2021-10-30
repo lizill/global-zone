@@ -10,7 +10,7 @@ import { LOG_IN_REQUEST } from "../reducers/user";
 const Foreign = () => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
-  const { logInDone, logInError } = useSelector(state => state.user)
+  const { logInDone, logInError, logInLoading } = useSelector(state => state.user)
   const dispatch = useDispatch();
 
   const onChangeId = (e) => {

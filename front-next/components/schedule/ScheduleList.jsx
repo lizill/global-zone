@@ -1,12 +1,14 @@
 import React, { useState, useCallback, memo } from "react";
 import { useSelector } from "react-redux";
 import moment from "moment";
+import { AiOutlinePlusCircle } from 'react-icons/ai'
 
 import ScheduleItem from "./ScheduleItem";
 import styles from '../../styles/schedule/schedule.module.scss';
 
 const ScheduleList = () => {
   const { selectedDate, schedule } = useSelector(state => state.schedule)
+  const { me } = useSelector(state => state.user)
   const [menu, setMenu] = useState('전체');
 
   const onClickMenu = useCallback((value) => {
@@ -35,7 +37,7 @@ const ScheduleList = () => {
           <button
             className={menu === '전체' ? styles.on : null}
             onClick={() => onClickMenu('전체')}
-          >
+          >
             <p>전체</p>
           </button>
           <button
@@ -61,6 +63,13 @@ const ScheduleList = () => {
           </button>
         </menu>
         <div className={styles.listWrap}>
+          { me.position === 'admin' && (
+              <div className={styles.createBtnWrap}>
+                <button>
+                  <AiOutlinePlusCircle/>
+                </button>
+              </div>
+          )}
           {
             setList(menu).length !== 0
             ? setList(menu).map(v => (<ScheduleItem key={v.id} schedule={v}/>))

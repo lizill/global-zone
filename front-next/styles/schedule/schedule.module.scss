@@ -152,12 +152,6 @@
           cursor: pointer;
         }
 
-        p {
-          // '전체'가 오른쪽으로 치우쳐서 바로잡기 위함..
-          position: relative;
-          bottom: 14px;
-        }
-
         div {
           position: absolute;
           width: 6px;
@@ -207,5 +201,17 @@
 
   div + div {
     margin-left: 2px;
+  }
+}
+
+.createBtnWrap {
+  display: flex;
+  justify-content: center;
+
+  button {
+    font-weight: bold;
+    font-size: 2.2rem;
+    margin-top: 1rem;
+    border: none;
   }
 }

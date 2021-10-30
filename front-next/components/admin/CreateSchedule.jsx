@@ -3,11 +3,11 @@ import { useSelector } from "react-redux";
 
 import styles from '../../styles/admin/admin.module.scss';
 
-const CreateSchdule = () => {
+const CreateSchedule = () => {
   const { selectedDate } = useSelector(state => state.schedule);
   const { foreigns } = useSelector(state => state.user);
   const [time, setTime] = useState('');
-  const [lang, setLang] = useState('american');
+  const [lang, setLang] = useState('');
   const [foreign, setForeign] = useState('');
 
   const onSelectTime = (e) => {
@@ -16,9 +16,10 @@ const CreateSchdule = () => {
 
   const onSelectLang = (e) => {
     setLang(e.target.value)
+    setForeign('')
   }
 
-  const onSelctForeign = (e) => {
+  const onSelectForeign = (e) => {
     setForeign(e.target.value)
   }
 
@@ -38,7 +39,7 @@ const CreateSchdule = () => {
   }
   
   return (
-    <div className={styles.createSchdule}>
+    <div className={styles.createSchedule}>
       <form onSubmit={onSubmit}>
         <label htmlFor="start_date">신청 날짜</label>
         <input id="start_date" type="text" disabled value={selectedDate} /> <br />
@@ -60,14 +61,14 @@ const CreateSchdule = () => {
           <option value="16:00">16:00 ~ 16:20</option>
           <option value="16:30">16:30 ~ 16:50</option>
         </select><br/>
-        <label htmlFor="lang">언어</label>
         <select id="lang" onChange={onSelectLang} value={lang}>
-          <option value="american">영어</option>
-          <option value="japanese">일본어</option>
-          <option value="chinese">중국어</option>
-        </select> <br />
-        <label htmlFor="foreign">유학생</label>
-        <select id="foreign" onChange={onSelctForeign} value={foreign}>
+          <option value="">언어</option>
+          <option value="en">영어</option>
+          <option value="ja">일본어</option>
+          <option value="ch">중국어</option>
+        </select>
+        <select id="foreign" onChange={onSelectForeign} value={foreign}>
+          <option value="">유학생</option>
           {setForeignList() && setForeignList().map(v => (
             <option value={v.id}>{v.name}</option>
           ))}
@@ -78,4 +79,4 @@ const CreateSchdule = () => {
   )
 }
 
-export default CreateSchdule;
+export default CreateSchedule;

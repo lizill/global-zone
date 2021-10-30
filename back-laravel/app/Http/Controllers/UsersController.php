@@ -9,7 +9,7 @@ class UsersController extends Controller
 {
   public function foreigns()
   {
-    $foreigns = User::whereIn('position', ['american', 'japanese', 'chinese'])->get();
+    $foreigns = User::whereIn('position', ['en', 'ja', 'ch'])->get();
 
     return $foreigns;
   }
