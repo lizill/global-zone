@@ -16,12 +16,12 @@ export const initialState = {
   logInLoading: false, // 유학생 로그인
   logInDone: false,
   logInError: null,
-  loadForeignsLoading: false, // 유학생들 정보 불러오기
-  loadForeignsDone: false,
-  loadForeignsError: null,
+  loadForeignListLoading: false, // 유학생들 정보 불러오기
+  loadForeignListDone: false,
+  loadForeignListError: null,
   
   me: null,
-  foreigns: null,
+  foreignList: null,
 };
 
 export const GOOGLE_LOG_IN_REQUEST = 'GOOGLE_LOG_IN_REQUEST';
@@ -44,9 +44,9 @@ export const LOG_IN_REQUEST = 'LOG_IN_REQUEST';
 export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS';
 export const LOG_IN_FAILURE = 'LOG_IN_FAILURE';
 
-export const LOAD_FOREIGNS_REQUEST = 'LOAD_FOREIGNS_REQUEST';
-export const LOAD_FOREIGNS_SUCCESS = 'LOAD_FOREIGNS_SUCCESS';
-export const LOAD_FOREIGNS_FAILURE = 'LOAD_FOREIGNS_FAILURE';
+export const LOAD_FOREIGN_LIST_REQUEST = 'LOAD_FOREIGN_LIST_REQUEST';
+export const LOAD_FOREIGN_LIST_SUCCESS = 'LOAD_FOREIGN_LIST_SUCCESS';
+export const LOAD_FOREIGN_LIST_FAILURE = 'LOAD_FOREIGN_LIST_FAILURE';
 
 const reducer = (state = initialState, action) => produce(state, (draft) => {
   switch (action.type) {
@@ -122,19 +122,19 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       draft.logInError = action.error;
       break;
 
-    case LOAD_FOREIGNS_REQUEST:
-      draft.loadForeignsLoading = true;
-      draft.loadForeignsDone = false;
-      draft.loadForeignsError = null;
+    case LOAD_FOREIGN_LIST_REQUEST:
+      draft.loadForeignListLoading = true;
+      draft.loadForeignListDone = false;
+      draft.loadForeignListError = null;
       break;
-    case LOAD_FOREIGNS_SUCCESS:
-      draft.loadForeignsLoading = false;
-      draft.loadForeignsDone = true;
-      draft.foreigns = action.data;
+    case LOAD_FOREIGN_LIST_SUCCESS:
+      draft.loadForeignListLoading = false;
+      draft.loadForeignListDone = true;
+      draft.foreignList = action.data;
       break;
-    case LOAD_FOREIGNS_FAILURE:
-      draft.loadForeignsLoading = false;
-      draft.loadForeignsError = action.error;
+    case LOAD_FOREIGN_LIST_FAILURE:
+      draft.loadForeignListLoading = false;
+      draft.loadForeignListError = action.error;
       break;
       
     default:

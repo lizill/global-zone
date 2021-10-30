@@ -1,14 +1,16 @@
 import React, { useState, useCallback, memo } from "react";
 import { useSelector } from "react-redux";
 import moment from "moment";
-import { AiOutlinePlusCircle } from 'react-icons/ai'
 
 import ScheduleItem from "./ScheduleItem";
 import styles from '../../styles/schedule/schedule.module.scss';
+import Modal from "../Modal";
+import CreateSchedule from "../admin/CreateSchedule";
 
 const ScheduleList = () => {
-  const { selectedDate, schedule } = useSelector(state => state.schedule)
-  const { me } = useSelector(state => state.user)
+  const { selectedDate, schedule } = useSelector(state => state?.schedule);
+  const [modal, setModal] = useState(false)
+  const { me } = useSelector(state => state?.user);
   const [menu, setMenu] = useState('전체');
 
   const onClickMenu = useCallback((value) => {
@@ -28,6 +30,10 @@ const ScheduleList = () => {
         return listByDate.filter(v => v.user.position === 'chinese');
     }
   }, [schedule, selectedDate]);
+
+  const isModalOpen = () => {
+
+  }
 
   return (
     <div className={styles.scheduleListWrap}>
@@ -63,11 +69,12 @@ const ScheduleList = () => {
           </button>
         </menu>
         <div className={styles.listWrap}>
-          { me.position === 'admin' && (
+          { me && me.position === 'admin' && (
               <div className={styles.createBtnWrap}>
-                <button>
-                  <AiOutlinePlusCircle/>
-                </button>
+                <button className={styles.createBtn} onClick={() => setModal(true)}>+</button>
+                <Modal isOpen={modal}>
+                  <CreateSchedule/>
+                </Modal>
               </div>
           )}
           {

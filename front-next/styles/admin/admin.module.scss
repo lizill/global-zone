@@ -82,20 +82,41 @@
     background-color: white;
     border-radius: 5px;
   }
+}
 
-  .createSchedule {
-    width: 440px;
-    background-color: white;
-    border-radius: 5px;
-    margin-top: 20px;
+.createSchedule {
+  //width: 600px;
+  background-color: white;
+  border-radius: 5px;
+  //margin-top: 20px;
 
-    form {
-      label {
+  .selectForeign {
+    display: flex;
+    margin: 1rem;
+
+    button {
+      display: block;
+      padding: 4px;
+      font-size: 1rem;
+      border: none;
+      width: 120px;
+      background-color: white;
+    }
+
+    .selectLang {
+
+      button + button {
+        border-top: 1px solid #e5e5e5;
       }
-      input {
-      }
-      button {
-      }
+    }
+  }
+
+  form {
+    label {
+    }
+    input {
+    }
+    button {
     }
   }
 }

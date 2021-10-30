@@ -7,7 +7,7 @@ import {
   LOAD_MY_INFO_REQUEST, LOAD_MY_INFO_SUCCESS, LOAD_MY_INFO_FAILURE,
   SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_FAILURE,
   LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_IN_FAILURE,
-  LOAD_FOREIGNS_REQUEST, LOAD_FOREIGNS_SUCCESS, LOAD_FOREIGNS_FAILURE,
+  LOAD_FOREIGN_LIST_REQUEST, LOAD_FOREIGN_LIST_SUCCESS, LOAD_FOREIGN_LIST_FAILURE,
 } from '../reducers/user';
 
 function googleLogInApi() {
@@ -113,25 +113,25 @@ function* watchLogIn() {
   yield takeLatest(LOG_IN_REQUEST, logIn);
 }
 
-function loadForeignsApi() {
+function loadForeignListApi() {
   return axios.get('/users/foreign');
 }
-function* loadForeigns() {
+function* loadForeignList() {
   try {
-    const result = yield call(loadForeignsApi);
+    const result = yield call(loadForeignListApi);
     yield put({
-      type: LOAD_FOREIGNS_SUCCESS,
+      type: LOAD_FOREIGN_LIST_SUCCESS,
       data: result.data
     });
   } catch (err) {
     yield put({
-      type: LOAD_FOREIGNS_FAILURE,
+      type: LOAD_FOREIGN_LIST_FAILURE,
       error: err.response.data,
     });
   }
 }
-function* watchLoadForegins() {
-  yield takeLatest(LOAD_FOREIGNS_REQUEST, loadForeigns);
+function* watchLoadForeignList() {
+  yield takeLatest(LOAD_FOREIGN_LIST_REQUEST, loadForeignList);
 }
 
 export default function* userSaga() {
@@ -141,6 +141,6 @@ export default function* userSaga() {
     fork(watchLoadMyInfo),
     fork(watchSignUp),
     fork(watchLogIn),
-    fork(watchLoadForegins),
+    fork(watchLoadForeignList),
   ]);
 }

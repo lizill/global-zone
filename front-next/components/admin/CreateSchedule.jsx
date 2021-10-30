@@ -5,7 +5,7 @@ import styles from '../../styles/admin/admin.module.scss';
 
 const CreateSchedule = () => {
   const { selectedDate } = useSelector(state => state.schedule);
-  const { foreigns } = useSelector(state => state.user);
+  const { foreignList } = useSelector(state => state.user);
   const [time, setTime] = useState('');
   const [lang, setLang] = useState('');
   const [foreign, setForeign] = useState('');
@@ -14,13 +14,9 @@ const CreateSchedule = () => {
     setTime(e.target.value)
   }
 
-  const onSelectLang = (e) => {
-    setLang(e.target.value)
+  const onSelectLang = (lang) => {
+    setLang(lang)
     setForeign('')
-  }
-
-  const onSelectForeign = (e) => {
-    setForeign(e.target.value)
   }
 
   const onSubmit = (e) => {
@@ -35,12 +31,11 @@ const CreateSchedule = () => {
   }
 
   const setForeignList = () => {
-    return foreigns?.filter(v => v.position === lang);
+    return foreignList?.filter(v => v.position === lang);
   }
   
   return (
     <div className={styles.createSchedule}>
-      <form onSubmit={onSubmit}>
         <label htmlFor="start_date">신청 날짜</label>
         <input id="start_date" type="text" disabled value={selectedDate} /> <br />
         <label htmlFor="start_time">신청 시간</label>
@@ -61,20 +56,19 @@ const CreateSchedule = () => {
           <option value="16:00">16:00 ~ 16:20</option>
           <option value="16:30">16:30 ~ 16:50</option>
         </select><br/>
-        <select id="lang" onChange={onSelectLang} value={lang}>
-          <option value="">언어</option>
-          <option value="en">영어</option>
-          <option value="ja">일본어</option>
-          <option value="ch">중국어</option>
-        </select>
-        <select id="foreign" onChange={onSelectForeign} value={foreign}>
-          <option value="">유학생</option>
-          {setForeignList() && setForeignList().map(v => (
-            <option value={v.id}>{v.name}</option>
-          ))}
-        </select> <br/>
-        <button type="submit">Save</button>
-      </form>
+        <div className={styles.selectForeign}>
+          <div className={styles.selectLang}>
+            <button onClick={() => onSelectLang('en')} style={lang === 'en' ? {backgroundColor: '#182f9e', color: 'white'} : null}>영어</button>
+            <button onClick={() => onSelectLang('ja')} style={lang === 'ja' ? {backgroundColor: '#5e87fe', color: 'white'} : null}>일본어</button>
+            <button onClick={() => onSelectLang('ch')} style={lang === 'ch' ? {backgroundColor: '#fa6e7a', color: 'white'} : null}>중국어</button>
+          </div>
+          <div className={styles.foreignList}>
+            {setForeignList() && setForeignList().map(v => (
+                <button onClick={() => setForeign(v.id)} style={foreign === v.id ? {backgroundColor: '#e5e5e5'} : null}>{v.name}</button>
+            ))}
+          </div>
+        </div>
+        <button type="submit" onClick={onSubmit}>Save</button>
     </div>
   )
 }
