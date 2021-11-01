@@ -2,31 +2,33 @@ import { all, fork, put, takeLatest, call } from 'redux-saga/effects';
 import axios from 'axios';
 
 import {
-  GOOGLE_LOG_IN_REQUEST, GOOGLE_LOG_IN_SUCCESS, GOOGLE_LOG_IN_FAILURE,
+  CREATE_SCHEDULE_REQUEST, CREATE_SCHEDULE_SUCCESS, CREATE_SCHEDULE_FAILURE,
 } from '../reducers/schedule';
 
-function googleLogInApi() {
-  return axios.get('http://localhost:8000/api/google/login');
+function createScheduleApi(data) {
+  console.log(data)
+  return axios.post('/schedule', data);
 }
-function* googleLogIn() {
+function* createSchedule(action) {
   try {
-    yield call(googleLogInApi);
+    console.log(action.data)
+    yield call(createScheduleApi, action.data);
     yield put({
-      type: GOOGLE_LOG_IN_SUCCESS,
+      type: CREATE_SCHEDULE_SUCCESS,
     });
   } catch (err) {
     yield put({
-      type: GOOGLE_LOG_IN_FAILURE,
+      type: CREATE_SCHEDULE_FAILURE,
       error: err.response.data,
     });
   }
 }
-function* watchGoogleLogIn() {
-  yield takeLatest(GOOGLE_LOG_IN_REQUEST, googleLogIn);
+function* watchCreateSchedule() {
+  yield takeLatest(CREATE_SCHEDULE_REQUEST, createSchedule);
 }
 
-export default function* userSaga() {
+export default function* scheduleSaga() {
   yield all([
-    fork(watchGoogleLogIn),
+    fork(watchCreateSchedule),
   ]);
 }

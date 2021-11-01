@@ -79,14 +79,36 @@ export const initialState = {
       reservations: []
     },
   ],
+
+  createScheduleLoading: false, // 스케줄 생성
+  createScheduleDone: false,
+  createScheduleError: null,
 };
 
-export const SET_SELETED_DATE = 'SET_SELETED_DATE';
+export const SET_SELECTED_DATE = 'SET_SELECTED_DATE';
+
+export const CREATE_SCHEDULE_REQUEST = 'CREATE_SCHEDULE_REQUEST';
+export const CREATE_SCHEDULE_SUCCESS = 'CREATE_SCHEDULE_SUCCESS';
+export const CREATE_SCHEDULE_FAILURE = 'CREATE_SCHEDULE_FAILURE';
 
 const reducer = (state = initialState, action) => produce(state, (draft) => {
   switch (action.type) {
-    case SET_SELETED_DATE:
+    case SET_SELECTED_DATE:
       draft.selectedDate = action.data;
+      break;
+
+    case CREATE_SCHEDULE_REQUEST:
+      draft.createScheduleLoading = true;
+      draft.createScheduleError = null;
+      draft.createScheduleDone = false;
+      break;
+    case CREATE_SCHEDULE_SUCCESS:
+      draft.createScheduleLoading = false;
+      draft.createScheduleDone = true;
+      break;
+    case CREATE_SCHEDULE_FAILURE:
+      draft.createScheduleLoading = false;
+      draft.createScheduleError = action.error;
       break;
 
     default:

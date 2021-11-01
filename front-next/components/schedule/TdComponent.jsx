@@ -2,7 +2,7 @@ import React, { memo, useCallback } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import moment from "moment";
 
-import { SET_SELETED_DATE } from "../../reducers/schedule";
+import { SET_SELECTED_DATE } from "../../reducers/schedule";
 import styles from '../../styles/schedule/schedule.module.scss';
 import DotsComponent from "./DotsComponent";
 
@@ -12,7 +12,7 @@ const TdComponent = ({ index, styleProps, days }) => {
 
   const onSelectDate = useCallback((date) => {
     dispatch({
-      type: SET_SELETED_DATE,
+      type: SET_SELECTED_DATE,
       data: date
     });
   }, []);

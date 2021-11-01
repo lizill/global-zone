@@ -11,7 +11,7 @@ class SchedulesController extends Controller
     public function schedule(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'user_id' => 'required|string|max:255',
+            'user_id' => 'required|max:255',
             'date' => 'required|string|max:255',
         ]);
 
@@ -25,8 +25,8 @@ class SchedulesController extends Controller
         //     'password' => random_int(100000, 999999),
         // ]);
         $schedule = Schedule::updateOrCreate([
-            'user_id' => $request->foreign_id,
-            'date' => $request->start_date,
+            'user_id' => $request->user_id,
+            'date' => $request->date,
         ], [
             'password' => random_int(100000, 999999)
         ]);

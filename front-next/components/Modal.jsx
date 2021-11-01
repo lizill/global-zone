@@ -1,14 +1,23 @@
-import React from 'react';
-import { IoMdClose } from 'react-icons/io'
+import React, { useCallback } from 'react';
+import { IoMdClose } from 'react-icons/io';
+import { useSelector, useDispatch } from "react-redux";
 
-import styles from '../styles/layout/Modal.module.scss'
+import styles from '../styles/layout/Modal.module.scss';
+import { closeModalAction } from "../reducers/user";
 
 const Modal = ({ children, isOpen }) => {
+    const { isModalOpen } = useSelector(state => state.user);
+    const dispatch = useDispatch();
+
+    const onClose = useCallback(() => {
+        dispatch(closeModalAction());
+    }, []);
+
     return (
-        <div className={styles.modalWrap} style={isOpen ? { display: "block" } : { display: 'none' }}>
+        <div className={styles.modalWrap} style={isModalOpen ? { display: "block" } : { display: 'none' }}>
             <div className={styles.modalContent}>
                 <header>
-                    <IoMdClose onClick={() => console.log('click')}/>
+                    <IoMdClose className={styles.closeBtn} onClick={onClose}/>
                 </header>
 
                 <main>

@@ -33,10 +33,14 @@ const ScheduleItem = ({ schedule }) => {
 
   return (
     <div className={styles.scheduleItemWrap} style={setBackgroundColor(schedule.user.position)[0]}>
-      <p>
+      <p> {/* 11월 02일 11시 00분 ~ 11시 20분 */}
         { lang(schedule.user.position) } { schedule.user.name } <br/>
         { moment(schedule.date, "YYYYMMDDhhmm").format('MM월 DD일 ') }
-        { moment(schedule.date, "YYYYMMDDhhmm").format('hh시 mm분') } ~ { moment(schedule.date, 'YYYYMMDDhhmm').add(20, 'minutes').format('hh시 mm분') }
+        {
+          moment(schedule.date, "YYYYMMDDhhmm").format('hh시 mm분')
+        } ~ {
+          moment(schedule.date, 'YYYYMMDDhhmm').add(20, 'minutes').format('hh시 mm분')
+        }
       </p>
       <div className={styles.reservationsDiv} style={setBackgroundColor(schedule.user.position)[1]}>
         {schedule.reservations.length < 4

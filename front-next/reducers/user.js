@@ -22,6 +22,7 @@ export const initialState = {
   
   me: null,
   foreignList: null,
+  isModalOpen: false,
 };
 
 export const GOOGLE_LOG_IN_REQUEST = 'GOOGLE_LOG_IN_REQUEST';
@@ -47,6 +48,17 @@ export const LOG_IN_FAILURE = 'LOG_IN_FAILURE';
 export const LOAD_FOREIGN_LIST_REQUEST = 'LOAD_FOREIGN_LIST_REQUEST';
 export const LOAD_FOREIGN_LIST_SUCCESS = 'LOAD_FOREIGN_LIST_SUCCESS';
 export const LOAD_FOREIGN_LIST_FAILURE = 'LOAD_FOREIGN_LIST_FAILURE';
+
+export const MODAL_ACTION_OPEN = 'MODAL_ACTION_OPEN';
+export const MODAL_ACTION_CLOSE = 'MODAL_ACTION_CLOSE';
+
+export const openModalAction = () => ({
+  type: MODAL_ACTION_OPEN,
+});
+
+export const closeModalAction = () => ({
+  type: MODAL_ACTION_CLOSE,
+});
 
 const reducer = (state = initialState, action) => produce(state, (draft) => {
   switch (action.type) {
@@ -135,6 +147,13 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
     case LOAD_FOREIGN_LIST_FAILURE:
       draft.loadForeignListLoading = false;
       draft.loadForeignListError = action.error;
+      break;
+
+    case MODAL_ACTION_OPEN:
+      draft.isModalOpen = true;
+      break;
+    case MODAL_ACTION_CLOSE:
+      draft.isModalOpen = false;
       break;
       
     default:

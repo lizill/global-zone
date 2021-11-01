@@ -35,34 +35,38 @@ const Admin = () => {
         <meta name="description" content="Global zone reservation service" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      
-      <header>
-        <div className={styles.menu}>
-          <button>
-            <img src="/images/logo_intro_globalzone.gif" alt="logo.gif" />
-          </button>
-          <button className={styles.logoutBtn} onClick={onLogout}>
-            <img src="/images/google_icon.png" alt="icon.png" width="20" />
-            <p>Logout</p>
-          </button>
-        </div>
-        <menu>
-          <button onClick={() => setShow('schedule')}>스케줄 관리</button>
-          <button onClick={() => setShow('user')}>유저 관리</button>
-        </menu>
-      </header>
+
+      <div style={{ backgroundColor: 'white' }}>
+        <header>
+          <div className={styles.menu}>
+            <button>
+              <img src="/images/logo_intro_globalzone.gif" alt="logo.gif" />
+            </button>
+            <button className={styles.logoutBtn} onClick={onLogout}>
+              <img src="/images/google_icon.png" alt="icon.png" width="20" />
+              <p>Logout</p>
+            </button>
+          </div>
+          <menu>
+            <button className={show === 'schedule' ? styles.onActive : null} onClick={() => setShow('schedule')}>스케줄 관리</button>
+            <button className={show === 'user' ? styles.onActive : null} onClick={() => setShow('user')}>유저 관리</button>
+          </menu>
+        </header>
+      </div>
 
       <main>
         {show === 'schedule' && <ScheduleControlContainer/>}
         {show === 'user' && <CreateUser/>}
       </main>
 
-      <footer>
-        <p>
-          담당전화 053-940-5625 41527 대구광역시 북구 복현로 35 (복현2동 218)<br/>
-          COPYRIGHT© YEUNGJIN UNIVERSITY. All RIGHTS RESERVED.
-        </p>
-      </footer>
+      <div style={{ backgroundColor: "white", borderTop: '1px solid #e6e6e6' }}>
+        <footer>
+          <p>
+            담당전화 053-940-5625 41527 대구광역시 북구 복현로 35 (복현2동 218)<br/>
+            COPYRIGHT© YEUNGJIN UNIVERSITY. All RIGHTS RESERVED.
+          </p>
+        </footer>
+      </div>
     </div>
   )
 }
