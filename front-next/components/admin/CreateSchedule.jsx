@@ -7,8 +7,8 @@ import { CREATE_SCHEDULE_REQUEST } from "../../reducers/schedule";
 
 const CreateSchedule = () => {
   const dispatch = useDispatch();
-  const { selectedDate } = useSelector(state => state.schedule);
-  const { foreignList } = useSelector(state => state.user);
+  const { selectedDate } = useSelector(state => state?.schedule);
+  const { foreignList } = useSelector(state => state?.user);
   const [time, setTime] = useState('');
   const [lang, setLang] = useState('');
   const [foreign, setForeign] = useState('');
@@ -31,7 +31,7 @@ const CreateSchedule = () => {
     }
 
     let isConfirm = confirm(`
-      신청 날짜: ${ moment(selectedDate, "YYYYMMDDhhmm").format('YYYY년 MM월 DD일') }
+      신청 날짜: ${ moment(selectedDate, "YYYYMMDD").format('YYYY년 MM월 DD일') }
       신청 시간: ${ moment(time, "hh:mm").format('hh시 mm분') }
       유학생: ${ foreignList.find(({ id }) => id === foreign).name }\n
       위 정보로 일정을 생성 하시겠습니까?
@@ -73,7 +73,7 @@ const CreateSchedule = () => {
     <div className={styles.createSchedule}>
       <label htmlFor="start_date">신청 날짜: </label>
       <span id="start_data">
-        { moment(selectedDate, "YYYYMMDDhhmm").format('YYYY년 MM월 DD일') }
+        { moment(selectedDate, "YYYYMMDD").format('YYYY년 MM월 DD일') }
       </span> <br/>
       <label htmlFor="start_time">신청 시간: </label>
       <select id="start_time" onChange={onSelectTime} value={time}>

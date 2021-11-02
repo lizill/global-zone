@@ -8,6 +8,7 @@ import wrapper from '../store/configuresStore';
 import CalendarContainer from "../components/schedule/CalendarConatainer";
 import ScheduleList from "../components/schedule/ScheduleList";
 import { LOAD_MY_INFO_REQUEST } from '../reducers/user';
+import { LOAD_SCHEDULES_REQUEST } from '../reducers/schedule';
 
 const Schedule = () => {
   return (
@@ -36,6 +37,9 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async ({
   }
   store.dispatch({
     type: LOAD_MY_INFO_REQUEST,
+  });
+  store.dispatch({
+    type: LOAD_SCHEDULES_REQUEST,
   });
   store.dispatch(END);
   await store.sagaTask.toPromise();

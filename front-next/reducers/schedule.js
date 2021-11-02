@@ -3,86 +3,15 @@ import moment from 'moment';
 
 export const initialState = {
   selectedDate: moment().add(1, 'days').format('YYYYMMDD'),
-  schedule: [
-    {
-      id: 1,
-      date: '202111011000', // 'YYYYMMDDhhmm'
-      user: {
-        id: 2,
-        name: '나카무라 시이아',
-        position: 'japanese'
-      },
-      reservations: [
-        {
-          id: 1,
-          email: 'lizill@g.yju.ac.kr',
-          name: '박동현'
-        }
-      ]
-    },
-    {
-      id: 2,
-      date: '202111021100', // 'YYYYMMDDhhmm'
-      user: {
-        id: 2,
-        name: '나카무라 시이아',
-        position: 'japanese'
-      },
-      reservations: [
-        {
-          id: 1,
-          email: 'lizill@g.yju.ac.kr',
-          name: '박동현'
-        }
-      ]
-    },
-    {
-      id: 3,
-      date: '202111031000', // 'YYYYMMDDhhmm'
-      user: {
-        id: 2,
-        name: '나카무라 시이아',
-        position: 'japanese'
-      },
-      reservations: [
-        {
-          id: 1,
-          email: 'lizill@g.yju.ac.kr',
-          name: '박동현'
-        }
-      ]
-    },
-    {
-      id: 4,
-      date: '202111041000', // 'YYYYMMDDhhmm'
-      user: {
-        id: 2,
-        name: '나카무라 시이아',
-        position: 'japanese'
-      },
-      reservations: [
-        {
-          id: 1,
-          email: 'lizill@g.yju.ac.kr',
-          name: '박동현'
-        }
-      ]
-    },
-    {
-      id: 5,
-      date: '202111021100', // 'YYYYMMDDhhmm'
-      user: {
-        id: 3,
-        name: '임채환',
-        position: 'chinese'
-      },
-      reservations: []
-    },
-  ],
+  schedules: [],
+  schedule: {},
 
   createScheduleLoading: false, // 스케줄 생성
   createScheduleDone: false,
   createScheduleError: null,
+  loadSchedulesLoading: false, // 스케줄 로드
+  loadSchedulesDone: false,
+  loadSchedulesError: null,
 };
 
 export const SET_SELECTED_DATE = 'SET_SELECTED_DATE';
@@ -90,6 +19,14 @@ export const SET_SELECTED_DATE = 'SET_SELECTED_DATE';
 export const CREATE_SCHEDULE_REQUEST = 'CREATE_SCHEDULE_REQUEST';
 export const CREATE_SCHEDULE_SUCCESS = 'CREATE_SCHEDULE_SUCCESS';
 export const CREATE_SCHEDULE_FAILURE = 'CREATE_SCHEDULE_FAILURE';
+
+export const LOAD_SCHEDULES_REQUEST = 'LOAD_SCHEDULES_REQUEST';
+export const LOAD_SCHEDULES_SUCCESS = 'LOAD_SCHEDULES_SUCCESS';
+export const LOAD_SCHEDULES_FAILURE = 'LOAD_SCHEDULES_FAILURE';
+
+export const LOAD_SCHEDULE_REQUEST = 'LOAD_SCHEDULE_REQUEST';
+export const LOAD_SCHEDULE_SUCCESS = 'LOAD_SCHEDULE_SUCCESS';
+export const LOAD_SCHEDULE_FAILURE = 'LOAD_SCHEDULE_FAILURE';
 
 const reducer = (state = initialState, action) => produce(state, (draft) => {
   switch (action.type) {
@@ -109,6 +46,36 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
     case CREATE_SCHEDULE_FAILURE:
       draft.createScheduleLoading = false;
       draft.createScheduleError = action.error;
+      break;
+
+    case LOAD_SCHEDULES_REQUEST:
+      draft.loadSchedulesLoading = true;
+      draft.loadSchedulesError = null;
+      draft.loadSchedulesDone = false;
+      break;
+    case LOAD_SCHEDULES_SUCCESS:
+      draft.loadSchedulesLoading = false;
+      draft.loadSchedulesDone = true;
+      draft.schedules = action.data
+      break;
+    case LOAD_SCHEDULES_FAILURE:
+      draft.loadSchedulesLoading = false;
+      draft.loadSchedulesError = action.error;
+      break;
+
+    case LOAD_SCHEDULE_REQUEST:
+      draft.loadScheduleLoading = true;
+      draft.loadScheduleError = null;
+      draft.loadScheduleDone = false;
+      break;
+    case LOAD_SCHEDULE_SUCCESS:
+      draft.loadScheduleLoading = false;
+      draft.loadScheduleDone = true;
+      draft.schedule = action.data
+      break;
+    case LOAD_SCHEDULE_FAILURE:
+      draft.loadScheduleLoading = false;
+      draft.loadScheduleError = action.error;
       break;
 
     default:

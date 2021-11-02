@@ -61,6 +61,7 @@
           height: 100%;
           border: none;
           border-radius: 8px;
+          transition: 0.2s;
 
           span {
             position: relative;
@@ -70,6 +71,7 @@
 
           &:hover {
             cursor: pointer;
+            background-color: #efefef;
           }
         }
       }
@@ -84,7 +86,6 @@
 }
 
 .scheduleItemWrap {
-  //background-color: #659cff;
   border-radius: 5px;
   padding: 12px 18px;
   font-size: 0.8em;

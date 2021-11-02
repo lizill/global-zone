@@ -18,22 +18,31 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('guest')->group(function () {
+    Route::post('/auth/login', [AuthController::class, 'login']); // POST /auth/login
+
+    Route::get('/google/login', [GoogleController::class, 'loginWithGoogle'])->name('login'); // GET /google/login
+    Route::any('/google/callback', [GoogleController::class, 'callbackFromGoogle'])->name('callback');
 });
 
-Route::middleware('guest')->post('/auth/login', [AuthController::class, 'login']);
-
-Route::get('/google/login', [GoogleController::class, 'loginWithGoogle'])->name('login');
-Route::any('/google/callback', [GoogleController::class, 'callbackFromGoogle'])->name('callback');
-
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::post('/auth/logout', [AuthController::class, 'logout']);
+    // Auth
+    Route::post('/auth/logout', [AuthController::class, 'logout']); // POST /auth/logout
 
-    // admin
-    Route::post('/auth/register', [AuthController::class, 'createForeignUser']);
+    // Schedules
+    Route::get('/schedules', [SchedulesController::class, 'schedules']); // GET /schedules
+    Route::get('/schedule/{schedule}', [SchedulesController::class, 'schedule']); // GET /schedule
 
-    Route::post('/schedule', [SchedulesController::class, 'schedule']);
+    // Users
+    Route::get('/user', [UsersController::class, 'user']); // GET /user
 
-    Route::get('/users/foreign', [UsersController::class, 'foreigns']);
+    // -----admin-----
+    // Auth
+    Route::post('/auth/register', [AuthController::class, 'createForeignUser']); // POST /auth/register
+
+    // Schedules
+    Route::post('/schedule', [SchedulesController::class, 'updateOrCreate']); // POST /schedule
+
+    // Users
+    Route::get('/users/foreign', [UsersController::class, 'foreigns']); // GET /users/foreign
 });

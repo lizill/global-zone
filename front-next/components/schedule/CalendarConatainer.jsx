@@ -8,7 +8,7 @@ import TdComponent from "./TdComponent";
 
 const CalendarContainer = () => {
   const [getMoment, setMoment] = useState(moment);
-  const { selectedDate } = useSelector(state => state.schedule);
+  const { selectedDate } = useSelector(state => state?.schedule);
 
   const today = getMoment; // today = moment()
   const firstWeek = today.clone().startOf('month').week();

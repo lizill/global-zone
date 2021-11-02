@@ -8,7 +8,7 @@ import DotsComponent from "./DotsComponent";
 
 const TdComponent = ({ index, styleProps, days }) => {
   const dispatch = useDispatch();
-  const { schedule } = useSelector(state => state.schedule)
+  const { schedules } = useSelector(state => state?.schedule)
 
   const onSelectDate = useCallback((date) => {
     dispatch({
@@ -24,7 +24,7 @@ const TdComponent = ({ index, styleProps, days }) => {
       >
         <span>{ days.format('D') }</span>
         <DotsComponent list={
-          schedule.filter(v => moment(v.date, 'YYYYMMDDhhmm').format('YYYYMMDD') === days.format('YYYYMMDD'))
+          schedules.filter(v => moment(v.date, 'YYYYMMDD').format('YYYYMMDD') === days.format('YYYYMMDD'))
         }/>
       </button>
     </td>

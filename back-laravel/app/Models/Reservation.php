@@ -14,4 +14,9 @@ class Reservation extends Model
         'schedule_id',
         'password',
     ];
+
+    public function schedule()
+    {
+        return $this->belongsTo(Schedule::class);
+    }
 }

@@ -10,7 +10,7 @@ import {openModalAction} from "../../reducers/user";
 
 const ScheduleList = () => {
   const dispatch = useDispatch();
-  const { selectedDate, schedule } = useSelector(state => state?.schedule);
+  const { selectedDate, schedules } = useSelector(state => state?.schedule);
   const { me } = useSelector(state => state?.user);
   const [menu, setMenu] = useState('전체');
 
@@ -19,18 +19,18 @@ const ScheduleList = () => {
   }, [menu]);
 
   const setList = useCallback((value) => {
-    const listByDate = schedule.filter(v => moment(v.date, 'YYYYMMDDhhmm').format('YYYYMMDD') === selectedDate);
+    const listByDate = schedules.filter(v => moment(v.date, 'YYYYMMDDhhmm').format('YYYYMMDD') === selectedDate);
     switch (value) {
       case '전체':
         return listByDate
       case '영어':
-        return listByDate.filter(v => v.user.position === 'american');
+        return listByDate.filter(v => v.user.position === 'en');
       case '일본어':
-        return listByDate.filter(v => v.user.position === 'japanese');
+        return listByDate.filter(v => v.user.position === 'ja');
       case '중국어':
-        return listByDate.filter(v => v.user.position === 'chinese');
+        return listByDate.filter(v => v.user.position === 'ch');
     }
-  }, [schedule, selectedDate]);
+  }, [schedules, selectedDate]);
 
   const onOpenModal = useCallback(() => {
     dispatch(openModalAction());
@@ -52,7 +52,7 @@ const ScheduleList = () => {
             onClick={() => onClickMenu('영어')}
           >
             영어
-            <div style={{ backgroundColor: "#182f9e" }}/>
+            <div style={{ backgroundColor: "#4d4cac" }}/>
           </button>
           <button 
             className={menu === '일본어' ? styles.on : null} 

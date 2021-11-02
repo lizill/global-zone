@@ -9,6 +9,7 @@ import wrapper from '../store/configuresStore';
 import styles from '../styles/admin/admin.module.scss'
 import CreateUser from "../components/admin/CreateUser";
 import { LOG_OUT_REQUEST, LOAD_MY_INFO_REQUEST, LOAD_FOREIGN_LIST_REQUEST } from "../reducers/user";
+import {LOAD_SCHEDULES_REQUEST} from "../reducers/schedule";
 import ScheduleControlContainer from "../components/admin/ScheduleControlContainer";
 
 const Admin = () => {
@@ -84,6 +85,9 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async ({
   });
   store.dispatch({
     type: LOAD_FOREIGN_LIST_REQUEST,
+  });
+  store.dispatch({
+    type: LOAD_SCHEDULES_REQUEST,
   });
   store.dispatch(END);
   await store.sagaTask.toPromise();
