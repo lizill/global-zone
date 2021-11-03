@@ -41,6 +41,7 @@ class SchedulesController extends Controller
         // 다음날부터 일주일간 정보 불러오기
         $nextDate = Carbon::now()->addDay()->format('Ymd');
         $schedules = Schedule::where('date', '>=', $nextDate)
+        ->orderBy('date')
         ->with('user', 'reservations')
         ->get();
 

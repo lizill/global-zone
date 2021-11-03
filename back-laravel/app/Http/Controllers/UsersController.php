@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
-  public function foreigns()
+  public function foreign()
   {
-    $foreigns = User::whereIn('position', ['en', 'ja', 'ch'])->get();
+    $foreignList = User::whereIn('position', ['en', 'ja', 'ch'])->get();
 
-    return $foreigns;
+    return $foreignList;
   }
 
   public function user(Request $request)

@@ -41,7 +41,7 @@ const CreateSchedule = () => {
       try {
         dispatch({
           type: CREATE_SCHEDULE_REQUEST,
-          data: { user_id: foreign, date: selectedDate + moment(time, "hh:mm").format('hhmm') }
+          data: { user_id: foreign, date: selectedDate + moment(time, "HH:mm").format('HHmm') }
         });
 
         alert('생성되었습니다.');

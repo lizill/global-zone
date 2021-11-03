@@ -5,7 +5,7 @@
 
   h3 {
     color: #182f9e;
-    margin: 20px 0px 10px 0px;
+    margin: 20px 0 10px 0;
   }
 }
 
@@ -31,8 +31,7 @@
     }
 
     p {
-      margin: 0px;
-      margin-bottom: 6px;
+      margin: 0px 0px 6px 0px;
       color: white;
       font-size: 1.5rem;
     }
@@ -100,6 +99,135 @@
       &:nth-child(3) {
         border-top: 1px solid #eef1f6;
         border-bottom: 1px solid #eef1f6;
+      }
+    }
+  }
+}
+
+.cardWrap {
+  padding: 2rem;
+  background-color: #eef1f6;
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    background-color: #eef1f6;
+
+    h1 {
+      margin: 0px;
+    }
+
+    p {
+      font-weight: bold;
+      margin: 0px;
+
+      .userLength {
+        color: #f29a00;
+        font-size: 1.7em;
+      }
+    }
+  }
+
+  .infoDiv {
+    position: relative;
+    overflow: hidden;
+    background-color: #182f9e;
+    border-radius: 8px;
+    color: white;
+    padding: 20px 25px;
+    margin: 30px 0px;
+    height: 100px;
+    font-size: 0.9em;
+    font-weight: bold;
+
+    .circles {
+      span {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .greenCircle {
+        width: 85px;
+        height: 85px;
+        left: 220px;
+        top: -45px;
+        background-color: rgb(102, 207, 214);
+      }
+
+      .pinkCircle {
+        width: 35px;
+        height: 35px;
+        left: 235px;
+        bottom: -2px;
+        background-color: pink;
+      }
+
+      .yellowCircle {
+        width: 55px;
+        height: 55px;
+        left: 155px;
+        bottom: -40px;
+        background-color: #f7bd4d;
+      }
+    }
+  }
+
+  article {
+    font-size: 0.85em;
+    font-weight: bold;
+
+    p {
+      border: 1px solid #bcbfc7;
+      border-radius: 5px;
+      padding: 15px 20px;
+      margin: 2px 0 15px 0;
+      color: #1c233d;
+      background-color: #dde5ef;
+    }
+
+    .term {
+      color: #6a6a6a;
+      font-weight: normal;
+    }
+
+    .termWrap {
+      color: #6a6a6a;
+      display: flex;
+      align-items: center;
+
+      label:hover {
+        cursor: pointer;
+      }
+
+      input {
+        width: 18px;
+        height: 18px;
+        margin-right: 10px;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+
+    .buttonWrap {
+      display: flex;
+      justify-content: center;
+      margin-top: 2rem;
+
+      button {
+        color: white;
+        width: 200px;
+        height: 60px;
+        background-color: #182f9e;
+        border-radius: 5px;
+        border: none;
+        font-weight: bold;
+
+        &:hover {
+          cursor: pointer;
+        }
       }
     }
   }

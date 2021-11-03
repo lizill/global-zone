@@ -28,7 +28,6 @@ class CreateReservationsTable extends Migration
             $table // 수락 여부
                 ->boolean('confirmed')
                 ->default(false);
-            $table->string('password');
             $table // 완료 여부(출결)
                 ->boolean('finished')
                 ->default(false);

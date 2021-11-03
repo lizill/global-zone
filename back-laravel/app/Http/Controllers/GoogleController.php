@@ -39,7 +39,7 @@ class GoogleController extends Controller
                 $saveUser = User::where('email', $user->getEmail())->first();
             }
 
-            Auth::loginUsingId($saveUser->id);
+            Auth::login($saveUser);
 
             return response()->json([
                 'user' => $saveUser,

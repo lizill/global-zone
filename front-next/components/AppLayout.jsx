@@ -8,7 +8,7 @@ import { LOG_OUT_REQUEST } from "../reducers/user";
 
 const AppLayout = ({ children, on }) => {
   const dispatch = useDispatch();
-  const { me } = useSelector(state => state.user);
+  const { me } = useSelector(state => state?.user);
 
   const onLogout = useCallback(() => {
     dispatch({

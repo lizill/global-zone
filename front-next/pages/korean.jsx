@@ -1,13 +1,19 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Head from 'next/head';
 import Router from 'next/router';
 import { GoChevronRight } from 'react-icons/go';
+import { useSelector } from "react-redux";
 import axios from 'axios';
 
 import LoginLayout from "../components/auth/LoginLayout";
 import styles from '../styles/login/Login.module.scss';
+import wrapper from "../store/configuresStore";
+import {LOAD_MY_INFO_REQUEST} from "../reducers/user";
+import {END} from "redux-saga";
 
 const Korean = () => {
+  const { me } = useSelector(state => state?.user)
+
   const onLogin = () => {
     axios.get('/google/login')
       .then((res) => {
@@ -17,6 +23,12 @@ const Korean = () => {
         alert('로그인을 실패했습니다!', err)
       });
   }
+
+  useEffect(() => {
+    if (me && me.id) {
+      Router.push('/');
+    }
+  }, [me]);
 
   return (
     <div>
@@ -46,3 +58,16 @@ const Korean = () => {
 }
 
 export default Korean;
+
+export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req }) => {
+  const cookie = req ? req.headers.cookie : '';
+  axios.defaults.headers.Cookie = '';
+  if (req && cookie) {
+    axios.defaults.headers.Cookie = cookie;
+  }
+  store.dispatch({
+    type: LOAD_MY_INFO_REQUEST,
+  });
+  store.dispatch(END);
+  await store.sagaTask.toPromise();
+});

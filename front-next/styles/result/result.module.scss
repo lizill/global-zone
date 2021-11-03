@@ -9,18 +9,20 @@
   padding: 20px 25px;
   margin: 30px;
 
-  p {
-    margin: 0px;
+  .statusWrap {
     z-index: 100;
-  }
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 
-  .status {
-    font-size: 0.9em;
+    .status {
+      font-size: 0.9em;
 
-    span {
-      color: #f7bd4d;
-      text-decoration: underline;
-      font-weight: bold;
+      span {
+        color: #f7bd4d;
+        text-decoration: underline;
+        font-weight: bold;
+      }
     }
   }
 

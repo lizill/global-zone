@@ -9,6 +9,7 @@ import ReservationManagement from '../components/reservation/ReservationManageme
 import styles from '../styles/reservation/Reservation.module.scss';
 import wrapper from '../store/configuresStore';
 import { LOAD_MY_INFO_REQUEST } from '../reducers/user';
+import { LOAD_RESERVATIONS_REQUEST } from '../reducers/reservation';
 
 export default function Home() {
   return (
@@ -37,6 +38,9 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async ({
   }
   store.dispatch({
     type: LOAD_MY_INFO_REQUEST,
+  });
+  store.dispatch({
+    type: LOAD_RESERVATIONS_REQUEST,
   });
   store.dispatch(END);
   await store.sagaTask.toPromise();

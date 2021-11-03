@@ -5,12 +5,15 @@ import Router from "next/router";
 
 import LoginLayout from "../components/auth/LoginLayout";
 import styles from '../styles/login/Login.module.scss';
-import { LOG_IN_REQUEST } from "../reducers/user";
+import {LOAD_MY_INFO_REQUEST, LOG_IN_REQUEST} from "../reducers/user";
+import wrapper from "../store/configuresStore";
+import axios from "axios";
+import {END} from "redux-saga";
 
 const Foreign = () => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
-  const { logInDone, logInError, logInLoading } = useSelector(state => state.user)
+  const { me, logInError, logInLoading } = useSelector(state => state.user)
   const dispatch = useDispatch();
 
   const onChangeId = (e) => {
@@ -30,10 +33,10 @@ const Foreign = () => {
   }
 
   useEffect(() => {
-    if (logInDone) {
+    if (me && me.id) {
       Router.push('/');
     }
-  }, [logInDone]);
+  }, [me]);
 
   return (
     <div>
@@ -58,3 +61,16 @@ const Foreign = () => {
 }
 
 export default Foreign;
+
+export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req }) => {
+  const cookie = req ? req.headers.cookie : '';
+  axios.defaults.headers.Cookie = '';
+  if (req && cookie) {
+    axios.defaults.headers.Cookie = cookie;
+  }
+  store.dispatch({
+    type: LOAD_MY_INFO_REQUEST,
+  });
+  store.dispatch(END);
+  await store.sagaTask.toPromise();
+});

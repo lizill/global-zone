@@ -48,7 +48,7 @@ class AuthController extends Controller
 
         $is_user = User::where('email', $request->email)->first();
         if ($is_user) {
-            Auth::loginUsingId($is_user->id);
+            Auth::login($is_user);
             return response()->json(['message' => 'login success!']);
         } else {
             return response()->json(['error' => 'Unauthorized'], 401);

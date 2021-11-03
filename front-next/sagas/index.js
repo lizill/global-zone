@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import userSaga from './user';
 import scheduleSaga from "./schedule";
+import reservationSaga from './reservation';
 import { backUrl } from '../config/config';
 
 axios.defaults.baseURL = backUrl;
@@ -12,5 +13,6 @@ export default function* rootSaga() {
   yield all([
     fork(userSaga),
     fork(scheduleSaga),
+    fork(reservationSaga),
   ]);
 }

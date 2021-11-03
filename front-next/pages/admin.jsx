@@ -25,9 +25,9 @@ const Admin = () => {
 
   useEffect(() => {
     if(!me || me.position !== 'admin') {
-      Router.push('/korean');
+      Router.push('/');
     }
-  }, [me])
+  }, [me]);
 
   return (
     <div className={styles.adminWrap}>

@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\SchedulesController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\ReservationsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,7 +23,7 @@ Route::middleware('guest')->group(function () {
     Route::post('/auth/login', [AuthController::class, 'login']); // POST /auth/login
 
     Route::get('/google/login', [GoogleController::class, 'loginWithGoogle'])->name('login'); // GET /google/login
-    Route::any('/google/callback', [GoogleController::class, 'callbackFromGoogle'])->name('callback');
+    Route::get('/google/callback', [GoogleController::class, 'callbackFromGoogle'])->name('callback');
 });
 
 Route::middleware(['auth:sanctum'])->group(function () {
@@ -36,6 +37,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Users
     Route::get('/user', [UsersController::class, 'user']); // GET /user
 
+    // Reservation
+    Route::post('/reservation', [ReservationsController::class, 'reservation']); // POST /reservation
+    Route::get('/reservations', [ReservationsController::class, 'reservations']); // GET /reservations
+
     // -----admin-----
     // Auth
     Route::post('/auth/register', [AuthController::class, 'createForeignUser']); // POST /auth/register
@@ -44,5 +49,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/schedule', [SchedulesController::class, 'updateOrCreate']); // POST /schedule
 
     // Users
-    Route::get('/users/foreign', [UsersController::class, 'foreigns']); // GET /users/foreign
+    Route::get('/users/foreign', [UsersController::class, 'foreign']); // GET /users/foreign
 });
