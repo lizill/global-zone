@@ -40,6 +40,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Reservation
     Route::post('/reservation', [ReservationsController::class, 'reservation']); // POST /reservation
     Route::get('/reservations', [ReservationsController::class, 'reservations']); // GET /reservations
+    Route::delete('/reservation/{reservation}', [ReservationsController::class, 'delete']); // DELETE /reservation/22
 
     // -----admin-----
     // Auth

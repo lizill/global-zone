@@ -23,10 +23,23 @@ class ReservationsController extends Controller
         return $reservation;
     }
 
+    // 예약 신청내역
     public function reservations(Request $request)
     {
-        $myReservations = Reservation::where('user_id', Auth::user()->id)->with('schedule')->get();
+        $myReservations = Reservation::with('schedule.user')
+        ->where('user_id', Auth::user()->id)
+        ->where('finished', false)
+        ->get();
 
         return $myReservations;
+    }
+
+    public function delete(Request $request, Reservation $reservation)
+    {
+        $reservation->delete();
+
+        return response()->json([
+            'message' => 'delete success!'
+        ]);
     }
 }

@@ -4,6 +4,7 @@ import axios from 'axios';
 import {
   RESERVATION_REQUEST, RESERVATION_SUCCESS, RESERVATION_FAILURE,
   LOAD_RESERVATIONS_REQUEST, LOAD_RESERVATIONS_SUCCESS, LOAD_RESERVATIONS_FAILURE,
+  CANCEL_RESERVATION_REQUEST, CANCEL_RESERVATION_SUCCESS, CANCEL_RESERVATION_FAILURE,
 } from '../reducers/reservation';
 
 function reservationApi(data) {
@@ -47,9 +48,30 @@ function* watchLoadReservations() {
   yield takeLatest(LOAD_RESERVATIONS_REQUEST, loadReservations);
 }
 
+function cancelReservationApi(data) {
+  return axios.delete('/reservation/' + data);
+}
+function* cancelReservation(action) {
+  try {
+    yield call(cancelReservationApi, action.data);
+    yield put({
+      type: CANCEL_RESERVATION_SUCCESS,
+    });
+  } catch (err) {
+    yield put({
+      type: CANCEL_RESERVATION_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+function* watchCancelReservation() {
+  yield takeLatest(CANCEL_RESERVATION_REQUEST, cancelReservation);
+}
+
 export default function* scheduleSaga() {
   yield all([
     fork(watchReservation),
     fork(watchLoadReservations),
+    fork(watchCancelReservation),
   ]);
 }
