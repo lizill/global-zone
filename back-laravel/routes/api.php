@@ -41,6 +41,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/reservation', [ReservationsController::class, 'reservation']); // POST /reservation
     Route::get('/reservations', [ReservationsController::class, 'reservations']); // GET /reservations
     Route::delete('/reservation/{reservation}', [ReservationsController::class, 'delete']); // DELETE /reservation/22
+    Route::get('/reservations/{schedule}', [ReservationsController::class, 'reservationUsers']); // GET /reservations/22
+    Route::patch('/reservation', [ReservationsController::class, 'accept']); // PATCH /reservation/22
 
     // -----admin-----
     // Auth

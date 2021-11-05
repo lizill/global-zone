@@ -13,7 +13,7 @@ import {END} from "redux-saga";
 const Foreign = () => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
-  const { me, logInError, logInLoading } = useSelector(state => state.user)
+  const { me, logInError } = useSelector(state => state?.user)
   const dispatch = useDispatch();
 
   const onChangeId = (e) => {
@@ -34,7 +34,11 @@ const Foreign = () => {
 
   useEffect(() => {
     if (me && me.id) {
-      Router.push('/');
+      if(me?.position === 'admin') {
+        Router.push('/admin');
+      } else {
+        Router.push('/');
+      }
     }
   }, [me]);
 

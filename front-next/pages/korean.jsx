@@ -26,7 +26,13 @@ const Korean = () => {
 
   useEffect(() => {
     if (me && me.id) {
-      Router.push('/');
+      if(me?.position === 'korean') {
+        Router.push('/');
+      } else if (me?.position === 'admin') {
+        Router.push('/admin');
+      } else {
+        Router.push('myschedule');
+      }
     }
   }, [me]);
 

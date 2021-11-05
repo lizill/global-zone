@@ -41,7 +41,8 @@ const ContentBtn = ({ content, on, onList }) => {
 }
 
 const ReservationManagement = () => {
-  const { reservations } = useSelector(state => state?.reservation)
+  const { reservations } = useSelector(state => state?.reservation);
+  const { me } = useSelector(state => state?.user);
   const [on, setOn] = useState('');
 
   const onList = useCallback((label) => {
@@ -56,21 +57,29 @@ const ReservationManagement = () => {
     return on === label ? { height: 66 * length} : { height: 0 }
   }, [on]);
 
+  const setItems = (confirmed) => {
+    if (confirmed) {
+      return reservations.filter(v => v.confirmed === '1')
+    } else {
+      return reservations.filter(v => v.confirmed === '0')
+    }
+  }
+
   return (
     <div className={styles.managementWrap}>
       <h3>예약 관리</h3>
       <div className={styles.contentWrap}>
         <ContentBtn content={contentBtnList[0]} on={on} onList={onList}/>
-        <div className={styles.itemList} style={transformHeight("standby", reservations.length)}>
-          {reservations.map(v => <Items key={v.id} reservation={v}/>)}
+        <div className={styles.itemList} style={transformHeight("standby", setItems(0)?.length)}>
+          {setItems(0)?.map(v => <Items key={v.id} reservation={v} standby/>)}
         </div>
         <ContentBtn content={contentBtnList[1]} on={on} onList={onList}/>
-        <div className={styles.itemList} style={transformHeight("completion", reservations.length)}>
-          {reservations.map(v => <Items key={v.id} reservation={v}/>)}
+        <div className={styles.itemList} style={transformHeight("completion", setItems(1)?.length)}>
+          {setItems(1)?.map(v => <Items key={v.id} reservation={v} completion/>)}
         </div>
         <ContentBtn content={contentBtnList[2]} on={on} onList={onList}/>
-        <div className={styles.itemList} style={transformHeight("result", reservations.length)}>
-          {reservations.map(v => <Items key={v.id} reservation={v}/>)}
+        <div className={styles.itemList} style={transformHeight("result", 0)}>
+          {/*{reservations.map(v => <Items key={v.id} reservation={v}/>)}*/}
         </div>
       </div>
     </div>

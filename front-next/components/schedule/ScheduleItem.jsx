@@ -1,4 +1,5 @@
 import React, { useCallback, memo } from "react";
+import { useSelector } from "react-redux";
 import moment from "moment";
 import { BsFillPersonFill } from 'react-icons/bs';
 import Link from 'next/link';
@@ -28,6 +29,7 @@ export const toStringDate = (date) => {
 }
 
 const ScheduleItem = ({ schedule }) => {
+  const { me } = useSelector(state => state?.user);
 
   const setBackgroundColor = useCallback((position) => {
     switch(position) {
@@ -43,7 +45,7 @@ const ScheduleItem = ({ schedule }) => {
   }, []);
 
   return (
-    <Link href={`/schedule/${schedule.id}`}>
+    <Link href={me?.position === 'korean' ? `/schedule/${schedule.id}` : `/schedule/show/${schedule.id}`}>
       <div className={styles.scheduleItemWrap} style={setBackgroundColor(schedule.user.position)[0]}>
         <p> {/* 11월 02일 11시 00분 ~ 11시 20분 */}
           { lang(schedule.user.position) } { schedule.user.name } <br/>

@@ -222,3 +222,28 @@
     }
   }
 }
+
+.userItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #bcbfc7;
+  border-radius: 5px;
+  padding: 15px 20px;
+  margin: 2px 0 15px 0;
+  color: #1c233d;
+  background-color: #dde5ef;
+
+  button {
+    color: white;
+    background-color: #182f9e;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 0.8em;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

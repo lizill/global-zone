@@ -77,6 +77,14 @@
             cursor: pointer;
           }
         }
+
+        .enterBtn {
+          font-size: 2rem;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
       }
 
       .itemWrap + .itemWrap {

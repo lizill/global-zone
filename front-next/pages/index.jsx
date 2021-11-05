@@ -2,6 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import axios from 'axios';
 import { END } from 'redux-saga';
+import { useSelector } from "react-redux";
 
 import AppLayout from '../components/AppLayout';
 import ReservationStatus from '../components/reservation/ReservationStatus';
@@ -12,6 +13,7 @@ import { LOAD_MY_INFO_REQUEST } from '../reducers/user';
 import { LOAD_RESERVATIONS_REQUEST } from '../reducers/reservation';
 
 export default function Home() {
+  const { me } = useSelector(state => state?.user);
   return (
     <div>
       <Head>

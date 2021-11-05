@@ -42,4 +42,26 @@ class ReservationsController extends Controller
             'message' => 'delete success!'
         ]);
     }
+
+    // 해당 스케줄 예약한 사람 리스트
+    public function reservationUsers(Request $request, Schedule $schedule)
+    {
+        $reservationUsers = Reservation::with('user')
+        ->where('reservations.schedule_id', $schedule->id)
+        ->get();
+
+        return $reservationUsers;
+    }
+
+    // 예약신청 수락
+    public function accept(Request $request)
+    {
+        $reservation = Reservation::find($request->id);
+        $reservation->confirmed = true;
+        $reservation->save();
+
+        return response()->json([
+            'message' => 'accept success!'
+        ]);
+    }
 }

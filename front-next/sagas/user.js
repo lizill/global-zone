@@ -99,9 +99,10 @@ function* logIn(action) {
   try {
     // console.log(action.data)
     yield call(logInApi, action.data);
-    yield put({
-      type: LOG_IN_SUCCESS,
-    });
+    yield all([
+        put({ type: LOG_IN_SUCCESS }),
+        put({type: LOAD_MY_INFO_REQUEST})
+    ]);
   } catch (err) {
     yield put({
       type: LOG_IN_FAILURE,

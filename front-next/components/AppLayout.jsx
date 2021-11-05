@@ -20,7 +20,7 @@ const AppLayout = ({ children, on }) => {
     if(!me) {
       Router.push('/korean');
     }
-  }, [me])
+  }, [me]);
 
   return (
     <div className={styles.appLayout}>
@@ -34,11 +34,11 @@ const AppLayout = ({ children, on }) => {
             <p>Logout</p>
           </button>
         </div>
-        <div className={styles.menu}>
-          <Link href="/"><a className={on === 'index' ? styles.on : null}>예약 조회</a></Link>
-          <Link href="/schedule"><a className={on === 'schedule' ? styles.on : null}>스케줄 조회</a></Link>
-          <Link href="/result"><a className={on === 'result' ? styles.on : null}>결과 관리</a></Link>
-        </div>
+          <div className={styles.menu}>
+            <Link href="/"><a className={on === 'index' ? styles.on : null}>예약 조회</a></Link>
+            <Link href="/schedule"><a className={on === 'schedule' ? styles.on : null}>스케줄 조회</a></Link>
+            <Link href="/result"><a className={on === 'result' ? styles.on : null}>결과 관리</a></Link>
+          </div>
       </header>
 
       <main>
