@@ -1,16 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
 
 import styles from '../../styles/reservation/Reservation.module.scss';
 import { lang, toStringDate } from "../schedule/ScheduleItem";
 import {RESERVATION_USERS_REQUEST} from "../../reducers/reservation";
-import Router from "next/router";
 import UserItem from "./UserItem";
 
-const ShowSchedule = ({ schedule, reservation }) => {
+const ShowSchedule = ({ schedule }) => {
     const dispatch = useDispatch();
-    const { me } = useSelector(state => state?.user);
     const { reservationUsers } = useSelector(state => state?.reservation);
 
     const onSubmit = (e) => {
@@ -53,7 +51,7 @@ const ShowSchedule = ({ schedule, reservation }) => {
                 <label htmlFor="me">예약 학생</label>
                 <div>
                     {reservationUsers?.map(v =>
-                        <UserItem key={v.id} reservation={v}/>
+                        <UserItem key={v.id} reservation={v} schedule={schedule}/>
                     )}
                 </div>
                 <div className={styles.buttonWrap}>

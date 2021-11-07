@@ -12,8 +12,15 @@ class ReservationsController extends Controller
     // 예약 신청
     public function reservation(Request $request)
     {
-        // 내 예약중에서 같은 시간대의 예약 불가능
-//         $myReservations = Reservation::where('user_id', Auth::user()->id)->with('schedule')->get();
+        // 내가 신청한 예약들 시간대와 같은 시간대가 있으면 신청 불가
+        $myReservationsDate = Reservation::join('schedules', 'reservations.schedule_id', '=', 'schedules.id')
+            ->where('reservations.user_id', Auth::user()->id)
+            ->where('schedules.date', $request->scheduleDate)
+            ->get();
+
+        if (count($myReservationsDate) != 0) {
+            return response()->json('이미 예약된 시간대 입니다.', 403);
+        }
 
         $reservation = new Reservation;
         $reservation->user_id = Auth::user()->id;
@@ -27,9 +34,9 @@ class ReservationsController extends Controller
     public function reservations(Request $request)
     {
         $myReservations = Reservation::with('schedule.user')
-        ->where('user_id', Auth::user()->id)
-        ->where('finished', false)
-        ->get();
+            ->where('user_id', Auth::user()->id)
+            ->where('finished', false)
+            ->get();
 
         return $myReservations;
     }
@@ -47,8 +54,8 @@ class ReservationsController extends Controller
     public function reservationUsers(Request $request, Schedule $schedule)
     {
         $reservationUsers = Reservation::with('user')
-        ->where('reservations.schedule_id', $schedule->id)
-        ->get();
+            ->where('reservations.schedule_id', $schedule->id)
+            ->get();
 
         return $reservationUsers;
     }

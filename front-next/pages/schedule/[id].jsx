@@ -20,13 +20,13 @@ const Schedule = () => {
         <AppLayout on={"schedule"}>
             <Head>
                 <title>
-                    {schedule.user.name} | 예약신청
+                    {schedule.user?.name} | 예약신청
                 </title>
                 <meta name="description" content={schedule.date} />
 
                 {/* 미리보기 제목, 설명, 이미지, 링크 눌렀을때 가는 주소, ... */}
-                <meta property="og:title" content={`${schedule.user.name} | 예약신청`} />
-                <meta property="og:description" content={schedule.date} />
+                <meta property="og:title" content={`${schedule.user?.name} | 예약신청`} />
+                <meta property="og:description" content={schedule?.date} />
                 <meta property="og:image" content={'https://dong0110.com/favicon.ico'} />
                 <meta property="og:url" content={`localhost:3000/schedule/${id}`} />
             </Head>

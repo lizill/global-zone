@@ -1,8 +1,7 @@
 // schedule/1 다이나믹 라우터
 import axios from 'axios';
-import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import {useDispatch, useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import { END } from 'redux-saga';
 import Head from 'next/head';
 
@@ -14,9 +13,6 @@ import wrapper from '../../../store/configuresStore';
 import ShowSchedule from "../../../components/schedule/ShowSchedule";
 
 const Schedule = () => {
-    const dispatch = useDispatch();
-    const router = useRouter();
-    const { id } = router.query;
     const { schedule } = useSelector(state => state?.schedule);
 
     return (
@@ -26,7 +22,7 @@ const Schedule = () => {
                     글로벌존 | {schedule.user.name}
                 </title>
             </Head>
-            <ShowSchedule schedule={schedule} />
+            <ShowSchedule schedule={schedule}/>
         </AppLayout>
     );
 };

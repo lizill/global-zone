@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -19,6 +20,14 @@ class GoogleController extends Controller
     {
         try {
             $user = Socialite::driver('google')->stateless()->user();
+
+            // Check @yju.ac.kr
+            if (explode('@', $user->getEmail())[1] != 'g.yju.ac.kr') {
+                // throw new Exception('not school acount!');
+                return response()->json([
+                    'error' => 'Not school acount!',
+                ], 403);
+            }
 
             // Check Users Email If Already There
             $is_user = User::where('email', $user->getEmail())->first();

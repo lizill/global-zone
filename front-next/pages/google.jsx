@@ -24,7 +24,13 @@ const Google = () => {
           Router.push('/');
         }
       })
-      .catch(err => console.error(err))
+      .catch((err) => {
+        console.error(err)
+        if (err.response.status === 403) {
+          alert('@g.yju.ac.kr로 끝나는 G-suite 계정만 사용이 가능합니다.');
+          Router.push('/korean');
+        }
+      })
   }, []);
 
   return (
