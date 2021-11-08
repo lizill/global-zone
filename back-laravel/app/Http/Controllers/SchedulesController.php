@@ -6,6 +6,7 @@ use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class SchedulesController extends Controller
 {
@@ -25,8 +26,6 @@ class SchedulesController extends Controller
         $schedule = Schedule::updateOrCreate([
             'user_id' => $request->user_id,
             'date' => $request->date,
-        ], [
-            'password' => random_int(100000, 999999)
         ]);
 
         return response()->json([
@@ -41,9 +40,9 @@ class SchedulesController extends Controller
         // 다음날부터 일주일간 정보 불러오기
         $nextDate = Carbon::now()->addDay()->format('Ymd');
         $schedules = Schedule::where('date', '>=', $nextDate)
-        ->orderBy('date')
-        ->with('user', 'reservations')
-        ->get();
+            ->orderBy('date')
+            ->with('user', 'reservations')
+            ->get();
 
         return $schedules;
     }
@@ -52,5 +51,26 @@ class SchedulesController extends Controller
     public function schedule(Request $request, Schedule $schedule)
     {
         return $schedule->fresh('user', 'reservations');
+    }
+
+    // update password
+    public function password(Request $request)
+    {
+        $addedTime = Carbon::now()->addMinutes(10)->format('YmdHi');
+        $schedule = Schedule::find($request->id);
+
+        // 10분전 부터 입장
+        if ($schedule->date > $addedTime) {
+            return response()->json('10분전 부터 입장할 수 있습니다.', 403);
+        }
+
+        // 비밀번호가 있으면 반환, 없으면 생성 후 반환
+        if (!$schedule->password) {
+            $schedule->password = Str::random(8) . '_' . $schedule->date;
+            $schedule->save();
+        }
+
+        // 비밀번호가 저장된 스케줄 전송 후 해당 방으로 입장
+        return $schedule;
     }
 }

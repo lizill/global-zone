@@ -12,6 +12,12 @@ class ReservationsController extends Controller
     // 예약 신청
     public function reservation(Request $request)
     {
+        // 신청한 사람이 4명 이상이면 신청 불가
+        $whoBookedThisSchedule = Reservation::where('schedule_id', $request->scheduleId)->get();
+        if (count($whoBookedThisSchedule) >= 4) {
+            return response()->json('예약 가능한 인원을 초과하였습니다.', 403);
+        }
+
         // 내가 신청한 예약들 시간대와 같은 시간대가 있으면 신청 불가
         $myReservationsDate = Reservation::join('schedules', 'reservations.schedule_id', '=', 'schedules.id')
             ->where('reservations.user_id', Auth::user()->id)
@@ -36,6 +42,7 @@ class ReservationsController extends Controller
         $myReservations = Reservation::with('schedule.user')
             ->where('user_id', Auth::user()->id)
             ->where('finished', false)
+            ->orderBy('date')
             ->get();
 
         return $myReservations;

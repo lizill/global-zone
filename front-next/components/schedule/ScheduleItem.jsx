@@ -54,7 +54,7 @@ const ScheduleItem = ({ schedule }) => {
         <div className={styles.reservationsDiv} style={setBackgroundColor(schedule.user.position)[1]}>
           {schedule.reservations.length < 4
             ? <span>예약 가능</span>
-            : <span>예약 불가능</span>}
+            : <span> </span>}
           <span>
             <BsFillPersonFill style={{ marginRight: "8px", fontSize: '1.3em' }}/>
             { schedule.reservations.length } / 4

@@ -1,14 +1,17 @@
-import React, { memo } from "react";
-import {IoMdClose} from "react-icons/io";
+import React, { memo, useEffect } from "react";
+import { IoMdClose } from "react-icons/io";
 import { IoEnterOutline } from 'react-icons/io5'
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import Router from "next/router";
 
 import styles from '../../styles/reservation/Reservation.module.scss';
 import { lang, toStringDate } from '../schedule/ScheduleItem'
-import {CANCEL_RESERVATION_REQUEST, LOAD_RESERVATIONS_REQUEST} from "../../reducers/reservation";
+import { CANCEL_RESERVATION_REQUEST } from "../../reducers/reservation";
+import { ENTER_SCHEDULE_REQUEST } from "../../reducers/schedule";
 
 const Items = ({ reservation, standby, completion }) => {
     const dispatch = useDispatch();
+    const { enterScheduleError, enterScheduleDone } = useSelector(state => state?.schedule);
 
     const onDelete = () => {
         const response = confirm('예약을 취소하시겠습니까?');
@@ -26,8 +29,25 @@ const Items = ({ reservation, standby, completion }) => {
     }
 
     const onEnter = () => {
-        alert('10분 전부터 입장할 수 있습니다.')
+        try {
+            dispatch({
+                type: ENTER_SCHEDULE_REQUEST,
+                data: reservation.schedule
+            });
+        } catch (err) {
+            console.error(err);
+        }
     }
+
+    useEffect(() => {
+        if(enterScheduleError) {
+            alert(enterScheduleError);
+            console.log(enterScheduleError);
+        }
+        if(enterScheduleDone) {
+            Router.push('/video/' + reservation.schedule.id);
+        }
+    }, [enterScheduleError, enterScheduleDone]);
 
     return (
         <div className={styles.itemWrap}>

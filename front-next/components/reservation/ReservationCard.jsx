@@ -37,7 +37,7 @@ const ReservationCard = ({ schedule }) => {
             alert('예약이 완료되었습니다.');
             Router.push('/');
         }
-    }, [reservationError, reservationDone])
+    }, [reservationError, reservationDone]);
 
     return (
         <section className={styles.cardWrap}>

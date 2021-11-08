@@ -1,6 +1,5 @@
-// schedule/1 다이나믹 라우터
+// schedule/show/1 다이나믹 라우터
 import axios from 'axios';
-import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { END } from 'redux-saga';
 import Head from 'next/head';
