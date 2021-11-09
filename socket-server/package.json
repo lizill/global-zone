@@ -1,0 +1,23 @@
+{
+  "name": "socket-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app",
+    "start": "cross-env NODE_ENV=production pm2 start app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "2.8.5",
+    "express": "4.17.1",
+    "http": "0.0.1-security",
+    "socket.io": "2.3.0",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
