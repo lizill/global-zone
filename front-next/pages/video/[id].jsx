@@ -3,10 +3,12 @@ import { useSelector } from "react-redux";
 import axios from 'axios';
 import { END } from 'redux-saga';
 import io from 'socket.io-client';
+import router from "next/router";
 
 import { LOAD_MY_INFO_REQUEST } from '../../reducers/user';
 import { LOAD_SCHEDULE_REQUEST } from '../../reducers/schedule';
 import PeerVideo from "../../components/video/PeerVideo";
+import BtnMenu from '../../components/video/BtnMenu';
 import styles from '../../styles/video/video.module.scss';
 import wrapper from '../../store/configuresStore';
 
@@ -35,11 +37,11 @@ const Video = () => {
 			if (localVideoRef.current) localVideoRef.current.srcObject = localStream;
 			if (!socketRef.current) return;
 			socketRef.current.emit('join_room', {
-				room: schedule.password,
-				userName: me.name,
+				room: schedule?.password,
+				userName: me?.name,
 			});
 		} catch (e) {
-			console.log(`getUserMedia error: ${e}`);
+			console.error(`getUserMedia error: ${e}`);
 		}
 	}, []);
 
@@ -49,7 +51,7 @@ const Video = () => {
 
 			pc.onicecandidate = (e) => {
 				if (!(socketRef.current && e.candidate)) return;
-				console.log('onicecandidate');
+				// console.log('onicecandidate');
 				socketRef.current.emit('candidate', {
 					candidate: e.candidate,
 					candidateSendID: socketRef.current.id,
@@ -57,12 +59,12 @@ const Video = () => {
 				});
 			};
 
-			pc.oniceconnectionstatechange = (e) => {
-				console.log(e);
-			};
+			// pc.oniceconnectionstatechange = (e) => {
+			// 	console.log(e);
+			// };
 
 			pc.ontrack = (e) => {
-				console.log('ontrack success');
+				// console.log('ontrack success');
 				setUsers((oldUsers) =>
 					oldUsers
 						.filter((user) => user.id !== socketID)
@@ -75,13 +77,13 @@ const Video = () => {
 			};
 
 			if (localStreamRef.current) {
-				console.log('localstream add');
+				// console.log('localstream add');
 				localStreamRef.current.getTracks().forEach((track) => {
 					if (!localStreamRef.current) return;
 					pc.addTrack(track, localStreamRef.current);
 				});
 			} else {
-				console.log('no local stream');
+				console.error('no local stream');
 			}
 
 			return pc;
@@ -92,12 +94,31 @@ const Video = () => {
 	}, []);
 
   useEffect(async () => {
+		if (me.position === 'korean') { // 한국인 사용자일 경우
+			const findUser = schedule.reservations.find(v => v.user_id == me.id);
+
+			if (!findUser) { // 예약한 사용자가 아닌 경우
+				alert('예약 신청한 사용자가 아닙니다.');
+				return router.push('/');
+			}
+	
+			if (findUser && !findUser.confirmed) {
+				alert('수락되지 않은 사용자입니다.');
+				return router.push('/');
+			}
+		} else { // 유학생일 경우
+			if (me.id != schedule.user_id) {
+				alert('본인의 스케줄이 아닙니다.');
+				return router.push('/');
+			}
+		}
+
 		socketRef.current = io.connect(SOCKET_SERVER_URL);
     getLocalStream();
 
 		socketRef.current.on('all_users', (allUsers) => {
 			allUsers.forEach(async (user) => {
-        console.log('join room', localStreamRef.current)
+        // console.log('join room', localStreamRef.current)
 				if (!localStreamRef.current) return;
 				const pc = createPeerConnection(user.id, user.userName);
 				if (!(pc && socketRef.current)) return;
@@ -107,7 +128,7 @@ const Video = () => {
 						offerToReceiveAudio: true,
 						offerToReceiveVideo: true,
 					});
-					console.log('create offer success');
+					// console.log('create offer success');
 					await pc.setLocalDescription(new RTCSessionDescription(localSdp));
 					socketRef.current.emit('offer', {
 						sdp: localSdp,
@@ -123,14 +144,14 @@ const Video = () => {
 
 		socketRef.current.on('getOffer', async (data) => {
       const { sdp, offerSendID, offerSendEmail } = data;
-      console.log('get offer');
+      // console.log('get offer');
       if (!localStreamRef.current) return;
       const pc = createPeerConnection(offerSendID, offerSendEmail);
       if (!(pc && socketRef.current)) return;
       pcsRef.current = { ...pcsRef.current, [offerSendID]: pc };
       try {
         await pc.setRemoteDescription(new RTCSessionDescription(sdp));
-        console.log('answer set remote description success');
+        // console.log('answer set remote description success');
         const localSdp = await pc.createAnswer({
           offerToReceiveVideo: true,
           offerToReceiveAudio: true,
@@ -148,7 +169,7 @@ const Video = () => {
 
 		socketRef.current.on('getAnswer', (data) => {
       const { sdp, answerSendID } = data;
-      console.log('get answer');
+      // console.log('get answer');
       const pc = pcsRef.current[answerSendID];
       if (!pc) return;
       pc.setRemoteDescription(new RTCSessionDescription(sdp));
@@ -157,11 +178,11 @@ const Video = () => {
 		socketRef.current.on(
 			'getCandidate',
 			async (data) => {
-				console.log('get candidate');
+				// console.log('get candidate');
 				const pc = pcsRef.current[data.candidateSendID];
 				if (!pc) return;
 				await pc.addIceCandidate(new RTCIceCandidate(data.candidate));
-				console.log('candidate add success');
+				// console.log('candidate add success');
 			},
 		);
 
@@ -189,14 +210,15 @@ const Video = () => {
       <div className={styles.videoContent}>
         <div className={styles.peersWrap}>
           {users.map((user, index) => (
-            <div className={styles.peerVideo}>
-              <PeerVideo key={index} name={user.userName} stream={user.stream} />
+            <div key={index} className={styles.peerVideo}>
+              <PeerVideo name={user.userName} stream={user.stream} />
             </div>
           ))}
         </div>
         <div className={styles.video}>
           <video ref={localVideoRef} autoPlay muted />
         </div>
+				<BtnMenu/>
       </div>
     </div>
   )

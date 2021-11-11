@@ -2,6 +2,9 @@
   background-color: #24272e;
 
   .videoContent {
+    margin: 0 auto;
+    height: 100vh;
+    max-width: 1024px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -9,23 +12,20 @@
     .peersWrap {
       display: flex;
       justify-content: center;
-      // max-width: 1024px;
-      margin: 0 auto;
 
       .peerVideo {
         transform: rotateY(180deg);
-        width: 100%;
-        width: 256px;
+        width: 25%;
         position: relative;
         left: 0;
-        right: 0;
-        margin: 0 auto;
+        top: 0px;
+        margin: 10px 5px;
+        border-radius: 5px;
         overflow: hidden;
-        border: 1px black solid;
 
         video {
           position: absolute;
-          top: 0; // 768 - 576 = 192
+          top: 0;
           left: 0;
           width: 100%;
         }
@@ -43,16 +43,15 @@
     .video {
       transform: rotateY(180deg);
       width: 100%;
-      max-width: 1024px;
       position: relative;
-      left: 0;
       right: 0;
-      margin: 0 auto;
+      top: 0;
+      border-radius: 5px;
       overflow: hidden;
 
       video {
         position: absolute;
-        top: 0; // 768 - 576 = 192
+        top: 0;
         left: 0;
         width: 100%;
       }

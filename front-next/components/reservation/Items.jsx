@@ -1,19 +1,19 @@
-import React, { memo, useEffect } from "react";
+import React, { memo, useEffect, useCallback } from "react";
 import { IoMdClose } from "react-icons/io";
 import { IoEnterOutline } from 'react-icons/io5'
 import { useDispatch, useSelector } from "react-redux";
 import Router from "next/router";
+import axios from "axios";
 
 import styles from '../../styles/reservation/Reservation.module.scss';
 import { lang, toStringDate } from '../schedule/ScheduleItem'
 import { CANCEL_RESERVATION_REQUEST } from "../../reducers/reservation";
-import { ENTER_SCHEDULE_REQUEST } from "../../reducers/schedule";
 
 const Items = ({ reservation, standby, completion }) => {
     const dispatch = useDispatch();
     const { enterScheduleError, enterScheduleDone } = useSelector(state => state?.schedule);
 
-    const onDelete = () => {
+    const onDelete = useCallback(() => {
         const response = confirm('예약을 취소하시겠습니까?');
 
         if(response) {
@@ -26,18 +26,20 @@ const Items = ({ reservation, standby, completion }) => {
                 console.error(err);
             }
         }
-    }
+    }, []);
 
-    const onEnter = () => {
+    const onEnter = useCallback(async () => {
         try {
-            dispatch({
-                type: ENTER_SCHEDULE_REQUEST,
-                data: reservation.schedule
-            });
+            const res = await axios.patch('/schedule/enter', reservation.schedule);
+
+            Router.push('/video/' + res.data.id);
         } catch (err) {
             console.error(err);
+            if (err.response?.status === 403) {
+                alert(err.response.data);
+            }
         }
-    }
+    }, []);
 
     useEffect(() => {
         if(enterScheduleError) {
@@ -45,7 +47,6 @@ const Items = ({ reservation, standby, completion }) => {
             console.log(enterScheduleError);
         }
         if(enterScheduleDone) {
-            Router.push('/video/' + reservation.schedule.id);
         }
     }, [enterScheduleError, enterScheduleDone]);
 

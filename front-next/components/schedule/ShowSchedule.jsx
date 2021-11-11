@@ -1,23 +1,27 @@
-import React from 'react';
+import React, { useCallback, memo } from 'react';
 import moment from "moment";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import axios from 'axios';
 
 import styles from '../../styles/reservation/Reservation.module.scss';
 import { lang, toStringDate } from "../schedule/ScheduleItem";
-import {RESERVATION_USERS_REQUEST} from "../../reducers/reservation";
 import UserItem from "./UserItem";
 
 const ShowSchedule = ({ schedule }) => {
-    const dispatch = useDispatch();
     const { reservationUsers } = useSelector(state => state?.reservation);
 
-    const onSubmit = (e) => {
-        e.preventDefault();
-        dispatch({
-            type: RESERVATION_USERS_REQUEST,
-            data: 13
-        })
-    }
+    const onEnter = useCallback(async () => {
+        try {
+            const res = await axios.patch('/schedule/enter', schedule);
+
+            Router.push('/video/' + res.data.id);
+        } catch (err) {
+            console.error(err);
+            if (err.response?.status === 403) {
+                alert(err?.response.data);
+            }
+        }
+    }, []);
 
     return (
         <section className={styles.cardWrap}>
@@ -55,11 +59,11 @@ const ShowSchedule = ({ schedule }) => {
                     )}
                 </div>
                 <div className={styles.buttonWrap}>
-                    <button onClick={onSubmit}>입장하기</button>
+                    <button onClick={onEnter}>입장하기</button>
                 </div>
             </article>
         </section>
     );
 }
 
-export default ShowSchedule;
+export default memo(ShowSchedule);
