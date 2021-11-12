@@ -1,3 +1,27 @@
+@mixin video-wrap-base {
+  transform: rotateY(180deg);
+  position: relative;
+  left: 0;
+  top: 0;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+@mixin video-base {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+@mixin before-video-base {
+  content: "";
+  display: block;
+  padding-top: 56.25%;
+  height: 0;
+  width: 100%;
+}
+
 .videoWrap {
   background-color: #24272e;
 
@@ -14,55 +38,67 @@
       justify-content: center;
 
       .peerVideo {
-        transform: rotateY(180deg);
+        @include video-wrap-base();
+
         width: 25%;
-        position: relative;
-        left: 0;
-        top: 0px;
         margin: 10px 5px;
-        border-radius: 5px;
-        overflow: hidden;
 
         video {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
+          @include video-base();
         }
       }
 
       .peerVideo:before {
-        content: "";
-        display: block;
-        padding-top: 56.25%;
-        height: 0;
-        width: 100%;
+        @include before-video-base();
       }
     }
 
     .video {
-      transform: rotateY(180deg);
+      @include video-wrap-base();
+
       width: 100%;
-      position: relative;
-      right: 0;
-      top: 0;
-      border-radius: 5px;
-      overflow: hidden;
 
       video {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
+        @include video-base();
       }
     }
 
     .video:before {
-      content: "";
-      display: block;
-      padding-top: 56.25%;
-      height: 0;
-      width: 100%;
+      @include before-video-base();
     }
+  }
+}
+
+@mixin icon-base {
+  width: 35px;
+  height: 35px;
+  padding: 9px;
+  background-color: white;
+  border-radius: 50%;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.buttonWrap {
+  display: flex;
+  justify-content: center;
+  gap: 2%;
+  margin: 10px 0;
+
+  .muteBtn {
+    @include icon-base();
+  }
+
+  .videoOffBtn {
+    @include icon-base();
+  }
+
+  .endCallBtn {
+    @include icon-base();
+    width: 80px;
+    border-radius: 10px;
+    color: red;
   }
 }

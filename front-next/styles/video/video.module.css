@@ -27,13 +27,13 @@
 .videoWrap .videoContent .peersWrap .peerVideo {
   -webkit-transform: rotateY(180deg);
           transform: rotateY(180deg);
-  width: 25%;
   position: relative;
   left: 0;
-  top: 0px;
-  margin: 10px 5px;
+  top: 0;
   border-radius: 5px;
   overflow: hidden;
+  width: 25%;
+  margin: 10px 5px;
 }
 .videoWrap .videoContent .peersWrap .peerVideo video {
   position: absolute;
@@ -51,12 +51,12 @@
 .videoWrap .videoContent .video {
   -webkit-transform: rotateY(180deg);
           transform: rotateY(180deg);
-  width: 100%;
   position: relative;
-  right: 0;
+  left: 0;
   top: 0;
   border-radius: 5px;
   overflow: hidden;
+  width: 100%;
 }
 .videoWrap .videoContent .video video {
   position: absolute;
@@ -70,5 +70,49 @@
   padding-top: 56.25%;
   height: 0;
   width: 100%;
+}
+
+.buttonWrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 2%;
+  margin: 10px 0;
+}
+.buttonWrap .muteBtn {
+  width: 35px;
+  height: 35px;
+  padding: 9px;
+  background-color: white;
+  border-radius: 50%;
+}
+.buttonWrap .muteBtn:hover {
+  cursor: pointer;
+}
+.buttonWrap .videoOffBtn {
+  width: 35px;
+  height: 35px;
+  padding: 9px;
+  background-color: white;
+  border-radius: 50%;
+}
+.buttonWrap .videoOffBtn:hover {
+  cursor: pointer;
+}
+.buttonWrap .endCallBtn {
+  width: 35px;
+  height: 35px;
+  padding: 9px;
+  background-color: white;
+  border-radius: 50%;
+  width: 80px;
+  border-radius: 10px;
+  color: red;
+}
+.buttonWrap .endCallBtn:hover {
+  cursor: pointer;
 }
 /*# sourceMappingURL=video.module.css.map */

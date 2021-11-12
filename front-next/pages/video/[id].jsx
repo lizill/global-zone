@@ -29,6 +29,9 @@ const Video = () => {
 	const localVideoRef = useRef(null);
 	const localStreamRef = useRef();
   const [users, setUsers] = useState([]);
+	const [isAudioMuted, setAudioMute] = useState(false);
+	const [isVideoOff, setVideoOff] = useState(false);
+	const [locationKeys, setLocationKeys] = useState([]);
 
 	const getLocalStream = useCallback(async () => {
 		try {
@@ -92,6 +95,49 @@ const Video = () => {
 			return undefined;
 		}
 	}, []);
+
+	const handleMuteClick = () => {
+		// console.log('audio mute')
+		localStreamRef.current
+			.getAudioTracks()
+			.forEach(track => track.enabled = !track.enabled);
+		if(!isAudioMuted) {
+			setAudioMute(true);
+		} else {
+			setAudioMute(false);
+		}
+	}
+
+	const handleCameraClick = () => {
+		// console.log('video click')
+		localStreamRef.current
+			.getVideoTracks()
+			.forEach(track => track.enabled = !track.enabled);
+		if(isVideoOff) {
+			setVideoOff(false);
+		} else {
+			setVideoOff(true);
+		}
+	}
+
+	const handleEndCall = () => {
+		whenUserLeavePage();
+		router.push('/');
+	}
+
+	const whenUserLeavePage = () => {
+		if (socketRef.current) {
+			socketRef.current.disconnect();
+		}
+		users.forEach((user) => {
+			if (!pcsRef.current[user.id]) return;
+			pcsRef.current[user.id].close();
+			delete pcsRef.current[user.id];
+		});
+		localStreamRef.current
+			.getTracks()
+			.forEach(track => track.stop());
+	}
 
   useEffect(async () => {
 		if (me.position === 'korean') { // 한국인 사용자일 경우
@@ -193,17 +239,17 @@ const Video = () => {
 			setUsers((oldUsers) => oldUsers.filter((user) => user.id !== data.id));
 		});
 
-		return () => {
-			if (socketRef.current) {
-				socketRef.current.disconnect();
-			}
-			users.forEach((user) => {
-				if (!pcsRef.current[user.id]) return;
-				pcsRef.current[user.id].close();
-				delete pcsRef.current[user.id];
-			});
-		};
+		return () => whenUserLeavePage;
 	}, [createPeerConnection, getLocalStream]);
+
+	useEffect(() => {
+		// 뒤로가기 등 페이지 이동시 연결해제
+		router.events.on('routeChangeStart', whenUserLeavePage);
+
+		return () => {
+			router.events.off('routeChangeStart', whenUserLeavePage);
+		}
+	}, []);
 
   return (
     <div className={styles.videoWrap}>
@@ -218,7 +264,13 @@ const Video = () => {
         <div className={styles.video}>
           <video ref={localVideoRef} autoPlay muted />
         </div>
-				<BtnMenu/>
+				<BtnMenu
+					isAudioMuted={isAudioMuted}
+					isVideoOff={isVideoOff}
+					audioMute={handleMuteClick}
+					videoOff={handleCameraClick}
+					endCall={handleEndCall}
+				/>
       </div>
     </div>
   )
