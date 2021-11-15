@@ -74,7 +74,7 @@
   height: 35px;
   padding: 9px;
   background-color: white;
-  border-radius: 50%;
+  border-radius: 10px;
 
   &:hover {
     cursor: pointer;
@@ -98,7 +98,43 @@
   .endCallBtn {
     @include icon-base();
     width: 80px;
-    border-radius: 10px;
     color: red;
+  }
+
+  .checkBtn {
+    @include icon-base();
+    color: green;
+  }
+}
+
+.checkWrap {
+  h2 {
+    margin: 0 0 20px 0;
+    font-size: 1.3em;
+
+    span {
+      color: #182f9e;
+    }
+  }
+
+  button {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    width: 100%;
+    padding: 8px 13px;
+    text-align: start;
+    margin-bottom: 10px;
+    background-color: #dde5ef;
+    border: 1px solid #bcbfc7;
+    border-radius: 5px;
+
+    p {
+      margin: 0;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }

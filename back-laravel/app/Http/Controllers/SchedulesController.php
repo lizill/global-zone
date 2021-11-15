@@ -54,7 +54,7 @@ class SchedulesController extends Controller
     }
 
     // update password
-    public function password(Request $request)
+    public function enter(Request $request)
     {
         $addedTime = Carbon::now()->addMinutes(10)->format('YmdHi');
         $schedule = Schedule::find($request->id);

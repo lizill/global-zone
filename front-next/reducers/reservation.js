@@ -19,6 +19,9 @@ export const initialState = {
   acceptReservationLoading: false, // 예약 수락
   acceptReservationDone: false,
   acceptReservationError: null,
+  checkReservationLoading: false, // 출석 체크
+  checkReservationDone: false,
+  checkReservationError: null,
 };
 
 export const RESERVATION_REQUEST = 'RESERVATION_REQUEST';
@@ -40,6 +43,10 @@ export const RESERVATION_USERS_FAILURE = 'RESERVATION_USERS_FAILURE';
 export const ACCEPT_RESERVATION_REQUEST = 'ACCEPT_RESERVATION_REQUEST';
 export const ACCEPT_RESERVATION_SUCCESS = 'ACCEPT_RESERVATION_SUCCESS';
 export const ACCEPT_RESERVATION_FAILURE = 'ACCEPT_RESERVATION_FAILURE';
+
+export const CHECK_RESERVATION_REQUEST = 'CHECK_RESERVATION_REQUEST';
+export const CHECK_RESERVATION_SUCCESS = 'CHECK_RESERVATION_SUCCESS';
+export const CHECK_RESERVATION_FAILURE = 'CHECK_RESERVATION_FAILURE';
 
 const reducer = (state = initialState, action) => produce(state, (draft) => {
   switch (action.type) {
@@ -113,6 +120,20 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
     case ACCEPT_RESERVATION_FAILURE:
       draft.acceptReservationLoading = false;
       draft.acceptReservationError = action.error;
+      break;
+
+    case CHECK_RESERVATION_REQUEST:
+      draft.checkReservationLoading = true;
+      draft.checkReservationError = null;
+      draft.checkReservationDone = false;
+      break;
+    case CHECK_RESERVATION_SUCCESS:
+      draft.checkReservationLoading = false;
+      draft.checkReservationDone = true;
+      break;
+    case CHECK_RESERVATION_FAILURE:
+      draft.checkReservationLoading = false;
+      draft.checkReservationError = action.error;
       break;
 
     default:

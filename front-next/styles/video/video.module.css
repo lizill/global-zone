@@ -87,7 +87,7 @@
   height: 35px;
   padding: 9px;
   background-color: white;
-  border-radius: 50%;
+  border-radius: 10px;
 }
 .buttonWrap .muteBtn:hover {
   cursor: pointer;
@@ -97,7 +97,7 @@
   height: 35px;
   padding: 9px;
   background-color: white;
-  border-radius: 50%;
+  border-radius: 10px;
 }
 .buttonWrap .videoOffBtn:hover {
   cursor: pointer;
@@ -107,12 +107,52 @@
   height: 35px;
   padding: 9px;
   background-color: white;
-  border-radius: 50%;
-  width: 80px;
   border-radius: 10px;
+  width: 80px;
   color: red;
 }
 .buttonWrap .endCallBtn:hover {
+  cursor: pointer;
+}
+.buttonWrap .checkBtn {
+  width: 35px;
+  height: 35px;
+  padding: 9px;
+  background-color: white;
+  border-radius: 10px;
+  color: green;
+}
+.buttonWrap .checkBtn:hover {
+  cursor: pointer;
+}
+
+.checkWrap h2 {
+  margin: 0 0 20px 0;
+  font-size: 1.3em;
+}
+.checkWrap h2 span {
+  color: #182f9e;
+}
+.checkWrap button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  gap: 2rem;
+  width: 100%;
+  padding: 8px 13px;
+  text-align: start;
+  margin-bottom: 10px;
+  background-color: #dde5ef;
+  border: 1px solid #bcbfc7;
+  border-radius: 5px;
+}
+.checkWrap button p {
+  margin: 0;
+}
+.checkWrap button:hover {
   cursor: pointer;
 }
 /*# sourceMappingURL=video.module.css.map */

@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import styles from '../styles/layout/Modal.module.scss';
 import { closeModalAction } from "../reducers/user";
 
-const Modal = ({ children, isOpen }) => {
+const Modal = ({ children }) => {
     const { isModalOpen } = useSelector(state => state.user);
     const dispatch = useDispatch();
 

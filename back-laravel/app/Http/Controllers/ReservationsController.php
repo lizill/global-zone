@@ -41,7 +41,7 @@ class ReservationsController extends Controller
     {
         $myReservations = Reservation::with('schedule.user')
             ->where('user_id', Auth::user()->id)
-            ->where('finished', false)
+            // ->where('finished', false)
             ->orderBy('date')
             ->get();
 
@@ -77,5 +77,15 @@ class ReservationsController extends Controller
         return response()->json([
             'message' => 'accept success!'
         ]);
+    }
+
+    // 출석 체크
+    public function check(Request $request)
+    {
+        $reservation = Reservation::find($request->id);
+        $reservation->finished = !$reservation->finished;
+        $reservation->save();
+
+        return response(200);
     }
 }

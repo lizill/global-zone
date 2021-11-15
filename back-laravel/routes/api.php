@@ -33,7 +33,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Schedules
     Route::get('/schedules', [SchedulesController::class, 'schedules']); // GET /schedules
     Route::get('/schedule/{schedule}', [SchedulesController::class, 'schedule']); // GET /schedule
-    Route::patch('/schedule/enter', [SchedulesController::class, 'password']); // PATCH /schedule/enter
+    Route::patch('/schedule/enter', [SchedulesController::class, 'enter']); // PATCH /schedule/enter
 
     // Users
     Route::get('/user', [UsersController::class, 'user']); // GET /user
@@ -44,6 +44,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::delete('/reservation/{reservation}', [ReservationsController::class, 'delete']); // DELETE /reservation/22
     Route::get('/reservations/{schedule}', [ReservationsController::class, 'reservationUsers']); // GET /reservations/22
     Route::patch('/reservation', [ReservationsController::class, 'accept']); // PATCH /reservation
+    Route::patch('/reservation/check', [ReservationsController::class, 'check']); // PATCH /reservation/check
 
     // -----admin-----
     // Auth

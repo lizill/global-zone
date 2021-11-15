@@ -126,6 +126,12 @@ const Video = () => {
 	}
 
 	const whenUserLeavePage = () => {
+		const isLeave = confirm('통화를 종료하시겠습니까?')
+
+		if (!isLeave) {
+			throw `Route change was aborted (this error can be safely ignored).`;
+		}
+
 		if (socketRef.current) {
 			socketRef.current.disconnect();
 		}
@@ -270,6 +276,8 @@ const Video = () => {
 					audioMute={handleMuteClick}
 					videoOff={handleCameraClick}
 					endCall={handleEndCall}
+					me={me}
+					reservations={schedule.reservations}
 				/>
       </div>
     </div>

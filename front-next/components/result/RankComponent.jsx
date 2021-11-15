@@ -4,7 +4,8 @@ import { useSelector } from 'react-redux';
 import styles from '../../styles/result/result.module.scss'
 
 const RankComponent = () => {
-  const { me } = useSelector((state) => state.user);
+  const { me } = useSelector((state) => state?.user);
+  const { reservations } = useSelector(state => state?.reservation);
 
   return (
     <div className={styles.rankWrap}>
@@ -16,7 +17,9 @@ const RankComponent = () => {
               <span>{me && me.name}</span> 학생의 2021학년도 2학기<br/>
               글로벌 존 이용 횟수
           </div>
-          <div className={styles.count}><span>3</span>회</div>
+          <div className={styles.count}>
+            <span>{reservations.filter(v => v.finished === '1').length}</span>회
+          </div>
       </div>
     </div>
   )

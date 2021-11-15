@@ -8,6 +8,7 @@ import RankComponent from "../components/result/RankComponent";
 import ResultComponent from "../components/result/ResultComponent";
 import wrapper from '../store/configuresStore';
 import { LOAD_MY_INFO_REQUEST } from '../reducers/user';
+import { LOAD_RESERVATIONS_REQUEST } from '../reducers/reservation';
 
 const Result = () => {
   return (
@@ -36,6 +37,9 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async ({
   }
   store.dispatch({
     type: LOAD_MY_INFO_REQUEST,
+  });
+  store.dispatch({
+    type: LOAD_RESERVATIONS_REQUEST,
   });
   store.dispatch(END);
   await store.sagaTask.toPromise();

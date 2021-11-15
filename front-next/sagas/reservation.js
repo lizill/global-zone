@@ -7,7 +7,10 @@ import {
   CANCEL_RESERVATION_REQUEST, CANCEL_RESERVATION_SUCCESS, CANCEL_RESERVATION_FAILURE,
   RESERVATION_USERS_REQUEST, RESERVATION_USERS_SUCCESS, RESERVATION_USERS_FAILURE,
   ACCEPT_RESERVATION_REQUEST, ACCEPT_RESERVATION_SUCCESS, ACCEPT_RESERVATION_FAILURE,
+  CHECK_RESERVATION_REQUEST, CHECK_RESERVATION_SUCCESS, CHECK_RESERVATION_FAILURE,
 } from '../reducers/reservation';
+
+import { LOAD_SCHEDULE_REQUEST } from '../reducers/schedule';
 
 function reservationApi(data) {
   return axios.post('/reservation', data);
@@ -113,6 +116,27 @@ function* watchAcceptReservation() {
   yield takeLatest(ACCEPT_RESERVATION_REQUEST, acceptReservation);
 }
 
+function checkReservationApi(data) {
+  return axios.patch('/reservation/check', data);
+}
+function* checkReservation(action) {
+  try {
+    yield call(checkReservationApi, action.data);
+    yield all([
+        put({ type: CHECK_RESERVATION_SUCCESS }),
+        put({ type: LOAD_SCHEDULE_REQUEST, data: action.data.schedule_id })
+      ]);
+  } catch (err) {
+    yield put({
+      type: CHECK_RESERVATION_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+function* watchCheckReservation() {
+  yield takeLatest(CHECK_RESERVATION_REQUEST, checkReservation);
+}
+
 export default function* scheduleSaga() {
   yield all([
     fork(watchReservation),
@@ -120,5 +144,6 @@ export default function* scheduleSaga() {
     fork(watchCancelReservation),
     fork(watchReservationUsers),
     fork(watchAcceptReservation),
+    fork(watchCheckReservation),
   ]);
 }
