@@ -9,6 +9,7 @@ import CalendarContainer from "../components/schedule/CalendarConatainer";
 import ScheduleList from "../components/schedule/ScheduleList";
 import { LOAD_MY_INFO_REQUEST } from '../reducers/user';
 import { LOAD_SCHEDULES_REQUEST } from '../reducers/schedule';
+import styles from '../styles/schedule/schedule.module.scss';
 
 const Schedule = () => {
   return (
@@ -20,8 +21,10 @@ const Schedule = () => {
       </Head>
 
       <AppLayout on="schedule">
-        <CalendarContainer/>
-        <ScheduleList/>
+        <div className={styles.schedule}>
+          <CalendarContainer/>
+          <ScheduleList/>
+        </div>
       </AppLayout>
     </div>
   )

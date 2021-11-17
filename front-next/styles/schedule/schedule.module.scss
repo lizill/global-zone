@@ -1,8 +1,14 @@
+.schedule {
+  background-color: white;
+  padding: 30px 20px 40px 20px;
+}
+
 .calendarWrap {
-  padding: 30px;
+  max-width: 440px;
+  margin: 0 auto;
   font-size: 0.9em;
   font-weight: 600;
-  background-color: white;
+  padding-bottom: 20px;
 
   span {
     font-size: 1.4em;
@@ -117,8 +123,8 @@
 }
 
 .scheduleListWrap {
-  padding: 0px 30px 30px 30px;
-  background-color: white;
+  max-width: 440px;
+  margin: 0 auto;
 
   .content {
     border: 1px solid #e5e5e5;

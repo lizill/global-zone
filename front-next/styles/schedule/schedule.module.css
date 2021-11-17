@@ -1,8 +1,14 @@
+.schedule {
+  background-color: white;
+  padding: 30px 20px 40px 20px;
+}
+
 .calendarWrap {
-  padding: 30px;
+  max-width: 440px;
+  margin: 0 auto;
   font-size: 0.9em;
   font-weight: 600;
-  background-color: white;
+  padding-bottom: 20px;
 }
 .calendarWrap span {
   font-size: 1.4em;
@@ -61,6 +67,8 @@
   height: 100%;
   border: none;
   border-radius: 8px;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
 }
 .calendarWrap .calendarTable tbody .tableData button span {
   position: relative;
@@ -69,6 +77,7 @@
 }
 .calendarWrap .calendarTable tbody .tableData button:hover {
   cursor: pointer;
+  background-color: #efefef;
 }
 .calendarWrap .calendarTable tbody .tableData:after {
   content: "";
@@ -86,8 +95,7 @@
 }
 .scheduleItemWrap p {
   padding: 0;
-  margin: 0;
-  margin-bottom: 12px;
+  margin: 0px 0px 12px 0px;
 }
 .scheduleItemWrap .reservationsDiv {
   display: -webkit-box;
@@ -113,9 +121,8 @@
 }
 
 .scheduleListWrap {
-  padding: 30px;
-  padding-top: 0px;
-  background-color: white;
+  max-width: 440px;
+  margin: 0 auto;
 }
 .scheduleListWrap .content {
   border: 1px solid #e5e5e5;
@@ -147,10 +154,6 @@
 }
 .scheduleListWrap .content menu button:hover {
   cursor: pointer;
-}
-.scheduleListWrap .content menu button p {
-  position: relative;
-  bottom: 14px;
 }
 .scheduleListWrap .content menu button div {
   position: absolute;
@@ -198,5 +201,56 @@
 }
 .dotsWrap div + div {
   margin-left: 2px;
+}
+
+.createBtnWrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.createBtnWrap .createBtn {
+  border: 1px solid #e5e5e5;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  width: 32px;
+  height: 32px;
+  background-color: white;
+}
+.createBtnWrap .createBtn:hover {
+  cursor: pointer;
+}
+
+.userItem {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: 1px solid #bcbfc7;
+  border-radius: 5px;
+  padding: 15px 20px;
+  margin: 2px 0 15px 0;
+  color: #1c233d;
+  background-color: #dde5ef;
+}
+.userItem button {
+  color: white;
+  background-color: #182f9e;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 0.8em;
+}
+.userItem button:hover {
+  cursor: pointer;
 }
 /*# sourceMappingURL=schedule.module.css.map */

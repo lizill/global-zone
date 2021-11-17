@@ -9,6 +9,7 @@ import ResultComponent from "../components/result/ResultComponent";
 import wrapper from '../store/configuresStore';
 import { LOAD_MY_INFO_REQUEST } from '../reducers/user';
 import { LOAD_RESERVATIONS_REQUEST } from '../reducers/reservation';
+import styles from '../styles/result/result.module.scss';
 
 const Result = () => {
   return (
@@ -20,8 +21,10 @@ const Result = () => {
       </Head>
       
       <AppLayout on="result">
-        <RankComponent/>
-        <ResultComponent/>
+        <div className={styles.result}>
+          <RankComponent/>
+          <ResultComponent/>
+        </div>
       </AppLayout>
     </div>
   )

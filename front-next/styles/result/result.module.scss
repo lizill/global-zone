@@ -1,3 +1,7 @@
+.result {
+  padding: 40px 20px;
+}
+
 .rankWrap {
   position: relative;
   display: flex;
@@ -7,7 +11,8 @@
   border-radius: 10px;
   color: white;
   padding: 20px 25px;
-  margin: 30px;
+  max-width: 440px;
+  margin: 0 auto;
 
   .statusWrap {
     z-index: 100;
@@ -62,5 +67,61 @@
     left: 155px;
     bottom: -40px;
     background-color: #f7bd4d;
+  }
+}
+
+.resultWrap {
+  max-width: 440px;
+  margin: 0 auto;
+
+  header {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #373a44;
+    color: white;
+    font-size: 0.9em;
+    font-weight: bold;
+    padding: 18px 21px;
+    border-radius: 5px 5px 0 0;
+
+    p {
+      margin: 0;
+    }
+
+    .icon {
+      margin-left: 5px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  article {
+    border: 1px solid #bcbfc7;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    overflow: hidden;
+
+    div {
+      background-color: white;
+      color: #373a44;
+      display: grid;
+      grid-template-columns: 0.8fr 1fr;
+      text-align: center;
+      font-size: 0.8em;
+      font-weight: bold;
+      padding: 15px 0;
+
+      p {
+        margin: 0;
+      }
+    }
+
+    div + div {
+      border-top: 1px solid #e8e8e8;
+    }
   }
 }
