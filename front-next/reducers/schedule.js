@@ -2,7 +2,7 @@ import produce from 'immer';
 import moment from 'moment';
 
 export const initialState = {
-  selectedDate: moment().add(1, 'days').format('YYYYMMDD'),
+  selectedDate: moment().format('YYYYMMDD'), // default today
   schedules: [],
   schedule: {},
 
@@ -15,6 +15,9 @@ export const initialState = {
   loadScheduleLoading: false, // 스케줄 로드
   loadScheduleDone: false,
   loadScheduleError: null,
+  foreignSchedulesLoading: false, // 외국인 스케줄 리스트 로드
+  foreignSchedulesDone: false,
+  foreignSchedulesError: null,
 };
 
 export const SET_SELECTED_DATE = 'SET_SELECTED_DATE';
@@ -30,6 +33,10 @@ export const LOAD_SCHEDULES_FAILURE = 'LOAD_SCHEDULES_FAILURE';
 export const LOAD_SCHEDULE_REQUEST = 'LOAD_SCHEDULE_REQUEST';
 export const LOAD_SCHEDULE_SUCCESS = 'LOAD_SCHEDULE_SUCCESS';
 export const LOAD_SCHEDULE_FAILURE = 'LOAD_SCHEDULE_FAILURE';
+
+export const FOREIGN_SCHEDULES_REQUEST = 'FOREIGN_SCHEDULES_REQUEST';
+export const FOREIGN_SCHEDULES_SUCCESS = 'FOREIGN_SCHEDULES_SUCCESS';
+export const FOREIGN_SCHEDULES_FAILURE = 'FOREIGN_SCHEDULES_FAILURE';
 
 const reducer = (state = initialState, action) => produce(state, (draft) => {
   switch (action.type) {
@@ -79,6 +86,21 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
     case LOAD_SCHEDULE_FAILURE:
       draft.loadScheduleLoading = false;
       draft.loadScheduleError = action.error;
+      break;
+
+    case FOREIGN_SCHEDULES_REQUEST:
+      draft.foreignSchedulesLoading = true;
+      draft.foreignSchedulesError = null;
+      draft.foreignSchedulesDone = false;
+      break;
+    case FOREIGN_SCHEDULES_SUCCESS:
+      draft.foreignSchedulesLoading = false;
+      draft.foreignSchedulesDone = true;
+      draft.schedules = action.data
+      break;
+    case FOREIGN_SCHEDULES_FAILURE:
+      draft.foreignSchedulesLoading = false;
+      draft.foreignSchedulesError = action.error;
       break;
 
     default:

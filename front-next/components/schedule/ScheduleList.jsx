@@ -40,35 +40,37 @@ const ScheduleList = () => {
     <div className={styles.scheduleListWrap}>
       {/* 일주일치 데이터를 가져와서 미리 저장 */}
       <div className={styles.content}>
-        <menu>
-          <button
-            className={menu === '전체' ? styles.on : null}
-            onClick={() => onClickMenu('전체')}
-          >
-            <p>전체</p>
-          </button>
-          <button
-            className={menu === '영어' ? styles.on : null}
-            onClick={() => onClickMenu('영어')}
-          >
-            영어
-            <div style={{ backgroundColor: "#4d4cac" }}/>
-          </button>
-          <button 
-            className={menu === '일본어' ? styles.on : null} 
-            onClick={() => onClickMenu('일본어')}
-          >
-            일본어
-            <div style={{ backgroundColor: "#659cff" }}/>
-          </button>
-          <button
-            className={menu === '중국어' ? styles.on : null} 
-            onClick={() => onClickMenu('중국어')}
-          >
-            중국어
-            <div style={{ backgroundColor: "#ff6565" }}/>
-          </button>
-        </menu>
+        {me?.position === 'korean' &&
+          <menu>
+            <button
+              className={menu === '전체' ? styles.on : null}
+              onClick={() => onClickMenu('전체')}
+            >
+              <p>전체</p>
+            </button>
+            <button
+              className={menu === '영어' ? styles.on : null}
+              onClick={() => onClickMenu('영어')}
+            >
+              영어
+              <div style={{ backgroundColor: "#4d4cac" }}/>
+            </button>
+            <button 
+              className={menu === '일본어' ? styles.on : null} 
+              onClick={() => onClickMenu('일본어')}
+            >
+              일본어
+              <div style={{ backgroundColor: "#659cff" }}/>
+            </button>
+            <button
+              className={menu === '중국어' ? styles.on : null} 
+              onClick={() => onClickMenu('중국어')}
+            >
+              중국어
+              <div style={{ backgroundColor: "#ff6565" }}/>
+            </button>
+          </menu>
+        }
         <div className={styles.listWrap}>
           { me && me.position === 'admin' && (
               <div className={styles.createBtnWrap}>

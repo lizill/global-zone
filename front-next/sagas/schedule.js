@@ -5,6 +5,7 @@ import {
   CREATE_SCHEDULE_REQUEST, CREATE_SCHEDULE_SUCCESS, CREATE_SCHEDULE_FAILURE,
   LOAD_SCHEDULES_REQUEST, LOAD_SCHEDULES_SUCCESS, LOAD_SCHEDULES_FAILURE,
   LOAD_SCHEDULE_REQUEST, LOAD_SCHEDULE_SUCCESS, LOAD_SCHEDULE_FAILURE,
+  FOREIGN_SCHEDULES_REQUEST, FOREIGN_SCHEDULES_SUCCESS, FOREIGN_SCHEDULES_FAILURE,
 } from '../reducers/schedule';
 
 function createScheduleApi(data) {
@@ -69,10 +70,32 @@ function* watchLoadSchedule() {
   yield takeLatest(LOAD_SCHEDULE_REQUEST, loadSchedule);
 }
 
+function foreignSchedulesApi() {
+  return axios.get('/schedules/foreign');
+}
+function* foreignSchedules() {
+  try {
+    const result = yield call(foreignSchedulesApi);
+    yield put({
+      type: FOREIGN_SCHEDULES_SUCCESS,
+      data: result.data
+    });
+  } catch (err) {
+    yield put({
+      type: FOREIGN_SCHEDULES_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+function* watchForeignSchedules() {
+  yield takeLatest(FOREIGN_SCHEDULES_REQUEST, foreignSchedules);
+}
+
 export default function* scheduleSaga() {
   yield all([
     fork(watchCreateSchedule),
     fork(watchLoadSchedules),
     fork(watchLoadSchedule),
+    fork(watchForeignSchedules),
   ]);
 }

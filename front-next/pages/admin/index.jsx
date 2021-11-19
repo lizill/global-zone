@@ -5,12 +5,12 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from 'axios';
 import { END } from 'redux-saga';
 
-import wrapper from '../store/configuresStore';
-import styles from '../styles/admin/admin.module.scss'
-import CreateUser from "../components/admin/CreateUser";
-import { LOG_OUT_REQUEST, LOAD_MY_INFO_REQUEST, LOAD_FOREIGN_LIST_REQUEST } from "../reducers/user";
-import {LOAD_SCHEDULES_REQUEST} from "../reducers/schedule";
-import ScheduleControlContainer from "../components/admin/ScheduleControlContainer";
+import wrapper from '../../store/configuresStore';
+import styles from '../../styles/admin/admin.module.scss'
+import CreateUser from "../../components/admin/CreateUser";
+import { LOG_OUT_REQUEST, LOAD_MY_INFO_REQUEST, LOAD_FOREIGN_LIST_REQUEST } from "../../reducers/user";
+import {LOAD_SCHEDULES_REQUEST} from "../../reducers/schedule";
+import ScheduleControlContainer from "../../components/admin/ScheduleControlContainer";
 
 const Admin = () => {
   const dispatch = useDispatch();

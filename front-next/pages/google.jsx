@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Router from 'next/router';
 import axios from 'axios';
-import FadeLoader from "react-spinners/FadeLoader";
+
+import Loader from '../components/Loader';
 
 const style = {
     width: '100vw',
@@ -35,7 +36,7 @@ const Google = () => {
 
   return (
       <div style={style}>
-        <FadeLoader color={"#182f9e"} loading={true}/>
+        <Loader/>
       </div>
   )
 }

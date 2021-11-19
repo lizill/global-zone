@@ -1,9 +1,8 @@
 import React, { useState, useCallback, memo } from "react";
-import { useSelector } from 'react-redux';
 import styles from '../../styles/reservation/Reservation.module.scss'
-import { AiOutlineDownCircle } from 'react-icons/ai'
 
 import Items from "./Items";
+import ContentBtn from "./ContentBtn";
 
 const contentBtnList = [
   {
@@ -23,26 +22,7 @@ const contentBtnList = [
   },
 ]
 
-const ContentBtn = ({ content, on, onList }) => {
-  return (
-    <button onClick={() => onList(content.name)}>
-      <img src={content.src} alt="" />
-      <p>{content.p}</p>
-      <AiOutlineDownCircle
-        className={styles.icon}
-        style={
-          on === content.name 
-          ? { transform: "rotate(180deg)" } 
-          : { transform: "rotate(0deg)" }
-        }
-      />
-    </button>
-  )
-}
-
-const ReservationManagement = () => {
-  const { reservations } = useSelector(state => state?.reservation);
-  const { me } = useSelector(state => state?.user);
+const ReservationManagement = ({ setItems, getResults }) => {
   const [on, setOn] = useState('');
 
   const onList = useCallback((label) => {
@@ -57,14 +37,6 @@ const ReservationManagement = () => {
     return on === label ? { height: 66 * length} : { height: 0 }
   }, [on]);
 
-  const setItems = (confirmed) => {
-    if (confirmed) {
-      return reservations.filter(v => v.confirmed === '1')
-    } else {
-      return reservations.filter(v => v.confirmed === '0')
-    }
-  }
-
   return (
     <div className={styles.managementWrap}>
       <h3>예약 관리</h3>
@@ -78,8 +50,8 @@ const ReservationManagement = () => {
           {setItems(1)?.map(v => <Items key={v.id} reservation={v} completion/>)}
         </div>
         <ContentBtn content={contentBtnList[2]} on={on} onList={onList}/>
-        <div className={styles.itemList} style={transformHeight("result", 0)}>
-          {/*{reservations.map(v => <Items key={v.id} reservation={v}/>)}*/}
+        <div className={styles.itemList} style={transformHeight("result", getResults()?.length)}>
+          {getResults().map(v => <Items key={v.id} reservation={v}/>)}
         </div>
       </div>
     </div>

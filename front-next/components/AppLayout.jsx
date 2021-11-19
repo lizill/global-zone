@@ -5,6 +5,7 @@ import Router from 'next/router';
 
 import styles from '../styles/layout/AppLayout.module.scss';
 import { LOG_OUT_REQUEST } from "../reducers/user";
+import Loader from './Loader';
 
 const AppLayout = ({ children, on }) => {
   const dispatch = useDispatch();
@@ -16,17 +17,27 @@ const AppLayout = ({ children, on }) => {
     });
   }, []);
 
+  const onHome = useCallback(() => {
+    if(me?.position === 'korean') {
+      Router.push('/');
+    } else {
+      Router.push('/foreign/schedule');
+    }
+  }, [me])
+
   useEffect(() => {
     if(!me) {
       Router.push('/korean');
     }
   }, [me]);
 
+  if(!me) return <Loader/>
+
   return (
     <div className={styles.appLayout}>
       <header>
         <div className={styles.menuLogo}>
-          <button>
+          <button onClick={onHome}>
             <img src="/images/logo_intro_globalzone.gif" alt="logo.gif" />
           </button>
           <button className={styles.logoutBtn} onClick={onLogout}>
@@ -34,11 +45,12 @@ const AppLayout = ({ children, on }) => {
             <p>Logout</p>
           </button>
         </div>
+        {me?.position === 'korean' &&
           <div className={styles.menu}>
             <Link href="/"><a className={on === 'index' ? styles.on : null}>예약 조회</a></Link>
             <Link href="/schedule"><a className={on === 'schedule' ? styles.on : null}>스케줄 조회</a></Link>
             <Link href="/result"><a className={on === 'result' ? styles.on : null}>결과 관리</a></Link>
-          </div>
+          </div>}
       </header>
 
       <main>

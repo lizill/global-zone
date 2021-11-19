@@ -5,13 +5,13 @@ import { END } from 'redux-saga';
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 
-import AppLayout from "../components/AppLayout";
-import wrapper from '../store/configuresStore';
-import CalendarContainer from "../components/schedule/CalendarConatainer";
-import ScheduleList from "../components/schedule/ScheduleList";
-import { LOAD_MY_INFO_REQUEST } from '../reducers/user';
-import { LOAD_SCHEDULES_REQUEST, SET_SELECTED_DATE } from '../reducers/schedule';
-import styles from '../styles/schedule/schedule.module.scss';
+import AppLayout from "../../components/AppLayout";
+import wrapper from '../../store/configuresStore';
+import CalendarContainer from "../../components/schedule/CalendarConatainer";
+import ScheduleList from "../../components/schedule/ScheduleList";
+import { LOAD_MY_INFO_REQUEST } from '../../reducers/user';
+import { FOREIGN_SCHEDULES_REQUEST, SET_SELECTED_DATE } from '../../reducers/schedule';
+import styles from '../../styles/schedule/schedule.module.scss';
 
 const Schedule = () => {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const Schedule = () => {
   useEffect(() => {
     dispatch({
       type: SET_SELECTED_DATE,
-      data: moment(schedules[0].date, 'YYYYMMDD').format('YYYYMMDD')
+      data: moment(schedules[0]?.date, 'YYYYMMDD').format('YYYYMMDD')
     });
   }, [])
 
@@ -43,7 +43,7 @@ const Schedule = () => {
   )
 }
 
-export default Schedule;
+export default Schedule
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req }) => {
   const cookie = req ? req.headers.cookie : '';
@@ -55,7 +55,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async ({
     type: LOAD_MY_INFO_REQUEST,
   });
   store.dispatch({
-    type: LOAD_SCHEDULES_REQUEST,
+    type: FOREIGN_SCHEDULES_REQUEST,
   });
   store.dispatch(END);
   await store.sagaTask.toPromise();

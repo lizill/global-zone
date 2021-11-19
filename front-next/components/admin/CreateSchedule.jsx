@@ -107,7 +107,11 @@ const CreateSchedule = () => {
         </div>
         <div>
           {setForeignList() && setForeignList().map(v => (
-              <button onClick={() => setForeign(v.id)} style={foreign === v.id ? {backgroundColor: '#e5e5e5'} : null}>
+              <button
+                key={v.id}
+                onClick={() => setForeign(v.id)}
+                style={foreign === v.id ? {backgroundColor: '#e5e5e5'} : null}
+              >
                 { v.name }
               </button>
           ))}

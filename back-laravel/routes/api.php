@@ -34,6 +34,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/schedules', [SchedulesController::class, 'schedules']); // GET /schedules
     Route::get('/schedule/{schedule}', [SchedulesController::class, 'schedule']); // GET /schedule
     Route::patch('/schedule/enter', [SchedulesController::class, 'enter']); // PATCH /schedule/enter
+    Route::get('/schedules/foreign', [SchedulesController::class, 'foreign']); // GET /schedules/foreign
 
     // Users
     Route::get('/user', [UsersController::class, 'user']); // GET /user

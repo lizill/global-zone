@@ -6,6 +6,7 @@ use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class SchedulesController extends Controller
@@ -72,5 +73,19 @@ class SchedulesController extends Controller
 
         // 비밀번호가 저장된 스케줄 전송 후 해당 방으로 입장
         return $schedule;
+    }
+
+    // get foreign schedules
+    public function foreign()
+    {
+        // 오늘 이후의 내 스케줄 리스트
+        $today = Carbon::now()->format('Ymd');
+        $schedules = Schedule::where('date', '>=', $today)
+            ->where('user_id', Auth::user()->id)
+            ->orderBy('date')
+            ->with('user', 'reservations')
+            ->get();
+
+        return $schedules;
     }
 }

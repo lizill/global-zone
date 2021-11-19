@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import Head from 'next/head';
 import Router from "next/router";
 
-import LoginLayout from "../components/auth/LoginLayout";
-import styles from '../styles/login/Login.module.scss';
-import {LOAD_MY_INFO_REQUEST, LOG_IN_REQUEST} from "../reducers/user";
-import wrapper from "../store/configuresStore";
+import LoginLayout from "../../components/auth/LoginLayout";
+import styles from '../../styles/login/Login.module.scss';
+import {LOAD_MY_INFO_REQUEST, LOG_IN_REQUEST} from "../../reducers/user";
+import wrapper from "../../store/configuresStore";
 import axios from "axios";
 import {END} from "redux-saga";
 
@@ -37,7 +37,7 @@ const Foreign = () => {
       if(me?.position === 'admin') {
         Router.push('/admin');
       } else {
-        Router.push('/');
+        Router.push('/foreign/schedule');
       }
     }
   }, [me]);
