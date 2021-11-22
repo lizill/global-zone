@@ -5,22 +5,21 @@ import { END } from 'redux-saga';
 
 import wrapper from '../../store/configuresStore';
 import styles from '../../styles/admin/admin.module.scss'
-import { LOAD_MY_INFO_REQUEST, LOAD_FOREIGN_LIST_REQUEST } from "../../reducers/user";
-import {LOAD_SCHEDULES_REQUEST} from "../../reducers/schedule";
-import ScheduleControlContainer from "../../components/admin/ScheduleControlContainer";
+import CreateUser from "../../components/admin/CreateUser";
+import { LOAD_MY_INFO_REQUEST } from "../../reducers/user";
 import AdminLayout from "../../components/admin/AdminLayout";
 
 const Admin = () => {
   return (
     <div className={styles.adminWrap}>
       <Head>
-        <title>글로벌존 | 관리자 페이지</title>
+        <title>글로벌존 | 유저 관리</title>
         <meta name="description" content="Global zone reservation service" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <AdminLayout on="index">
-        <ScheduleControlContainer/>
+      <AdminLayout on="user">
+        <CreateUser/>
       </AdminLayout>
     </div>
   )
@@ -36,12 +35,6 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async ({
   }
   store.dispatch({
     type: LOAD_MY_INFO_REQUEST,
-  });
-  store.dispatch({
-    type: LOAD_FOREIGN_LIST_REQUEST,
-  });
-  store.dispatch({
-    type: LOAD_SCHEDULES_REQUEST,
   });
   store.dispatch(END);
   await store.sagaTask.toPromise();

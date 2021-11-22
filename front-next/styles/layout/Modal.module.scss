@@ -5,7 +5,7 @@
   width: 100vw;
   height: 100vh;
   border: 1px solid #e5e5e5;
-  background-color: rgba(26, 32, 44, 0.50);
+  background-color: rgba(26, 32, 44, 0.5);
   z-index: 100;
   box-sizing: border-box;
   overflow: hidden;
@@ -51,5 +51,5 @@
   0% {
     transform: translate(-50%, -60%);
     opacity: 0;
-   }
+  }
 }

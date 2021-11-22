@@ -18,10 +18,12 @@ const Schedule = () => {
   const { schedules } = useSelector(state => state?.schedule)
 
   useEffect(() => {
-    dispatch({
-      type: SET_SELECTED_DATE,
-      data: moment(schedules[0].date, 'YYYYMMDD').format('YYYYMMDD')
-    });
+    if (schedules.length !== 0) {
+      dispatch({
+        type: SET_SELECTED_DATE,
+        data: moment(schedules[0]?.date, 'YYYYMMDD').format('YYYYMMDD')
+      });
+    }
   }, [])
 
   return (

@@ -13,10 +13,11 @@ function createScheduleApi(data) {
 }
 function* createSchedule(action) {
   try {
-    yield call(createScheduleApi, action.data);
-    yield put({
-      type: CREATE_SCHEDULE_SUCCESS,
-    });
+    const result = yield call(createScheduleApi, action.data);
+    yield all([
+      put({ type: CREATE_SCHEDULE_SUCCESS, data: result.data }),
+      put({ type: LOAD_SCHEDULES_REQUEST })
+    ]);
   } catch (err) {
     yield put({
       type: CREATE_SCHEDULE_FAILURE,

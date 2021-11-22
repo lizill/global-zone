@@ -1,8 +1,8 @@
 import React from "react";
 
-import ScheduleList from "../schedule/ScheduleList";
 import styles from '../../styles/admin/admin.module.scss'
 import CalendarContainer from "../schedule/CalendarConatainer";
+import ScheduleList from "./ScheduleList";
 
 const ScheduleControllerContainer = () => {
   return (

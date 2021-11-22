@@ -27,7 +27,7 @@ class SchedulesController extends Controller
         $schedule = Schedule::updateOrCreate([
             'user_id' => $request->user_id,
             'date' => $request->date,
-        ]);
+        ], []);
 
         return response()->json([
             'message' => 'create schedule success',
@@ -87,5 +87,10 @@ class SchedulesController extends Controller
             ->get();
 
         return $schedules;
+    }
+
+    // delete schedule
+    public function delete()
+    {
     }
 }

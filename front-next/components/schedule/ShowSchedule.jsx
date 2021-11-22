@@ -2,6 +2,7 @@ import React, { useCallback, memo } from 'react';
 import moment from "moment";
 import { useSelector } from "react-redux";
 import axios from 'axios';
+import Router from 'next/router';
 
 import styles from '../../styles/reservation/Reservation.module.scss';
 import { lang, toStringDate } from "../schedule/ScheduleItem";
@@ -13,7 +14,7 @@ const ShowSchedule = ({ schedule }) => {
     const onEnter = useCallback(async () => {
         try {
             const res = await axios.patch('/schedule/enter', schedule);
-
+            console.log(res)
             Router.push('/video/' + res.data.id);
         } catch (err) {
             console.error(err);

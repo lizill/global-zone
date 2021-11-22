@@ -52,6 +52,7 @@ export const LOAD_FOREIGN_LIST_FAILURE = 'LOAD_FOREIGN_LIST_FAILURE';
 export const MODAL_ACTION_OPEN = 'MODAL_ACTION_OPEN';
 export const MODAL_ACTION_CLOSE = 'MODAL_ACTION_CLOSE';
 
+
 export const openModalAction = () => ({
   type: MODAL_ACTION_OPEN,
 });

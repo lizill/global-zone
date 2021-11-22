@@ -122,7 +122,11 @@ const Video = () => {
 
 	const handleEndCall = () => {
 		whenUserLeavePage();
-		router.push('/');
+		if(me?.position === 'korean') {
+			router.push('/');
+		} else {
+			router.push('/foreign/schedule');
+		}
 	}
 
 	const whenUserLeavePage = () => {
@@ -141,7 +145,7 @@ const Video = () => {
 			delete pcsRef.current[user.id];
 		});
 		localStreamRef.current
-			.getTracks()
+			?.getTracks()
 			.forEach(track => track.stop());
 	}
 
@@ -161,7 +165,7 @@ const Video = () => {
 		} else { // 유학생일 경우
 			if (me.id != schedule.user_id) {
 				alert('본인의 스케줄이 아닙니다.');
-				return router.push('/');
+				return router.push('/foreign/schedule');
 			}
 		}
 

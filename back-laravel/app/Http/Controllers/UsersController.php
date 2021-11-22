@@ -9,6 +9,7 @@ use Carbon\Carbon;
 
 class UsersController extends Controller
 {
+  // get foreign list
   public function foreign()
   {
     $foreignList = User::whereIn('position', ['en', 'ja', 'ch'])->get();
@@ -16,6 +17,7 @@ class UsersController extends Controller
     return $foreignList;
   }
 
+  // get user info
   public function user(Request $request)
   {
     return $request->user();

@@ -5,6 +5,7 @@ export const initialState = {
   selectedDate: moment().format('YYYYMMDD'), // default today
   schedules: [],
   schedule: {},
+  newSchedule: {},
 
   createScheduleLoading: false, // 스케줄 생성
   createScheduleDone: false,
@@ -38,6 +39,13 @@ export const FOREIGN_SCHEDULES_REQUEST = 'FOREIGN_SCHEDULES_REQUEST';
 export const FOREIGN_SCHEDULES_SUCCESS = 'FOREIGN_SCHEDULES_SUCCESS';
 export const FOREIGN_SCHEDULES_FAILURE = 'FOREIGN_SCHEDULES_FAILURE';
 
+export const SELECT_SCHEDULE_ACTION = 'SELECT_SCHEDULE_ACTION';
+
+export const selectScheduleAction = (data) => ({
+  type: SELECT_SCHEDULE_ACTION,
+  data
+});
+
 const reducer = (state = initialState, action) => produce(state, (draft) => {
   switch (action.type) {
     case SET_SELECTED_DATE:
@@ -52,6 +60,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
     case CREATE_SCHEDULE_SUCCESS:
       draft.createScheduleLoading = false;
       draft.createScheduleDone = true;
+      draft.newSchedule = action.data
       break;
     case CREATE_SCHEDULE_FAILURE:
       draft.createScheduleLoading = false;
@@ -102,6 +111,9 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       draft.foreignSchedulesLoading = false;
       draft.foreignSchedulesError = action.error;
       break;
+
+    case SELECT_SCHEDULE_ACTION:
+      draft.newSchedule = action.data;
 
     default:
       break;
