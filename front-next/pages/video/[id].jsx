@@ -11,6 +11,7 @@ import PeerVideo from "../../components/video/PeerVideo";
 import BtnMenu from '../../components/video/BtnMenu';
 import styles from '../../styles/video/video.module.scss';
 import wrapper from '../../store/configuresStore';
+import Loader from '../../components/Loader';
 
 const pc_config = {
   "iceServers": [
@@ -31,7 +32,8 @@ const Video = () => {
   const [users, setUsers] = useState([]);
 	const [isAudioMuted, setAudioMute] = useState(false);
 	const [isVideoOff, setVideoOff] = useState(false);
-	const [locationKeys, setLocationKeys] = useState([]);
+	const [isLoading, setLoading] = useState(true);
+	const [showVideo, setShowVideo] = useState(null);
 
 	const getLocalStream = useCallback(async () => {
 		try {
@@ -130,11 +132,14 @@ const Video = () => {
 	}
 
 	const whenUserLeavePage = () => {
-		const isLeave = confirm('통화를 종료하시겠습니까?')
+		// const isLeave = confirm('통화를 종료하시겠습니까?')
+		// // const isLeave = true
 
-		if (!isLeave) {
-			throw `Route change was aborted (this error can be safely ignored).`;
-		}
+		// if (!isLeave) {
+		// 	throw `Route change was aborted (this error can be safely ignored).`;
+		// }
+
+		setLoading(true)
 
 		if (socketRef.current) {
 			socketRef.current.disconnect();
@@ -168,6 +173,8 @@ const Video = () => {
 				return router.push('/foreign/schedule');
 			}
 		}
+
+		setLoading(false)
 
 		socketRef.current = io.connect(SOCKET_SERVER_URL);
     getLocalStream();
@@ -261,18 +268,35 @@ const Video = () => {
 		}
 	}, []);
 
+	if(isLoading) return <Loader/>
+
+	if(users.length === 0) return (
+		<div className={styles.emptyRoom}>
+			<h4>누군가 올때까지 기다려주세요</h4>
+			<Loader/>
+		</div>
+	)
+
   return (
     <div className={styles.videoWrap}>
       <div className={styles.videoContent}>
         <div className={styles.peersWrap}>
-          {users.map((user, index) => (
-            <div key={index} className={styles.peerVideo}>
-              <PeerVideo name={user.userName} stream={user.stream} />
+					{showVideo && (
+						<div onClick={() => setShowVideo(null)} className={styles.peerVideo}>
+              <PeerVideo name={me.name} stream={localStreamRef.current}/>
+						</div>
+					 )}
+          {users.filter(v => v !== showVideo).map((user, index) => (
+            <div onClick={() => setShowVideo(user)} key={index} className={styles.peerVideo}>
+              <PeerVideo name={user.userName} stream={user.stream}/>
             </div>
           ))}
         </div>
         <div className={styles.video}>
-          <video ref={localVideoRef} autoPlay muted />
+					{showVideo
+						? <PeerVideo name={showVideo?.userName} stream={showVideo?.stream}/>
+						: <PeerVideo name={me.name} stream={localStreamRef.current}/>}
+						{/* : <video ref={localVideoRef} autoPlay muted/>} */}
         </div>
 				<BtnMenu
 					isAudioMuted={isAudioMuted}
@@ -289,7 +313,6 @@ const Video = () => {
 }
 
 export default Video;
-
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req, params }) => {
   const cookie = req ? req.headers.cookie : '';

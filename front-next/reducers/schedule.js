@@ -19,9 +19,14 @@ export const initialState = {
   foreignSchedulesLoading: false, // 외국인 스케줄 리스트 로드
   foreignSchedulesDone: false,
   foreignSchedulesError: null,
+  deleteScheduleLoading: false, // 스케줄 삭제
+  deleteScheduleDone: false,
+  deleteScheduleError: null,
 };
 
 export const SET_SELECTED_DATE = 'SET_SELECTED_DATE';
+
+export const SELECT_SCHEDULE_ACTION = 'SELECT_SCHEDULE_ACTION';
 
 export const CREATE_SCHEDULE_REQUEST = 'CREATE_SCHEDULE_REQUEST';
 export const CREATE_SCHEDULE_SUCCESS = 'CREATE_SCHEDULE_SUCCESS';
@@ -39,7 +44,9 @@ export const FOREIGN_SCHEDULES_REQUEST = 'FOREIGN_SCHEDULES_REQUEST';
 export const FOREIGN_SCHEDULES_SUCCESS = 'FOREIGN_SCHEDULES_SUCCESS';
 export const FOREIGN_SCHEDULES_FAILURE = 'FOREIGN_SCHEDULES_FAILURE';
 
-export const SELECT_SCHEDULE_ACTION = 'SELECT_SCHEDULE_ACTION';
+export const DELETE_SCHEDULE_REQUEST = 'DELETE_SCHEDULE_REQUEST';
+export const DELETE_SCHEDULE_SUCCESS = 'DELETE_SCHEDULE_SUCCESS';
+export const DELETE_SCHEDULE_FAILURE = 'DELETE_SCHEDULE_FAILURE';
 
 export const selectScheduleAction = (data) => ({
   type: SELECT_SCHEDULE_ACTION,
@@ -52,6 +59,9 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       draft.selectedDate = action.data;
       break;
 
+    case SELECT_SCHEDULE_ACTION:
+      draft.newSchedule = action.data;
+
     case CREATE_SCHEDULE_REQUEST:
       draft.createScheduleLoading = true;
       draft.createScheduleError = null;
@@ -60,7 +70,6 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
     case CREATE_SCHEDULE_SUCCESS:
       draft.createScheduleLoading = false;
       draft.createScheduleDone = true;
-      draft.newSchedule = action.data
       break;
     case CREATE_SCHEDULE_FAILURE:
       draft.createScheduleLoading = false;
@@ -112,8 +121,19 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       draft.foreignSchedulesError = action.error;
       break;
 
-    case SELECT_SCHEDULE_ACTION:
-      draft.newSchedule = action.data;
+    case DELETE_SCHEDULE_REQUEST:
+      draft.deleteScheduleLoading = true;
+      draft.deleteScheduleError = null;
+      draft.deleteScheduleDone = false;
+      break;
+    case DELETE_SCHEDULE_SUCCESS:
+      draft.deleteScheduleLoading = false;
+      draft.deleteScheduleDone = true;
+      break;
+    case DELETE_SCHEDULE_FAILURE:
+      draft.deleteScheduleLoading = false;
+      draft.deleteScheduleError = action.error;
+      break;
 
     default:
       break;

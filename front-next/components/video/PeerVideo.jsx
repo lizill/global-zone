@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, memo } from 'react';
 
 const Video = ({ name, stream, muted }) => {
 	const ref = useRef(null);
@@ -10,10 +10,11 @@ const Video = ({ name, stream, muted }) => {
 	}, [stream, muted]);
 
 	return (
-		<div>
+		<>
 			<video ref={ref} muted={isMuted} autoPlay />
-		</div>
+			<p>{name}</p>
+		</>
 	);
 };
 
-export default Video;
+export default memo(Video);

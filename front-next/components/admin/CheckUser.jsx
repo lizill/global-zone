@@ -1,7 +1,7 @@
-import React, { useState, useCallback } from 'react'
+import React from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 
-import { CREATE_SCHEDULE_REQUEST } from '../../reducers/schedule';
+import { CREATE_SCHEDULE_REQUEST, DELETE_SCHEDULE_REQUEST } from '../../reducers/schedule';
 import { closeModalAction } from '../../reducers/user';
 
 const CheckUser = () => {
@@ -21,8 +21,19 @@ const CheckUser = () => {
     dispatch(closeModalAction());
   }
 
+  const onDelete = () => {
+    if(newSchedule.id) {
+      dispatch({
+        type: DELETE_SCHEDULE_REQUEST,
+        data: newSchedule.id
+      });
+    }
+    dispatch(closeModalAction());
+  }
+
   return (
     <div>
+      <button onClick={onDelete}>-</button>
       {setForeignList()?.map(v => (
           <button
             key={v.id}

@@ -10,9 +10,9 @@ const TdBtn = ({ schedule, date, lang }) => {
   const { selectedDate } = useSelector(state => state?.schedule)
 
   const onSelectSchedule = useCallback(() => {
-    dispatch(selectScheduleAction({ date: selectedDate + moment(date, 'HH:mm').format('HHmm'), lang }));
+    dispatch(selectScheduleAction({ id: schedule?.id, date: selectedDate + moment(date, 'HH:mm').format('HHmm'), lang }));
     dispatch(openModalAction());
-  }, [selectedDate]);
+  }, [selectedDate, schedule]);
 
   return (
     <div>

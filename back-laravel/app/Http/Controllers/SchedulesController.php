@@ -90,7 +90,12 @@ class SchedulesController extends Controller
     }
 
     // delete schedule
-    public function delete()
+    public function delete(Request $request, Schedule $schedule)
     {
+        $schedule->delete();
+
+        return response()->json([
+            'message' => 'delete success!'
+        ]);
     }
 }

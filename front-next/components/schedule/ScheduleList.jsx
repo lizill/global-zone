@@ -1,15 +1,11 @@
 import React, { useState, useCallback, memo } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import moment from "moment";
 
 import ScheduleItem from "./ScheduleItem";
 import styles from '../../styles/schedule/schedule.module.scss';
-import Modal from "../Modal";
-import CreateSchedule from "../admin/CreateSchedule";
-import {openModalAction} from "../../reducers/user";
 
 const ScheduleList = () => {
-  const dispatch = useDispatch();
   const { selectedDate, schedules } = useSelector(state => state?.schedule);
   const { me } = useSelector(state => state?.user);
   const [menu, setMenu] = useState('전체');
@@ -31,10 +27,6 @@ const ScheduleList = () => {
         return listByDate.filter(v => v.user.position === 'ch');
     }
   }, [schedules, selectedDate]);
-
-  const onOpenModal = useCallback(() => {
-    dispatch(openModalAction());
-  }, []);
 
   return (
     <div className={styles.scheduleListWrap}>
@@ -72,14 +64,6 @@ const ScheduleList = () => {
           </menu>
         }
         <div className={styles.listWrap}>
-          { me && me.position === 'admin' && (
-              <div className={styles.createBtnWrap}>
-                <button className={styles.createBtn} onClick={onOpenModal}>+</button>
-                <Modal>
-                  <CreateSchedule/>
-                </Modal>
-              </div>
-          )}
           {
             setList(menu).length !== 0
             ? setList(menu).map(v => (<ScheduleItem key={v.id} schedule={v}/>))
