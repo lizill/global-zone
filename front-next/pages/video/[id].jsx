@@ -306,6 +306,7 @@ const Video = () => {
 					endCall={handleEndCall}
 					me={me}
 					reservations={schedule.reservations}
+					socketRef={socketRef}
 				/>
       </div>
     </div>

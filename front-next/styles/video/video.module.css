@@ -125,12 +125,23 @@
 .buttonWrap .videoOffBtn:hover {
   cursor: pointer;
 }
+.buttonWrap .messageBtn {
+  width: 35px;
+  height: 35px;
+  padding: 9px;
+  background-color: white;
+  border-radius: 10px;
+}
+.buttonWrap .messageBtn:hover {
+  cursor: pointer;
+}
 .buttonWrap .endCallBtn {
   width: 35px;
   height: 35px;
   padding: 9px;
   background-color: white;
   border-radius: 10px;
+  margin-left: 10px;
   width: 80px;
   color: red;
 }
@@ -188,5 +199,60 @@
   text-align: center;
   color: #494949;
   min-width: 200px;
+}
+
+.messageWrap {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  top: 50%;
+  right: 0;
+  max-height: 100vh;
+  min-width: 300px;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  background-color: white;
+  border-radius: 10px;
+  padding: 1rem;
+}
+.messageWrap article {
+  overflow-y: scroll;
+}
+.messageWrap .sendMessage {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 1rem;
+  gap: 8px;
+}
+.messageWrap .sendMessage input {
+  display: block;
+  width: 80%;
+  height: 3em;
+  border-radius: 1.8em;
+  border: 1px solid #e0e0e0;
+  padding: 0 20px;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+.messageWrap .sendMessage input:hover {
+  border: 1px solid #30addc;
+  background-color: #30aedc10;
+}
+.messageWrap .sendMessage input:focus {
+  outline: none;
 }
 /*# sourceMappingURL=video.module.css.map */

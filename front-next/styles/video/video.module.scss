@@ -119,8 +119,13 @@
     @include icon-base();
   }
 
+  .messageBtn {
+    @include icon-base();
+  }
+
   .endCallBtn {
     @include icon-base();
+    margin-left: 10px;
     width: 80px;
     color: red;
   }
@@ -172,5 +177,51 @@
     text-align: center;
     color: rgb(73, 73, 73);
     min-width: 200px;
+  }
+}
+
+.messageWrap {
+  position: absolute;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  top: 50%;
+  right: 0;
+  max-height: 100vh;
+  min-width: 300px;
+  transform: translateY(-50%);
+  background-color: white;
+  border-radius: 10px;
+  padding: 1rem;
+
+  article {
+    overflow-y: scroll;
+  }
+
+  .sendMessage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    gap: 8px;
+
+    input {
+      display: block;
+      width: 80%;
+      height: 3em;
+      border-radius: 1.8em;
+      border: 1px solid #e0e0e0;
+      padding: 0 20px;
+      transition: 0.2s;
+
+      &:hover {
+        border: 1px solid #30addc;
+        background-color: #30aedc10;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
   }
 }

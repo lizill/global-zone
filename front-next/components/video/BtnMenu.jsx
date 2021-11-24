@@ -8,8 +8,9 @@ import styles from '../../styles/video/video.module.scss';
 import AttendanceCheck from "./AttendanceCheck";
 import Modal from "../Modal";
 import { openModalAction } from "../../reducers/user";
+import MessageBtn from "./MessageBtn";
 
-const BtnMenu = ({ isAudioMuted, isVideoOff, audioMute, videoOff, endCall, me, reservations }) => {
+const BtnMenu = ({ isAudioMuted, isVideoOff, audioMute, videoOff, endCall, me, reservations, socketRef }) => {
   const dispatch = useDispatch();
 
   const onOpenModal = useCallback(() => {
@@ -24,14 +25,15 @@ const BtnMenu = ({ isAudioMuted, isVideoOff, audioMute, videoOff, endCall, me, r
       { isVideoOff 
       ? <BsCameraVideoOff onClick={() => videoOff()} className={styles.videoOffBtn}/> 
       : <BsFillCameraVideoFill onClick={() => videoOff()} className={styles.videoOffBtn}/> }
-      <BsFillTelephoneXFill onClick={endCall} className={styles.endCallBtn}/>
-      {me.position !== 'korean' && 
+      <MessageBtn socketRef={socketRef} me={me}/>
+      {me.position !== 'korean' &&
         <>
           <FaListAlt className={styles.checkBtn} onClick={onOpenModal}/>
           <Modal>
             <AttendanceCheck reservations={reservations}/>
           </Modal>
         </>}
+      <BsFillTelephoneXFill onClick={endCall} className={styles.endCallBtn}/>
     </div>
   )
 }

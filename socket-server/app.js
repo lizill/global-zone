@@ -16,7 +16,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://pakudong.com'],
+  origin: ['http://localhost:3000', 'https://global.pakudong.com'],
   credentials: true,
 }));
 const PORT = process.env.PORT || 8080;
@@ -62,7 +62,14 @@ io.on('connection', socket => {
     socket.on('candidate', data => {
         //console.log(data.candidate);
         socket.to(data.candidateReceiveID).emit('getCandidate', {candidate: data.candidate, candidateSendID: data.candidateSendID});
-    })
+    });
+
+    socket.on('message', data => {
+        const roomID = socketToRoom[socket.id];
+
+        console.log(data);
+        socket.to(roomID).emit('newmessage', {name: data.name, contents: data.contents});
+    });
 
     socket.on('disconnect', () => {
         console.log(`[${socketToRoom[socket.id]}]: ${socket.id} exit`);
