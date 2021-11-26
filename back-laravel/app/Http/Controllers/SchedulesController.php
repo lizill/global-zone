@@ -23,11 +23,15 @@ class SchedulesController extends Controller
             return response()->json($validator->errors()->toJson(), 400);
         }
 
-        // 같은 사람의 같은 시간이 있을 경우 업데이트
-        $schedule = Schedule::updateOrCreate([
+        // 이전 스케줄 삭제 후 새롭게 생성
+        if ($request->id) {
+            Schedule::find($request->id)->delete();
+        }
+
+        $schedule = Schedule::create([
             'user_id' => $request->user_id,
             'date' => $request->date,
-        ], []);
+        ]);
 
         return response()->json([
             'message' => 'create schedule success',

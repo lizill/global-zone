@@ -4,10 +4,10 @@ import { IoSend } from 'react-icons/io5';
 
 import styles from '../../styles/video/video.module.scss';
 
-const MessageItems = ({item}) => {
+const MessageItems = ({ item, me }) => {
   return (
-    <div>
-      <label htmlFor="peerMessage">{item.name}</label>
+    <div className={item.name === me.name ? styles.myMessage : styles.peerMessage}>
+      {item.name !== me.name && <label htmlFor="peerMessage">{item.name}</label>}
       <p id="peerMessage">{item.contents}</p>
     </div>
   )
@@ -25,7 +25,14 @@ const MessageBtn = ({ socketRef, me }) => {
   const onSubmit = (e) => {
     e.preventDefault()
     
-    socketRef.current.emit('message', { name: me.name, contents: newMessage })
+    const data = {
+      name: me.name,
+      contents: newMessage
+    }
+    socketRef.current.emit('message', data);
+    setMessages((prev) => {
+      return [...prev, data]
+    });
     setNewMessage('');
   }
 
@@ -45,14 +52,14 @@ const MessageBtn = ({ socketRef, me }) => {
       {isMessageOpen &&
         <section className={styles.messageWrap}>
           <header>
-            <AiOutlineRight onClick={() => setMessageOpen(false)}/>
+            <AiOutlineRight className={styles.closeMessage} onClick={() => setMessageOpen(false)}/>
           </header>
           <article>
-            {messages.length !== 0 && messages.map(v => <MessageItems item={v}/>)}
+            {messages.length !== 0 && messages.map(v => <MessageItems item={v} me={me}/>)}
           </article>
           <form onSubmit={onSubmit} className={styles.sendMessage}>
             <input placeholder="메세지를 입력해주세요" value={newMessage} autoFocus type="text" onChange={onChangeMessage} />
-            <IoSend onClick={onSubmit}/>
+            <IoSend className={styles.sendIcon} onClick={onSubmit}/>
           </form>
         </section>
       }

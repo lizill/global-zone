@@ -16,7 +16,7 @@ const CheckUser = () => {
   const onSubmit = (foreignId) => {
     dispatch({
       type: CREATE_SCHEDULE_REQUEST,
-      data: { user_id: foreignId, date: newSchedule.date }
+      data: { id: newSchedule.id, user_id: foreignId, date: newSchedule.date }
     });
     dispatch(closeModalAction());
   }

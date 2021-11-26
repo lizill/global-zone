@@ -12,7 +12,9 @@ class UsersController extends Controller
   // get foreign list
   public function foreign()
   {
-    $foreignList = User::whereIn('position', ['en', 'ja', 'ch'])->get();
+    $foreignList = User::whereIn('position', ['en', 'ja', 'ch'])
+      ->orderBy('email', 'desc')
+      ->get();
 
     return $foreignList;
   }

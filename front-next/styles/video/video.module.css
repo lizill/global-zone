@@ -213,16 +213,24 @@
       -ms-flex-direction: column;
           flex-direction: column;
   top: 50%;
-  right: 0;
-  max-height: 100vh;
-  min-width: 300px;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
+  right: 0px;
+  max-height: 100vh;
+  min-width: 300px;
   background-color: white;
   border-radius: 10px;
   padding: 1rem;
 }
+.messageWrap .closeMessage {
+  width: 20px;
+  height: 20px;
+}
+.messageWrap .closeMessage:hover {
+  cursor: pointer;
+}
 .messageWrap article {
+  margin-top: 1rem;
   overflow-y: scroll;
 }
 .messageWrap .sendMessage {
@@ -238,13 +246,18 @@
   margin-top: 1rem;
   gap: 8px;
 }
+.messageWrap .sendMessage .sendIcon {
+  font-size: 1.2em;
+}
+.messageWrap .sendMessage .sendIcon:hover {
+  cursor: pointer;
+}
 .messageWrap .sendMessage input {
-  display: block;
   width: 80%;
-  height: 3em;
-  border-radius: 1.8em;
+  height: 2.4em;
+  border-radius: 1.2em;
   border: 1px solid #e0e0e0;
-  padding: 0 20px;
+  padding: 0 18px;
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }

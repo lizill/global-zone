@@ -128,13 +128,26 @@
       }
     }
   }
+}
 
-  form {
-    label {
-    }
-    input {
-    }
-    button {
+.userWrap {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+
+  .listWrap {
+    display: flex;
+    gap: 1rem;
+
+    .list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 8px;
+
+      button {
+        text-align: left;
+      }
     }
   }
 }

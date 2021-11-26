@@ -6,7 +6,8 @@ import { END } from 'redux-saga';
 import wrapper from '../../store/configuresStore';
 import styles from '../../styles/admin/admin.module.scss'
 import CreateUser from "../../components/admin/CreateUser";
-import { LOAD_MY_INFO_REQUEST } from "../../reducers/user";
+import ForeignList from "../../components/admin/ForeignList";
+import { LOAD_MY_INFO_REQUEST, LOAD_FOREIGN_LIST_REQUEST } from "../../reducers/user";
 import AdminLayout from "../../components/admin/AdminLayout";
 
 const Admin = () => {
@@ -19,7 +20,10 @@ const Admin = () => {
       </Head>
 
       <AdminLayout on="user">
-        <CreateUser/>
+        <div className={styles.userWrap}>
+          <CreateUser/>
+          <ForeignList/>
+        </div>
       </AdminLayout>
     </div>
   )
@@ -35,6 +39,9 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async ({
   }
   store.dispatch({
     type: LOAD_MY_INFO_REQUEST,
+  });
+  store.dispatch({
+    type: LOAD_FOREIGN_LIST_REQUEST,
   });
   store.dispatch(END);
   await store.sagaTask.toPromise();

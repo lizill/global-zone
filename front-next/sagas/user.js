@@ -78,9 +78,10 @@ function* signUp(action) {
   try {
     // console.log(action.data)
     yield call(signUpApi, action.data);
-    yield put({
-      type: SIGN_UP_SUCCESS,
-    });
+    yield all([
+      put({ type: SIGN_UP_SUCCESS }),
+      put({ type: LOAD_FOREIGN_LIST_REQUEST })
+    ]);
   } catch (err) {
     yield put({
       type: SIGN_UP_FAILURE,
