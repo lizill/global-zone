@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('guest')->group(function () {
+Route::middleware(['guest', 'cors'])->group(function () {
     Route::post('/auth/login', [AuthController::class, 'login']); // POST /auth/login
 
     Route::get('/google/login', [GoogleController::class, 'loginWithGoogle'])->name('login'); // GET /google/login
