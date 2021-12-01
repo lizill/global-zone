@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { CREATE_SCHEDULE_REQUEST, DELETE_SCHEDULE_REQUEST } from '../../reducers/schedule';
 import { closeModalAction } from '../../reducers/user';
+import styles from '../../styles/admin/admin.module.scss';
 
 const CheckUser = () => {
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const CheckUser = () => {
   }
 
   return (
-    <div>
+    <div className={styles.userList}>
       <button onClick={onDelete}>-</button>
       {setForeignList()?.map(v => (
           <button

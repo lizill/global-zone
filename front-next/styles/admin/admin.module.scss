@@ -17,14 +17,27 @@
 
     menu {
       margin: 0;
+
       button {
         cursor: pointer;
         font-weight: bold;
         margin: 0px 10px 10px 0px;
       }
 
-      .onActive {
+      .on {
         color: #182f9e;
+      }
+
+      a {
+        font-weight: bold;
+
+        &:hover {
+          color: #182f9e;
+        }
+      }
+
+      a + a {
+        margin-left: 1rem;
       }
     }
 
@@ -150,4 +163,30 @@
       }
     }
   }
+}
+
+.userForm {
+  background-color: white;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  padding: 1.5rem 2rem;
+
+  h3 {
+    margin: 0;
+    margin-bottom: 1rem;
+  }
+
+  label {
+    display: block;
+  }
+
+  input {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.userList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
 }

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SIGN_UP_REQUEST } from "../../reducers/user";
 
+import styles from '../../styles/admin/admin.module.scss';
+
 const CreateUser = () => {
   const dispatch = useDispatch();
   const [id, setId] = useState('');
@@ -72,8 +74,8 @@ const CreateUser = () => {
 
   return (
     <div>
-      create new user
-      <form  onSubmit={onSubmit}>
+      <form className={styles.userForm} onSubmit={onSubmit}>
+        <h3>새 계정 작성하기</h3>
         <label htmlFor="email">학번</label>
         <input id="email" type="text" required value={id} onChange={onChangeId}/><br/>
         <label htmlFor="name">이름</label>
@@ -87,7 +89,7 @@ const CreateUser = () => {
         <input id="password" type="password" min="8" required value={password} onChange={onChangePassword}/><br/>
         <label htmlFor="passwordCheck">비밀번호 확인</label>
         <input id="passwordCheck" type="password" min="8" required value={passwordCheck} onChange={onChangePasswordCheck}/><br/>
-        
+        <br />
         {error && <p style={{ color: "red" }}>{ error }</p>}
         {signUpError && <p style={{ color: "red" }}>{ signUpError.error }</p>}
         <button type="submit">Save</button>

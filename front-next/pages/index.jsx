@@ -16,7 +16,6 @@ import { LOAD_RESERVATIONS_REQUEST } from '../reducers/reservation';
 const subToday = moment().clone().subtract(20, 'minutes').format('YYYYMMDDHHmm')
 
 export default function Home() {
-  const { me } = useSelector(state => state?.user);
   const { reservations } = useSelector(state => state?.reservation);
 
   const setItems = (confirmed) => {
