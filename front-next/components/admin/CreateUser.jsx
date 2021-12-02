@@ -65,7 +65,7 @@ const CreateUser = () => {
 
       setId('');
       setName('');
-      setLang('');
+      setLang('en');
       setPassword('');
       setPasswordCheck('');
       setError('');

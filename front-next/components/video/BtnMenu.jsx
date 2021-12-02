@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, memo } from "react";
 import { useDispatch } from "react-redux";
 import { AiFillSound, AiOutlineSound } from 'react-icons/ai';
 import { BsFillCameraVideoFill, BsFillTelephoneXFill, BsCameraVideoOff } from 'react-icons/bs';
@@ -38,4 +38,4 @@ const BtnMenu = ({ isAudioMuted, isVideoOff, audioMute, videoOff, endCall, me, r
   )
 }
 
-export default BtnMenu;
+export default memo(BtnMenu);

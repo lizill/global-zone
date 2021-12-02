@@ -12,6 +12,7 @@ import BtnMenu from '../../components/video/BtnMenu';
 import styles from '../../styles/video/video.module.scss';
 import wrapper from '../../store/configuresStore';
 import Loader from '../../components/Loader';
+import { SOCKET_SERVER_URL } from '../../config/config';
 
 const pc_config = {
   "iceServers": [
@@ -20,7 +21,6 @@ const pc_config = {
       }
   ]
 };
-const SOCKET_SERVER_URL = 'http://localhost:8080';
 
 const Video = () => {
   const { schedule } = useSelector(state => state?.schedule);
@@ -270,12 +270,12 @@ const Video = () => {
 
 	if(isLoading) return <Loader/>
 
-	if(users.length === 0) return (
-		<div className={styles.emptyRoom}>
-			<h4>누군가 올때까지 기다려주세요</h4>
-			<Loader/>
-		</div>
-	)
+	// if(users.length === 0) return (
+	// 	<div className={styles.emptyRoom}>
+	// 		<h4>누군가 올때까지 기다려주세요</h4>
+	// 		<Loader/>
+	// 	</div>
+	// )
 
   return (
     <div className={styles.videoWrap}>
