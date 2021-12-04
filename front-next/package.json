@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next -p 3000",
     "build": "cross-env ANALYZE=true NODE_ENV=production next build",
-    "start": "cross-env NODE_ENV=production next start -p 80"
+    "start": "cross-env NODE_ENV=production next start -p 3000"
   },
   "dependencies": {
     "@next/bundle-analyzer": "^12.0.4",
