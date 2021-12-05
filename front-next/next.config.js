@@ -1,10 +1,12 @@
+const withPlugins = require("next-compose-plugins");
+const withPWA = require("next-pwa");
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
-module.exports = withBundleAnalyzer({
+const nextConfig = {
   compress: true,
-  webpack(config, { webpack }) {
+  webpack: (config, { webpack }) => {
     const prod = process.env.NODE_ENV === 'production';
     return {
       ...config,
@@ -17,4 +19,16 @@ module.exports = withBundleAnalyzer({
       ],
     };
   },
-});
+}
+
+module.exports = withPlugins([
+  [
+    withPWA,
+    {
+      pwa: {
+        dest: 'public',
+      },
+    },
+  ],
+  withBundleAnalyzer,
+], nextConfig);
