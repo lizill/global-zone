@@ -39,7 +39,7 @@ const ResultComponent = () => {
           <p>유학생</p>
         </div>
         {getCurrentReservations().length !== 0
-        ? getCurrentReservations().map(v => v.finished === '1' && (
+        ? getCurrentReservations().map(v => v.finished == 1 && (
             <div key={v.id}>
               <p>{moment(v.schedule.date, "YYYYMMDDhhmm").format('MM-DD HH:mm')}</p>
               <p>{v.schedule.user.name}</p>

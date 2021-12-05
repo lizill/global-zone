@@ -1,10 +1,7 @@
 import React, { memo } from "react";
-import { useSelector } from "react-redux";
 import styles from '../../styles/reservation/Reservation.module.scss';
 
 const ReservationStatus = ({ setItems, getResults }) => {
-  // const { reservations } = useSelector(state => state?.reservation);
-
   return (
     <div className={styles.statusWrap}>
       <h3>실시간 예약 현황</h3>

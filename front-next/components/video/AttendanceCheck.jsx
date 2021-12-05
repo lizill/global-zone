@@ -26,7 +26,7 @@ const AttendanceCheck = ({ reservations }) => {
           disabled={checkReservationLoading}
         >
           <p>{ v.user.name + ` (${v.user.email})` }</p>
-          {v.finished === '1' && <BsCheckLg style={{color: '#182f9e'}}/>}
+          {v.finished == 1 && <BsCheckLg style={{color: '#182f9e'}}/>}
         </button>
         )}
     </div>

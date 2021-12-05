@@ -18,7 +18,7 @@ const RankComponent = () => {
               글로벌 존 이용 횟수
           </div>
           <div className={styles.count}>
-            <span>{reservations.filter(v => v.finished === '1').length}</span>회
+            <span>{reservations.filter(v => v.finished == 1).length}</span>회
           </div>
       </div>
     </div>

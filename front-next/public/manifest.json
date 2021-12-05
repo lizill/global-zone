@@ -24,7 +24,6 @@
       }
     ],
   "display": "standalone",
-  "orientation": "landscape",
   "background_color": "#fff",
   "theme_color": "#fff",
   "start_url": "/"

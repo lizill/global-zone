@@ -23,16 +23,16 @@ export default function Home() {
     const items = reservations.filter(v => v.schedule.date >= subToday)
     
     if (confirmed) {
-      return items.filter(v => v.confirmed === '1')
+      return items.filter(v => v.confirmed == 1)
     } else {
-      return items.filter(v => v.confirmed === '0')
+      return items.filter(v => v.confirmed == 0)
     }
   }
 
   const getResults = () => {
     // 시간이 지났는데 confirmed === '1', finished === '0' 일 경우
     const items = reservations.filter(v => v.schedule.date <= subToday)
-    return items.filter(v => v.confirmed === '1' && v.finished === '0')
+    return items.filter(v => v.confirmed == 1 && v.finished == 0)
   }
 
   return (
