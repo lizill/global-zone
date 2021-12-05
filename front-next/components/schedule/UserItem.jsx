@@ -26,7 +26,7 @@ const UserItem = ({ reservation, schedule }) => {
     return (
         <div className={styles.userItem}>
             <span>{reservation.user.name}</span>
-            {reservation.confirmed ==='0' && schedule.user_id == me.id && <button onClick={onAccept}>수락</button>}
+            {reservation.confirmed == 0 && schedule.user_id == me.id && <button onClick={onAccept}>수락</button>}
         </div>
     )
 }
