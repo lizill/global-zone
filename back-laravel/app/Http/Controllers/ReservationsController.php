@@ -39,11 +39,6 @@ class ReservationsController extends Controller
     // 예약 신청내역
     public function reservations(Request $request)
     {
-        // $myReservations = Reservation::with('schedule')
-        //     ->where('user_id', Auth::user()->id)
-        //     // ->where('finished', false)
-        //     ->orderBy('date')
-        //     ->get();
         $myReservations = Reservation::with(array('schedule' => function ($query) {
             $query->orderBy('date');
         }))->get();
