@@ -36,12 +36,13 @@ class ReservationsController extends Controller
         return $reservation;
     }
 
-    // 예약 신청내역
+    // 내 예약 신청내역
     public function reservations(Request $request)
     {
-        $myReservations = Reservation::with(array('schedule' => function ($query) {
-            $query->orderBy('date');
-        }))->get();
+        $myReservations = Reservation::where('reservations.user_id', Auth::user()->id)
+            ->with(array('schedule' => function ($query) {
+                $query->orderBy('date');
+            }))->get();
 
         return $myReservations;
     }
