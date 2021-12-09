@@ -1,8 +1,10 @@
 # Global Zone
 
 > **Global Zone**: [gzone](https://gzone.yju.ac.kr/student)
+
 > Global zone reservation service clone coding
-> ![main](./images/main.png)
+
+![main](./images/main.png)
 
 # Architecture
 
