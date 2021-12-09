@@ -31,7 +31,7 @@ const Korean = () => {
       } else if (me?.position === 'admin') {
         Router.push('/admin');
       } else {
-        Router.push('myschedule');
+        Router.push('/foreign');
       }
     }
   }, [me]);

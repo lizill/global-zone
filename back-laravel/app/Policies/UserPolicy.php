@@ -41,6 +41,7 @@ class UserPolicy
     public function create(User $user)
     {
         // 관리자만 생성가능
+        return $user->position === 'admin';
     }
 
     /**

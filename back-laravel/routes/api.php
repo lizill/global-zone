@@ -5,7 +5,6 @@ use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\SchedulesController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ReservationsController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['guest', 'cors'])->group(function () {
+Route::middleware(['guest'])->group(function () {
     Route::post('/auth/login', [AuthController::class, 'login']); // POST /auth/login
 
     Route::get('/google/login', [GoogleController::class, 'loginWithGoogle'])->name('login'); // GET /google/login

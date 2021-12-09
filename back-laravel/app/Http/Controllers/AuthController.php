@@ -6,12 +6,16 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use Throwable;
 
 class AuthController extends Controller
 {
     public function createForeignUser(Request $request)
     {
+        // 관리자인지 확인
+        if ($request->user()->can('create')) {
+            abort(403);
+        }
+
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:100',
             'email' => 'required|string|max:255|unique:users',
@@ -20,7 +24,7 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors()->toJson(), 400);
+            return response()->json($validator->errors()->toJson(), 422);
         }
 
         User::create([

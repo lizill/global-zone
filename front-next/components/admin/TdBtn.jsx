@@ -1,11 +1,12 @@
 import React, { useCallback, memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import moment from 'moment';
 
 import { openModalAction } from '../../reducers/user';
 import { selectScheduleAction } from '../../reducers/schedule';
-import moment from 'moment';
+import styles from '../../styles/admin/admin.module.scss';
 
-const TdBtn = ({ schedule, date, lang }) => {
+const TdBtn = ({ schedule, date, lang, bgColor }) => {
   const dispatch = useDispatch()
   const { selectedDate } = useSelector(state => state?.schedule)
 
@@ -15,9 +16,9 @@ const TdBtn = ({ schedule, date, lang }) => {
   }, [selectedDate, schedule]);
 
   return (
-    <div>
-      <button onClick={() => onSelectSchedule()}>
-        {schedule ? schedule.user.name : '-'}
+    <div className={styles.scheduleBtnWrap}>
+      <button onClick={() => onSelectSchedule()} style={schedule ? bgColor : { backgroundColor: '#dbdbdb' }}>
+        {schedule ? schedule.user.name : ''}
       </button>
     </div>
   )

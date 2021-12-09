@@ -14,6 +14,11 @@ class SchedulesController extends Controller
     // create or update schedule
     public function updateOrCreate(Request $request)
     {
+        // 관리자인지 확인
+        if ($request->user()->can('create')) {
+            abort(403);
+        }
+
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|max:255',
             'date' => 'required|string|max:255',
@@ -96,6 +101,11 @@ class SchedulesController extends Controller
     // delete schedule
     public function delete(Request $request, Schedule $schedule)
     {
+        // 관리자인지 확인
+        if ($request->user()->can('delete')) {
+            abort(403);
+        }
+
         $schedule->delete();
 
         return response()->json([

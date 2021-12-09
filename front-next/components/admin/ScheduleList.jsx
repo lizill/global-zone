@@ -56,9 +56,9 @@ const ScheduleList = () => {
             {DATA?.map(v => (
               <tr key={v}>
                 <td>{v}</td>
-                <td><TdBtn schedule={setTd(v, 'en')} date={v} lang={'en'}/></td>
-                <td><TdBtn schedule={setTd(v, 'ja')} date={v} lang={'ja'}/></td>
-                <td><TdBtn schedule={setTd(v, 'ch')} date={v} lang={'ch'}/></td>
+                <td><TdBtn schedule={setTd(v, 'en')} date={v} lang={'en'} bgColor={{ backgroundColor: '#4d4cac' }}/></td>
+                <td><TdBtn schedule={setTd(v, 'ja')} date={v} lang={'ja'} bgColor={{ backgroundColor: '#659cff' }}/></td>
+                <td><TdBtn schedule={setTd(v, 'ch')} date={v} lang={'ch'} bgColor={{ backgroundColor: '#ff6565' }}/></td>
               </tr>
             ))}
           </tbody>

@@ -42,6 +42,7 @@ class SchedulePolicy
     public function create(User $user)
     {
         // 관리자만 생성가능
+        return $user->position === 'admin';
     }
 
     /**
@@ -53,7 +54,6 @@ class SchedulePolicy
      */
     public function update(User $user, Schedule $schedule)
     {
-        // 관리자만 수정가능
     }
 
     /**
@@ -66,6 +66,7 @@ class SchedulePolicy
     public function delete(User $user, Schedule $schedule)
     {
         // 관리자만 삭제가능
+        return $user->position === 'admin';
     }
 
     /**
