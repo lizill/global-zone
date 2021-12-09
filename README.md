@@ -1,6 +1,6 @@
 # Global Zone
 
-> [Global zone](https://gzone.yju.ac.kr/student) Reservation Service clone coding
+> [Global Zone](https://gzone.yju.ac.kr/student) Reservation Service clone coding
 
 ![main](./images/main.png)
 
