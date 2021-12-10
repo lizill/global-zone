@@ -3,6 +3,8 @@ $phone: "only screen and (max-width: 758px)";
 .layout {
   background-color: #fbfafb;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 
   header {
     background-color: white;
@@ -67,6 +69,7 @@ $phone: "only screen and (max-width: 758px)";
 
   main {
     margin: 100px 0px 50px 0px;
+    flex: 1;
   }
 
   .mainWrap {
@@ -93,13 +96,11 @@ $phone: "only screen and (max-width: 758px)";
   }
 
   footer {
-    margin: 0 auto;
     padding: 20px;
     text-align: center;
     color: #aaa;
-    bottom: 0px;
     border-top: 1px solid #eaeaea;
-    max-width: 1280px;
+    width: 100vw;
   }
 }
 

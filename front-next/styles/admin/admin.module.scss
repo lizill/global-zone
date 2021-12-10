@@ -1,7 +1,9 @@
 .adminWrap {
   background-color: #eef1f6;
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
+  display: flex;
+  flex-direction: column;
 
   header {
     max-width: 1280px;
@@ -29,7 +31,9 @@
       }
 
       a {
+        display: inline-block;
         font-weight: bold;
+        margin-bottom: 0.5rem;
 
         &:hover {
           color: #182f9e;
@@ -66,6 +70,7 @@
     max-width: 1280px;
     margin: 0 auto;
     padding: 20px;
+    flex: 1;
   }
 
   footer {
@@ -84,19 +89,22 @@
 .scContainer {
   display: flex;
   justify-content: center;
+  gap: 2rem;
 
   .calendarWrap {
+    border: 1px solid #eaeaea;
     width: 440px;
+    padding: 1rem;
     background-color: white;
-    border-radius: 5px;
+    border-radius: 8px;
     overflow: hidden;
   }
 
   .scheduleList {
-    padding-top: 2rem;
-    width: 440px;
+    border: 1px solid #eaeaea;
+    padding: 1rem;
     background-color: white;
-    border-radius: 5px;
+    border-radius: 8px;
   }
 }
 
@@ -143,6 +151,18 @@
   }
 }
 
+@mixin button-base {
+  border: 1px solid #eaeaea;
+  border-radius: 5px;
+  color: white;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 .userWrap {
   display: flex;
   justify-content: center;
@@ -159,16 +179,8 @@
       margin-top: 8px;
 
       button {
+        @include button-base();
         text-align: left;
-        color: white;
-        padding: 0.5rem 1rem;
-        border: 1px solid #eaeaea;
-        border-radius: 5px;
-        font-weight: bold;
-
-        &:hover {
-          cursor: pointer;
-        }
       }
     }
   }
@@ -206,10 +218,6 @@
   margin: 0 1rem;
 
   button {
-    border: 1px solid #eaeaea;
-    border-radius: 5px;
-    color: white;
-    padding: 0.5rem 1rem;
-    font-weight: bold;
+    @include button-base();
   }
 }
